@@ -7,4 +7,9 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', 'DashboardController@index');
+    Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/import', 'HubspotImport@start');
+    Route::get('/download/{type}/{file}', 'DashboardController@download');
+});
