@@ -41,4 +41,7 @@
             Invoices
         </a>
     </div>
+    <div class="sitebar-footer">
+
+    </div>
 </div>
