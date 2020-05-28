@@ -24,6 +24,24 @@
     <div id="app">
         <div class="sidebar-container col-sm-12 col-md-2 col-lg-2 col-xl-2 pr-0 position-fixed big-desktop">
             @include('_partials.sidebar')
+            <div class="sidebar-footer vh-100">
+                <a href="">
+                <span class="sidebar-settings text-white text-center border-right 100 float-left">
+                    <i class="uil uil-setting"></i>
+                </span>
+                </a>
+
+                <a href="{{ route('logout') }}"
+                   onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    <span class="sidebar-logout text-white text-center float-right">
+                        <i class="uil uil-sign-out-alt"></i>
+                    </span>
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </div>
         </div>
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -42,7 +60,12 @@
                         <!-- Authentication Links -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    @if(Auth::user()->logo != 'default')
+                                        <img src="{{asset('/images/'.Auth::user()->id.Auth::user()->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                                    @else
+                                        <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                                    @endif
+                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -55,7 +78,14 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
+
+                                    <a class="dropdown-item" href="/profile" role="button">
+                                        Profile <span class="caret"></span>
+                                    </a>
                                 </div>
+
+
+
 
                                 <div class="mobile">
 

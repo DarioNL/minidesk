@@ -7,8 +7,6 @@
   border-bottom: 1px solid #f4f8f9;
 }
 
-
-
 .no-scroll * {
   overflow: hidden !important;
 }
@@ -75,11 +73,11 @@
     display: none !important;
   }
 
-    .navbar {
-        position: fixed;
-        width: 85%;
-        left: 15.6%;
-    }
+  .navbar {
+    position: fixed;
+    width: 85%;
+    left: 15.6%;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -138,7 +136,7 @@
   border-bottom: 2px solid #f4f8f9;
 }
 
-.sidebar-link:hover{
+.sidebar-link:hover {
   background-color: #000066;
 }
 
@@ -156,35 +154,68 @@
   color: #535d6d !important;
 }
 
-.sidebar-logo{
-    width: 70%;
-    max-width: 53px;
-    background: #fff;
-    margin-left: 15%;
-    z-index: 1000;
-    position: inherit;
-    border: 1px solid rgba(52,73,94,0.44);
-    padding: 4px;
+.sidebar-logo {
+  width: 70%;
+  max-width: 53px;
+  background: #fff;
+  margin-left: 15%;
+  z-index: 1000;
+  position: inherit;
+  border: 1px solid rgba(52, 73, 94, 0.44);
+  padding: 4px;
 }
 
-.sidebar-logo-container{
-    width: 35%;
+.sidebar-logo-container {
+  width: 35%;
 }
 
-.sidebar-user-container{
-    padding-top: 20px;
-    padding-bottom: 20px;
+.sidebar-user-container {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.brand-container{
-    width: 97%;
-    line-height: 59px;
-    height: 55px;
+.sidebar-footer {
+    width: 93%;
+    height: 100%;
+    font-size: 1.5rem;
 }
 
-.brand{
-    font-size: 2rem;
-    font-weight: 400;
+.sidebar-settings {
+    width: 50%;
+    background-color: #000066;
+    height: 100%;
+}
+
+.sidebar-settings:hover {
+    background-color: #3333ff;
+}
+
+.sidebar-logout {
+    width: 50%;
+    background-color: #000066;
+    height: 100%;
+}
+
+.sidebar-logout:hover {
+    background-color: #3333ff;
+}
+
+.user-profile-img {
+    width: 29px;
+    height: 29px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.brand-container {
+  width: 97%;
+  line-height: 59px;
+  height: 55px;
+}
+
+.brand {
+  font-size: 2rem;
+  font-weight: 400;
 }
 
 .card {
@@ -199,8 +230,8 @@
   border-radius: 0.25rem;
 }
 
-.card-header{
-    margin-top: 15rem;
+.card-header {
+  margin-top: 15rem;
 }
 
 th {
