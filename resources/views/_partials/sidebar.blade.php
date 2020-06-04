@@ -6,7 +6,7 @@
     </div>
     <div class="sidebar-user-container border-bottom">
     <div class="sidebar-logo-container float-left">
-        @if(Auth::user()->logo != 'default')
+        @if(Auth::user()->logo != null)
             <img src="{{asset('/images/'.Auth::user()->id.Auth::user()->logo.'')}}" class="sidebar-logo d-block ui-w-30 bg-white rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
         @else
             <img src="{{asset('/images/blank_profile_picture.png')}}" class="sidebar-logo d-block ui-w-30 bg-white rounded-circle" alt="">

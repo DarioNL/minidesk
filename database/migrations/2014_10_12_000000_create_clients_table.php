@@ -15,6 +15,7 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('company_id')->nullable()->default(null);
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -26,11 +27,12 @@ class CreateClientsTable extends Migration
             $table->string('city')->nullable();
             $table->string('phone')->nullable();
             $table->string('country')->nullable();
-            $table->string('logo')->default('default');
-            $table->string('company')->nullable();
+            $table->string('logo')->nullable();
             $table->string('invoices')->nullable();
             $table->string('estimates')->nullable();
             $table->timestamp('last_login')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
             $table->softDeletes();
         });
 

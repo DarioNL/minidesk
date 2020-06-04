@@ -25,7 +25,7 @@ class CreateCompaniesTable extends Migration
             $table->string('vat_number')->nullable();
             $table->string('phone')->nullable();
             $table->string('password');
-            $table->string('logo')->default('default');
+            $table->string('logo')->nullable();
             $table->timestamps();
             $table->timestamp('last_login')->nullable();
             $table->rememberToken();

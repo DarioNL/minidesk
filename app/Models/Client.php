@@ -9,18 +9,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 
-class Company extends Authenticatable
+class Client extends Authenticatable
 {
-
     use Notifiable , SoftDeletes, UsesUuid;
 
-    protected $table = 'companies';
+    protected $table = 'clients';
 
     protected $primaryKey = 'id';
 
 
     protected $fillable = [
-        'name', 'email', 'password', 'address', 'zipcode', 'city', 'house_number', 'phone', 'vat_number', 'logo'
+        'name', 'email', 'password', 'address', 'zipcode', 'city', 'house_number', 'phone', 'vat_number', 'logo', 'company_id'
     ];
 
 
@@ -33,18 +32,20 @@ class Company extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function Clients()
+    public function Company()
     {
-        $this->hasMany(Client::class , 'company_id', 'id');
+        return $this->hasOne(Company::class ,'id', 'company_id');
     }
 
     public function Estimates()
     {
-        $this->hasMany(Estimate::class , 'company_id', 'id');
+        $this->hasMany(Estimate::class , 'client_id', 'id');
     }
 
     public function Invoices()
     {
-        $this->hasMany(Estimate::class , 'company_id', 'id');
+        $this->hasMany(Estimate::class , 'client_id', 'id');
     }
+
+
 }
