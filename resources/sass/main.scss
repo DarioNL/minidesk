@@ -37,6 +37,8 @@
     transition: 0.25s;
 }
 
+
+
 .show-n {
     width: 90%;
     height: calc(100% - 63px);
@@ -78,7 +80,34 @@
         width: 85%;
         left: 15.6%;
     }
+
+    .main {
+        margin-left: 16%;
+        width: 84%;
+    }
+
+    .table-container {
+        margin-top: 4%;
+    }
 }
+
+
+
+
+.btn-primary {
+    color: white;
+    background-color: #1100ff;
+    border-color: #1100ff;
+}
+
+.btn-primary:hover {
+    color: white;
+    background-color: #0e00d9;
+    border-color: #0e00cc;
+}
+
+
+
 
 @media only screen and (max-width: 767px) {
     .position-fixed-desktop {
@@ -233,6 +262,8 @@
 .card-header {
     margin-top: 15rem;
 }
+
+
 
 th {
     text-transform: uppercase;

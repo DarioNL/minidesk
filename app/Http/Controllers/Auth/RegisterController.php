@@ -25,7 +25,11 @@ class RegisterController extends Controller
             'city' => 'required',
             'house_number' => 'required',
             'phone' => 'required',
-            'email' => Rule::unique('companies','email'),
+            'password' => 'required',
+            'email' => [
+                Rule::unique('companies','email'),
+                Rule::unique('clients','email')
+            ],
             'vat_number' => 'required|min:9|max:9',
         ]);
 
