@@ -37328,6 +37328,8 @@ module.exports = function(module) {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./components */ "./resources/js/components.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -37372,6 +37374,48 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components.js":
+/*!************************************!*\
+  !*** ./resources/js/components.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(/*! ./components/tablerows_clickable */ "./resources/js/components/tablerows_clickable.js");
+
+__webpack_require__(/*! ./components/search */ "./resources/js/components/search.js");
+
+/***/ }),
+
+/***/ "./resources/js/components/search.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/search.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/tablerows_clickable.js":
+/*!********************************************************!*\
+  !*** ./resources/js/components/tablerows_clickable.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$("tr.clickable-row-not-last td:not(:last-child)").click(function () {
+  if (!$(this).hasClass('disabled-click')) {
+    window.location.href = $(this).parent().attr('data-href');
+  }
+});
+$("tr.clickable-row td").click(function () {
+  window.location.href = $(this).parent().attr('data-href');
+});
 
 /***/ }),
 

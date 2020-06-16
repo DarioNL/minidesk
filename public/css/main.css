@@ -37,8 +37,6 @@
   transition: 0.25s;
 }
 
-
-
 .show-n {
   width: 90%;
   height: calc(100% - 63px);
@@ -81,33 +79,27 @@
     left: 15.6%;
   }
 
-    .main {
-        margin-left: 16%;
-        width: 84%;
-    }
+  .main {
+    margin-left: 16%;
+    width: 84%;
+  }
 
-    .table-container {
-        margin-top: 4%;
-    }
+  .table-container {
+    margin-top: 4%;
+  }
 }
 
-
-
-
 .btn-primary {
-    color: white;
-    background-color: #1100ff;
-    border-color: #1100ff;
+  color: white;
+  background-color: #1100ff;
+  border-color: #1100ff;
 }
 
 .btn-primary:hover {
-    color: white;
-    background-color: #0e00d9;
-    border-color: #0e00cc;
+  color: white;
+  background-color: #0e00d9;
+  border-color: #0e00cc;
 }
-
-
-
 
 @media only screen and (max-width: 767px) {
   .position-fixed-desktop {
@@ -204,36 +196,36 @@
 }
 
 .sidebar-footer {
-    width: 93%;
-    height: 100%;
-    font-size: 1.5rem;
+  width: 93%;
+  height: 100%;
+  font-size: 1.5rem;
 }
 
 .sidebar-settings {
-    width: 50%;
-    background-color: #000066;
-    height: 100%;
+  width: 50%;
+  background-color: #000066;
+  height: 100%;
 }
 
 .sidebar-settings:hover {
-    background-color: #3333ff;
+  background-color: #3333ff;
 }
 
 .sidebar-logout {
-    width: 50%;
-    background-color: #000066;
-    height: 100%;
+  width: 50%;
+  background-color: #000066;
+  height: 100%;
 }
 
 .sidebar-logout:hover {
-    background-color: #3333ff;
+  background-color: #3333ff;
 }
 
 .user-profile-img {
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .brand-container {
@@ -263,50 +255,51 @@
   margin-top: 15rem;
 }
 
-
-
 table {
-    width: 100%;
-    text-align: left;
-    border-collapse: collapse;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
 }
 
 tr:hover {
-    background-color: #ececff;
-    cursor: pointer;
-}
-.table-header:hover{
-    background: #00008B;
-    cursor: unset;
+  background-color: #ececff;
+  cursor: pointer;
 }
 
-table td, table th {
-    padding: 16px 21px;
+.table-header:hover {
+  background: #00008B;
+  cursor: unset;
 }
+
+table td,
+table th {
+  padding: 16px 21px;
+}
+
 table tbody td {
-    font-size: 13px;
+  font-size: 13px;
 }
 
-th{
-    font-weight: normal;
-    padding: 4px;
-    font-size: 1rem;
+th {
+  font-weight: normal;
+  padding: 4px;
+  font-size: 1rem;
 }
 
 .table-header {
-    color: black;
-    font-family: Arial;
-    font-weight: normal;
-    font-size: unset;
-    background: #00008B;
+  color: black;
+  font-family: Arial;
+  font-weight: normal;
+  font-size: unset;
+  background: #00008B;
 }
 
 table thead th:first-child {
-    border-left: none;
+  border-left: none;
 }
 
 table tfoot td {
-    font-size: 14px;
+  font-size: 14px;
 }
 
 .expire-wrapper {

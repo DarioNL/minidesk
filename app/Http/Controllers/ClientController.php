@@ -70,4 +70,62 @@ class ClientController extends Controller
 
         return view('clients.show', compact('client'));
     }
+
+    public function update(Request $request, $id)
+    {
+        $client = Client::all()->find($id);
+
+        $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'address' => 'required',
+            'zipcode' => 'required',
+            'city' => 'required',
+            'house_number' => 'required',
+            'phone' => 'required',
+            'email' => [
+                Rule::unique('companies','email'),
+                Rule::unique('clients','email')->ignore($client->id)
+            ],
+        ]);
+
+        if ($client->email != $request->post('email')) {
+            $client->email_verified_at = null;
+            $client->save();
+        }
+
+
+        $client->update([
+            'first_name' => $request->post('first_name'),
+            'last_name' => $request->post('last_name'),
+            'address' => $request->post('address'),
+            'zipcode' => $request->post('zipcode'),
+            'house_number_suffix' => $request->post('house_number_suffix'),
+            'city' => $request->post('city'),
+            'house_number' => $request->post('house_number'),
+            'phone' => $request->post('phone'),
+            'email' => $request->post('email'),
+            'logo' => $request->post('logo'),
+        ]);
+
+        if ($request->has('send_login')) {
+//            if ($request->post('send_login') == true) {
+//                $user->sendLoginInfo($user->email, $password);
+//            }
+        }
+
+
+        return redirect('/clients');
+    }
+
+    public function destroy($id){
+        $client = Client::all()->find($id);
+        $client->delete();
+        $client->email = 'deleted_'.time().'_'.$client->email;
+        $client->save();
+        return response()->json([
+            'message' => 'Deleted client'
+        ])->setStatusCode(200);
+
+    }
 }

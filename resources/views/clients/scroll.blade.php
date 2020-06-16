@@ -1,5 +1,7 @@
 @foreach($clients as $client)
-    <tr class="clickable-row border-bottom" data-href="/admin/clients/{{$client->id}}">
+    @include('clients.delete', ['client' => $client])
+    @include('clients.edit', ['client' => $client])
+    <tr class="clickable-row border-bottom" data-href="/clients/{{$client->id}}">
         <td class="pl-3">{{$client->first_name}}</td>
         <td class="pl-3">{{$client->last_name}}</td>
         <td class="pl-3">@if($client->company->logo != null)
@@ -18,9 +20,9 @@
             </button>
 
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="/admin/clients/{{$client->id}}/edit" class="dropdown-item"
+                <a onclick="$('#editModal').modal('show')" class="dropdown-item"
                    type="button">Edit</a>
-                <a data-href="/admin/clients/{{$client->id}}/delete" class="dropdown-item deleteitem" type="button">Delete</a>
+                <button onclick="$('#deleteModal').modal('show')" class="dropdown-item deleteitem" type="button">Delete</button>
             </div>
         </td>
     </tr>
