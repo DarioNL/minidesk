@@ -14,7 +14,7 @@
         <td class="text-muted">{{$client->phone}}</td>
         @php($data = explode(' ', $client->created_at))
         <td class="text-muted">{{$data[0]}}</td>
-        <td width="1" class="text-center desktoptd">
+        <td width="1" class="text-center desktoptd last-child">
             <button class="btn btn-light btn-ellipsis" data-toggle="dropdown">
                 <i class="uil uil-ellipsis-v"></i>
             </button>

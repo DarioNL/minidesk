@@ -2,45 +2,69 @@
 
 @section('content')
 
-    <div class="card table-container align-items-center w-100">
-        <div class="w-100 border-bottom p-2">
-            <div class="float-left">
-                <h3 class="float-left pt-2">All Clients</h3>
-            </div>
-            <div class="float-right">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
-                    + Create New Client
-                </button>
-            </div>
-        </div>
-        <div class="card-body w-100 pt-2">
+    @include('clients.delete', ['client' => $client])
+    @include('clients.edit', ['client' => $client])
+
+    <div class="card">
+        <div class="card-body pt-2">
             <div class="card-title mb-5 text-muted">
-                <h4 class="float-right text-muted mr-2 mt-1 desktoptd">
-                    <form method="get">
-                        <i class="uil uil-search"></i>
-                        <input type="text" class="searchinput searchitem" name="search" minlength="2" placeholder="Search">
-                        <a href="/company/clients" class="text-muted text-decoration-none">x</a>
-                    </form>
-                </h4>
+                <h3 class="float-left">{{$client->name}}</h3>
             </div>
             <div class="card-text">
-                <table class="w-100 border-bottom border-top">
-                    <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Company Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th>
-                        <th>Created At</th>
-                        <th class="desktoptd">Actions</th>
-                    </tr>
-                    <tbody id="append_hook">
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="text-muted font-weight-bolder">Name</p>
+                        {{$client->first_name}} {{$client->last_name}}
+                        <div class="text-muted">{{$client->company_name}}</div>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted font-weight-bolder">Email</p>
+                        {{$client->email}}
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <p class="text-muted font-weight-bolder">Address</p>
+                        {{$client->address ?? '-'}}  {{$client->house_number}}{{$client->house_number_suffix}}
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted font-weight-bolder">Zipcode</p>
+                        {{$client->zipcode ?? '-'}}
+                    </div>
+                </div>
+
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <p class="text-muted font-weight-bolder">Company</p>
+                        @if($client->company->logo != null and $client->company != null)
+                            <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                        @else
+                            <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                        @endif {{ $client->Company->name ?? '-'}}
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted font-weight-bolder">City</p>
+                        {{$client->city ?? '-'}}
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <p class="text-muted font-weight-bolder">Phone</p>
+                        {{$client->phone ?? '-'}}
+                    </div>
+                    <div class="col-6">
+                        <p></p>
+                        <a onclick="$('#editModal').modal('show')"
+                           class="btn btn-secondary text-white float-right w-25 desktoptd">Edit</a>
+
+                        <a onclick="$('#deleteModal').modal('show')"
+                           class="btn btn-danger text-white mr-2 float-right w-25 desktoptd">Delete</a>
+                    </div>
+                </div>
+
 
 
 @stop

@@ -115,7 +115,7 @@ class ClientController extends Controller
         }
 
 
-        return redirect('/clients');
+        return back();
     }
 
     public function destroy($id){
