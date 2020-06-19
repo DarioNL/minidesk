@@ -1,4 +1,5 @@
 @foreach($clients as $client)
+
     @include('clients.delete', ['client' => $client])
     @include('clients.edit', ['client' => $client])
     <tr class="clickable-row border-bottom" data-href="/clients/{{$client->id}}">
