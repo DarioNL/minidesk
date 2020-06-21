@@ -117,6 +117,20 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="house_number_suffix" class="col-md-4 col-form-label text-md-right">{{ __('House Number Suffix (optional)') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="house_number_suffix" type="text" class="form-control" name="house_number_suffix" autocomplete="house_number">
+
+                                @error('house_number_suffix')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                             <div class="col-md-6">

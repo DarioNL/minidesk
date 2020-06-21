@@ -23,6 +23,7 @@
         "vue-template-compiler": "^2.6.11"
     },
     "dependencies": {
-        "@iconscout/unicons": "^2.1.9"
+        "@iconscout/unicons": "^2.1.9",
+        "datatables.net-bs4": "^1.10.21"
     }
 }

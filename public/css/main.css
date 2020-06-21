@@ -78,6 +78,27 @@
     width: 85%;
     left: 15.6%;
   }
+
+  .main {
+    margin-left: 16%;
+    width: 84%;
+  }
+
+  .table-container {
+    margin-top: 4%;
+  }
+}
+
+.btn-primary {
+  color: white;
+  background-color: #1100ff;
+  border-color: #1100ff;
+}
+
+.btn-primary:hover {
+  color: white;
+  background-color: #0e00d9;
+  border-color: #0e00cc;
 }
 
 @media only screen and (max-width: 767px) {
@@ -175,36 +196,36 @@
 }
 
 .sidebar-footer {
-    width: 93%;
-    height: 100%;
-    font-size: 1.5rem;
+  width: 93%;
+  height: 100%;
+  font-size: 1.5rem;
 }
 
 .sidebar-settings {
-    width: 50%;
-    background-color: #000066;
-    height: 100%;
+  width: 50%;
+  background-color: #000066;
+  height: 100%;
 }
 
 .sidebar-settings:hover {
-    background-color: #3333ff;
+  background-color: #3333ff;
 }
 
 .sidebar-logout {
-    width: 50%;
-    background-color: #000066;
-    height: 100%;
+  width: 50%;
+  background-color: #000066;
+  height: 100%;
 }
 
 .sidebar-logout:hover {
-    background-color: #3333ff;
+  background-color: #3333ff;
 }
 
 .user-profile-img {
-    width: 29px;
-    height: 29px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .brand-container {
@@ -234,43 +255,51 @@
   margin-top: 15rem;
 }
 
-th {
-  text-transform: uppercase;
-  color: #64768b;
-  font-weight: bold;
-}
-
-tr {
-  height: 50px;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-}
-
 table {
-  border-collapse: separate;
-  border-spacing: 0 0.5em;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
 }
 
-tr:first-child td:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-  padding-left: 20px;
+tr:hover {
+  background-color: #ececff;
+  cursor: pointer;
 }
 
-tr:first-child td:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
+.table-header:hover {
+  background: #00008B;
+  cursor: unset;
 }
 
-tr:last-child td:first-child {
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  padding-left: 20px;
+table td,
+table th {
+  padding: 16px 21px;
 }
 
-tr:last-child td:last-child {
-  border-bottom-right-radius: 10px;
-  border-top-right-radius: 10px;
+table tbody td {
+  font-size: 13px;
+}
+
+th {
+  font-weight: normal;
+  padding: 4px;
+  font-size: 1rem;
+}
+
+.table-header {
+  color: black;
+  font-family: Arial;
+  font-weight: normal;
+  font-size: unset;
+  background: #00008B;
+}
+
+table thead th:first-child {
+  border-left: none;
+}
+
+table tfoot td {
+  font-size: 14px;
 }
 
 .expire-wrapper {
@@ -402,5 +431,29 @@ tr:last-child td:last-child {
 
 .pointer {
   cursor: pointer !important;
+}
+
+.project-tab {
+    padding-top: 10%;
+    margin-top: -8%;
+}
+.project-tab {
+    font-size: 16px;
+}
+.nav-tabs .nav-link.active {
+    color: #0062cc;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-size: 16px;
+}
+.project-tab{
+    border: none;
+}
+.project-tab{
+    color: #333;
+}
+.project-tab{
+    text-decoration: none;
 }
 
