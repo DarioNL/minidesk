@@ -2,6 +2,7 @@
 
 @section('content')
 @include('clients.create')
+@include('clients.delete', ['client' => $client])
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
         <div class="float-left">

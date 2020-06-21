@@ -37,8 +37,6 @@
     transition: 0.25s;
 }
 
-
-
 .show-n {
     width: 90%;
     height: calc(100% - 63px);
@@ -91,9 +89,6 @@
     }
 }
 
-
-
-
 .btn-primary {
     color: white;
     background-color: #1100ff;
@@ -105,9 +100,6 @@
     background-color: #0e00d9;
     border-color: #0e00cc;
 }
-
-
-
 
 @media only screen and (max-width: 767px) {
     .position-fixed-desktop {
@@ -263,8 +255,6 @@
     margin-top: 15rem;
 }
 
-
-
 table {
     width: 100%;
     text-align: left;
@@ -275,19 +265,22 @@ tr:hover {
     background-color: #ececff;
     cursor: pointer;
 }
-.table-header:hover{
+
+.table-header:hover {
     background: #00008B;
     cursor: unset;
 }
 
-table td, table th {
+table td,
+table th {
     padding: 16px 21px;
 }
+
 table tbody td {
     font-size: 13px;
 }
 
-th{
+th {
     font-weight: normal;
     padding: 4px;
     font-size: 1rem;
@@ -440,3 +433,26 @@ table tfoot td {
     cursor: pointer !important;
 }
 
+.project-tab {
+    padding-top: 10%;
+    margin-top: -8%;
+}
+.project-tab {
+    font-size: 16px;
+}
+.nav-tabs .nav-link.active {
+    color: #0062cc;
+    background-color: transparent;
+    border-color: transparent transparent #f3f3f3;
+    border-bottom: 3px solid !important;
+    font-size: 16px;
+}
+.project-tab{
+    border: none;
+}
+.project-tab{
+    color: #333;
+}
+.project-tab{
+    text-decoration: none;
+}
