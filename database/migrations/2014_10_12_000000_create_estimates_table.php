@@ -15,7 +15,8 @@ class CreateEstimatesTable extends Migration
     {
         Schema::create('estimates', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('number');
+            $table->string('number')->nullable();
+            $table->string('sign_id');
             $table->uuid('company_id')->nullable()->default(null);
             $table->uuid('client_id')->nullable()->default(null);
             $table->decimal('amount',9,2);
