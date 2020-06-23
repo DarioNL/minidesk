@@ -15,10 +15,11 @@ class CreateEstimatesTable extends Migration
     {
         Schema::create('estimates', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('number')->nullable();
+            $table->string('number');
+            $table->string('title')->nullable();
             $table->string('sign_id');
-            $table->uuid('company_id')->nullable()->default(null);
-            $table->uuid('client_id')->nullable()->default(null);
+            $table->uuid('company_id');
+            $table->uuid('client_id');
             $table->decimal('amount',9,2);
             $table->timestamp('send_date');
             $table->timestamp('due_date');

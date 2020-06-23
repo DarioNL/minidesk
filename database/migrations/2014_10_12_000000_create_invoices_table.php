@@ -18,8 +18,8 @@ class CreateInvoicesTable extends Migration
             $table->string('title')->nullable();
             $table->string('number');
             $table->string('pay_id');
-            $table->uuid('company_id')->nullable()->default(null);
-            $table->uuid('client_id')->nullable()->default(null);
+            $table->uuid('company_id');
+            $table->uuid('client_id');
             $table->decimal('amount',9,2);
             $table->timestamp('send_date');
             $table->timestamp('due_date');
