@@ -30,7 +30,6 @@
     </tr>
 @endforeach
 @else
-    <td colspan="4">No clients found</td>
-    <td width="1"></td>
+    <td colspan="8" class="text-center">No Clients found</td>
 @endif
 

@@ -19,7 +19,7 @@ class Estimate extends Authenticatable
 
 
     protected $fillable = [
-        'company_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date'
+       'number', 'sign_id', 'company_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date'
     ];
 
 
@@ -31,6 +31,11 @@ class Estimate extends Authenticatable
     public function Client()
     {
         return $this->hasOne(Client::class ,'id', 'client_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Products::class ,'estimate_id', 'id');
     }
 
 }

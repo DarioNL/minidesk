@@ -1,16 +1,20 @@
-@if(count($clients))
-@foreach($clients as $client)
+@if(count($estimates))
+@foreach($estimates as $estimate)
 
-    @include('clients.delete', ['client' => $client])
-    @include('clients.edit', ['client' => $client])
-    <tr class="clickable-row border-bottom" data-href="/clients/{{$client->id}}">
-        <td class="pl-3">{{$client->first_name}}</td>
-        <td class="pl-3">{{$client->last_name}}</td>
-        <td class="pl-3">@if($client->company->logo != null)
-                <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+    @include('estimates.delete', ['client' => $estimate])
+    @include('estimates.edit', ['client' => $estimate])
+    <tr class="clickable-row border-bottom" data-href="/clients/{{$estimate->id}}">
+        <td class="pl-3">{{$estimate->number}}</td>
+        <td class="pl-3">@if($estimates->company->logo != null)
+                <img src="{{asset('/images/'.$estimates->company->id.$estimates->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-            @endif{{$client->company->name}}</td>
+            @endif{{$estimates->company->name}}</td>
+        <td class="pl-3">@if($estimates->client->logo != null)
+                <img src="{{asset('/images/'.$estimates->client->id.$estimates->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+            @else
+                <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+            @endif{{$estimates->client->name}}</td>
         <td class="text-muted">{{$client->email}}</td>
         <td class="text-muted">{{$client->city}}, {{$client->zipcode}}</td>
         <td class="text-muted">{{$client->phone}}</td>
@@ -30,7 +34,6 @@
     </tr>
 @endforeach
 @else
-    <td colspan="4">No clients found</td>
-    <td width="1"></td>
+    <td colspan="9" class="text-center">No Estimates found</td>
 @endif
 

@@ -18,4 +18,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/clients/{id}', 'ClientController@show');
     Route::post('/clients/{id}/edit', 'ClientController@update');
     Route::delete('/clients/{id}/delete', 'ClientController@destroy');
+    Route::get('/estimates', 'EstimateController@index');
+    Route::post('/estimates/create', 'EstimateController@postCreate');
+    Route::get('/estimates/{id}', 'EstimateController@show');
+    Route::post('/estimates/{id}/edit', 'EstimateController@update');
+    Route::delete('/estimates/{id}/delete', 'EstimateController@destroy');
 });

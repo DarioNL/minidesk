@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@include('clients.create')
-@include('clients.delete', ['client' => $client])
+@include('estimates.create', ['clients' => $clients])
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
         <div class="float-left">
@@ -10,7 +9,7 @@
         </div>
         <div class="float-right">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
-                 + Create New Client
+                 + Create New Estimate
             </button>
         </div>
         </div>
@@ -27,17 +26,18 @@
             <div class="card-text">
                 <table class="w-100 border-bottom border-top">
                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Company Name</th>
-                        <th>Email</th>
-                        <th>Address</th>
-                        <th>Phone</th>
+                        <th>Number</th>
+                        <th>Company</th>
+                        <th>Client</th>
+                        <th>Amount</th>
+                        <th>Sent Date</th>
+                        <th>Due Date</th>
+                        <th>Sign Date</th>
                         <th>Created At</th>
                         <th class="desktoptd">Actions</th>
                     </tr>
                     <tbody id="append_hook">
-                    @include('clients.scroll', ['clients' => $clients])
+                    @include('estimates.scroll', ['estimates' => $estimates])
                     </tbody>
                 </table>
             </div>

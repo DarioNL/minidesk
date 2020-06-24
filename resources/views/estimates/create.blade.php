@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Create New Client</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Create New Estimate</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -12,59 +12,44 @@
                     @csrf
                     <div class="row">
                         <div class="col-6">
-                            <label for="first_name" class="font-weight-bolder text-muted col-form-label">{{__('First Name')}}</label>
-                            <input type="text" autocomplete="first_name"
+                            <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Client')}}</label>
+                            @if(count($clients))
+                                <select name="client" class="select2 form-control">
+                                    @foreach($clients as $client)
+                                        <option value="{{$client->id}}" title="">{{$client->first_name}} {{$client->last_name}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <p class="text-muted">No users to link</p>
+                            @endif
+                            <a class="float-right" href="/clients">Create new client</a>
+                        </div>
+                        <div class="col-6">
+                            <label for="DueDate" class="font-weight-bolder text-muted col-form-label">{{__('Due Date')}}</label>
+                            <input type="date" autocomplete="due_date"
                                    class="form-control"
-                                   name="first_name" value="{{old('first_name')}}"
+                                   name="due_date" value="{{old('due_date')}}"
                                    required autofocus>
 
 
-                            @error('first_name')
-                                <span class="invalid-feedback" role="alert">
+                            @error('DueDate')
+                            <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="last_name" class="font-weight-bolder text-muted col-form-label">{{__('Last Name')}}</label>
-                            <input type="text" autocomplete="last_name"
-                                   class="form-control"
-                                   name="last_name" value="{{old('last_name')}}"
-                                   required autofocus>
-
-
-                            @error('last_name')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
                             @enderror
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-                            <label for="house_number" class="font-weight-bolder text-muted col-form-label">{{__('House Number')}}</label>
-                            <input type="text" autocomplete="house_number"
+                            <label for="title" class="font-weight-bolder text-muted col-form-label">{{__('Title (optional)')}}</label>
+                            <input type="text" autocomplete="title"
                                    class="form-control"
-                                   name="house_number" value="{{old('house_number')}}"
+                                   name="title" value="{{old('title')}}"
                                    required autofocus>
 
 
-                            @error('house_number')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="house_number_suffix" class="font-weight-bolder text-muted col-form-label">{{__('Suffix (optional)')}}</label>
-                            <input type="text" autocomplete="house_number_suffix"
-                                   class="form-control"
-                                   name="house_number_suffix" value="{{old('house_number_suffix')}}"
-                                    autofocus>
-
-
-                            @error('house_number_suffix')
+                            @error('title')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -74,101 +59,89 @@
 
 
                     <div class="row">
-                        <div class="col-6">
-                            <label for="city" class="font-weight-bolder text-muted col-form-label">{{__('City')}}</label>
-                            <input type="text" autocomplete="city"
-                                   class="form-control"
-                                   name="city" value="{{old('city')}}"
-                                   autofocus>
-
-
-                            @error('city')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-
-                        <div class="col-6">
-                            <label for="zipcode" class="font-weight-bolder text-muted col-form-label">{{__('Zipcode')}}</label>
-                            <input type="text" autocomplete="zipcode"
-                                   class="form-control"
-                                   name="zipcode" value="{{old('zipcode')}}"
-                                   autofocus>
-
-
-                            @error('zipcode')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-
-                        <div class="col-6">
-                            <label for="address" class="font-weight-bolder text-muted col-form-label">{{__('Address')}}</label>
-                            <input type="text" autocomplete="last_name"
-                                   class="form-control"
-                                   name="address" value="{{old('address')}}"
-                                   required autofocus>
-
-
-                            @error('address')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="col-6">
-                            <label for="phone" class="font-weight-bolder text-muted col-form-label">{{__('Phone')}}</label>
-                            <input type="tel" autocomplete="phone"
-                                   class="form-control"
-                                   name="phone" value="{{old('phone')}}"
-                                   autofocus>
-
-
-                            @error('phone')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="col-12">
+                        <table class=" border-bottom border-top order-table">
+                            <tr class="border-bottom text-secondary order-table-header" style="box-shadow: none !important; font-weight: normal">
+                                <th class="order">Amount</th>
+                                <th class="order">Description</th>
+                                <th class="order">Price</th>
+                                <th class="order">Tax</th>
+                                <th class="order">Total</th>
+                            </tr>
+                            <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <input id="amount" type="number" autocomplete="amount"
+                                           class="form-control" min="1"
+                                           name="amount" value="{{old('amount')}}"
+                                           required autofocus>
+                                </th>
+                                <td>
+                                    <input type="text" autocomplete="description"
+                                           class="form-control"
+                                           name="description" value="{{old('description')}}"
+                                           required autofocus>
+                                </td>
+                                <td>
+                                    <input id="price" type="number" autocomplete="price"
+                                           class="form-control"
+                                           name="price" value="{{old('price')}}"
+                                           min="0.00" step="0.01" placeholder="0.00"
+                                           required autofocus>
+                                </td>
+                                <td>
+                                    <select id="vat" name="vat" class="form-control">
+                                        <option value="21">21% full VAT</option>
+                                        <option value="9">9% lowered VAT</option>
+                                        <option value="0">0% no VAT</option>
+                                    </select>
+                                </td>
+                                <th id="total">€0.00</th>
+                            </tr>
+                            </tbody>
+                        </table>
                         </div>
                     </div>
 
-                <div class="row">
-                        <div class="col-6">
-                            <label for="email" class="font-weight-bolder text-muted col-form-label">{{__('Email')}}</label>
-                            <input type="email" autocomplete="email"
-                                   class="form-control"
-                                   name="email" value="{{old('email')}}"
-                                   autofocus>
-
-
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                <div class="row col-12">
+                    <div class="w-100">
+                        <div class="float-right">
+                        <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Discount %')}}</label>
+                        <input type="number" id="discount" autocomplete="discount"
+                               class="form-control" min="0"
+                               name="discount" value="{{old('discount')}}"
+                               required autofocus>
                         </div>
-
-
-                </div>
-                <div class="col-6">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="true" name="send_login" id="send_login">
-                        <label class="form-check-label" for="send_login">
-                            Send Login Info
-                        </label>
                     </div>
                 </div>
+
+                <div class="row col-12">
+                    <div class="w-100 text-secondary">
+                        <div id="discount-price" class="float-right">
+                            0% Discount -€0.00
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row col-12">
+                    <div class="w-100 text-secondary">
+                        <div id="subtotal" class="float-right">
+                             Subtotal €0.00
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
                 <div class="modal-footer">
+                    <div class="row col-12">
+                        <div class="w-100 text-secondary">
+                            <div id="total" class="float-right">
+                                total 0.00
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button class="btn btn-primary float-right w-25">Save</button>
                 </div>

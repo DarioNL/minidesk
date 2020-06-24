@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 
-class Invoice extends Authenticatable
+class Products extends Authenticatable
 {
     use Notifiable , SoftDeletes, UsesUuid;
 
@@ -19,7 +19,7 @@ class Invoice extends Authenticatable
 
 
     protected $fillable = [
-        'company_id', 'sign_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date'
+       'number', 'company_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date'
     ];
 
 
@@ -33,5 +33,9 @@ class Invoice extends Authenticatable
         return $this->hasOne(Client::class ,'id', 'client_id');
     }
 
+    public function products()
+    {
+        return $this->hasOne(Products::class ,'id', 'estimate_id');
+    }
 
 }
