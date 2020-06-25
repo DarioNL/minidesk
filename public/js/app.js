@@ -37407,6 +37407,54 @@ __webpack_require__(/*! ./components/search */ "./resources/js/components/search
 
 __webpack_require__(/*! ./components/select2 */ "./resources/js/components/select2.js");
 
+__webpack_require__(/*! ./components/price_calculations */ "./resources/js/components/price_calculations.js");
+
+/***/ }),
+
+/***/ "./resources/js/components/price_calculations.js":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/price_calculations.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  $('.product').click(function () {
+      $('.product').click(function () {
+
+      });
+    CalculateItemsValue();
+  });
+});
+
+function percentage(num, per) {
+  return num / 100 * per;
+}
+
+function CalculateItemsValue() {
+  var total_items = 1;
+  var total = 0.00;
+  var noVatTotal = 0.00;
+
+  for (i = 1; i <= total_items; i++) {
+      amountID = document.getElementById("amount" + i);
+    priceID = document.getElementById("price" + i);
+    vatID = document.getElementById("vat" + i);
+      console.log(parseFloat(priceID.value))
+
+    noVatTotal[i] = noVatTotal + parseFloat(amountID.value) * parseFloat(priceID.value);
+      console.log(parseFloat(amountID.value))
+    total[i] = percentage(noVatTotal[i], parseInt(vatID.selectedIndex));
+      if(total[i] == "undefined"){
+          document.getElementById("total" + i).innerHTML = "€0.00";
+      }else {
+          document.getElementById("total" + i).innerHTML = "€" + total[i];
+      }
+  }
+
+  document.getElementById("total").innerHTML = "€" + total;
+}
+
 /***/ }),
 
 /***/ "./resources/js/components/search.js":

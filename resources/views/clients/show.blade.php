@@ -117,7 +117,7 @@
                                                     </tr>
                                                     <tbody id="append_hook">
                                                     @php($clients = \App\Models\Client::all())
-                                                    @include('clients.scroll', ['clients' => $estimates])
+                                                    @include('clients.scroll', ['clients' => $clients])
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -136,7 +136,7 @@
                                                     </tr>
                                                     <tbody id="append_hook">
                                                     @php($clients = \App\Models\Client::all())
-                                                    @include('clients.scroll', ['clients' => $estimates])
+                                                    @include('clients.scroll', ['clients' => $clients])
                                                     </tbody>
                                                 </table>
                                             </div>

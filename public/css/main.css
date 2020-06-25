@@ -255,26 +255,25 @@
   margin-top: 15rem;
 }
 
-.order-table{
-    font-size: 10px;
-    color: gray;
-    margin-top: 2rem
+.order-table {
+  font-size: 10px;
+  color: gray;
+  margin-top: 2rem;
 }
 
-.order-table-header{
-    padding: 0;
-    background: #eaeaea;
+.order-table-header {
+  padding: 0;
+  background: #eaeaea;
 }
 
-.order-table-header:hover{
-    background: #eaeaea;
+.order-table-header:hover {
+  background: #eaeaea;
 }
 
-.order{
-    padding: 10px;
-    font-size: 15px;
+.order {
+  padding: 10px;
+  font-size: 15px;
 }
-
 
 table {
   width: 100%;

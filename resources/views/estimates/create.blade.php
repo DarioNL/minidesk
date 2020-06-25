@@ -71,8 +71,8 @@
                             <tbody>
                             <tr>
                                 <th scope="row">
-                                    <input id="amount" type="number" autocomplete="amount"
-                                           class="form-control" min="1"
+                                    <input id="amount1" type="number" autocomplete="amount"
+                                           class="form-control product amount1" min="1"
                                            name="amount" value="{{old('amount')}}"
                                            required autofocus>
                                 </th>
@@ -83,20 +83,20 @@
                                            required autofocus>
                                 </td>
                                 <td>
-                                    <input id="price" type="number" autocomplete="price"
-                                           class="form-control"
+                                    <input id="price1" type="number" autocomplete="price"
+                                           class="form-control product"
                                            name="price" value="{{old('price')}}"
                                            min="0.00" step="0.01" placeholder="0.00"
                                            required autofocus>
                                 </td>
                                 <td>
-                                    <select id="vat" name="vat" class="form-control">
+                                    <select id="vat1" name="vat" class="form-control product">
                                         <option value="21">21% full VAT</option>
                                         <option value="9">9% lowered VAT</option>
                                         <option value="0">0% no VAT</option>
                                     </select>
                                 </td>
-                                <th id="total">€0.00</th>
+                                <th id="total1">€0.00</th>
                             </tr>
                             </tbody>
                         </table>
@@ -109,6 +109,7 @@
                         <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Discount %')}}</label>
                         <input type="number" id="discount" autocomplete="discount"
                                class="form-control" min="0"
+                               onkeyup="CalculateItemsValue()"
                                name="discount" value="{{old('discount')}}"
                                required autofocus>
                         </div>
@@ -125,7 +126,7 @@
 
                 <div class="row col-12">
                     <div class="w-100 text-secondary">
-                        <div id="subtotal" class="float-right">
+                        <div id="subtotal1" class="float-right">
                              Subtotal €0.00
                         </div>
                     </div>
