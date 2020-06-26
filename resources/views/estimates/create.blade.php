@@ -60,6 +60,7 @@
 
                     <div class="row">
                         <div class="col-12">
+                            <a class="new-product" href="#">+ Add new product</a>
                         <table class=" border-bottom border-top order-table">
                             <tr class="border-bottom text-secondary order-table-header" style="box-shadow: none !important; font-weight: normal">
                                 <th class="order">Amount</th>
@@ -69,7 +70,7 @@
                                 <th class="order">Total</th>
                             </tr>
                             <tbody>
-                            <tr>
+                            <tr id="table-rows">
                                 <th scope="row">
                                     <input id="amount1" type="number" autocomplete="amount"
                                            class="form-control product amount1" min="1"
@@ -108,9 +109,8 @@
                         <div class="float-right">
                         <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Discount %')}}</label>
                         <input type="number" id="discount" autocomplete="discount"
-                               class="form-control" min="0"
-                               onkeyup="CalculateItemsValue()"
-                               name="discount" value="{{old('discount')}}"
+                               class="form-control product" min="0"
+                               name="discount" value="0"
                                required autofocus>
                         </div>
                     </div>
@@ -126,7 +126,7 @@
 
                 <div class="row col-12">
                     <div class="w-100 text-secondary">
-                        <div id="subtotal1" class="float-right">
+                        <div id="subtotal" class="float-right">
                              Subtotal €0.00
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                     <div class="row col-12">
                         <div class="w-100 text-secondary">
                             <div id="total" class="float-right">
-                                total 0.00
+                                total €0.00
                             </div>
                         </div>
                     </div>

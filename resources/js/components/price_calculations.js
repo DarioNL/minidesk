@@ -22,10 +22,10 @@ $(document).ready(function(){
 
                 noVatTotal[i] = total + parseInt(amountID.innerText) * parseInt(priceID.innerText);
                 total[i] = percentage(noVatTotal[i], parseInt(vatID.innerText))
-                document.getElementById("Total"+i).innerHTML = "€" + total[i];
+                document.getElementById("total"+i).innerHTML = "€" + total[i];
 
             }
-            document.getElementById("ItemsTotal").innerHTML = "€" + total;
+            document.getElementById("total").innerHTML = "€" + total;
 
         }
 

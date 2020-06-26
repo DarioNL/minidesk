@@ -37427,33 +37427,112 @@ $(document).ready(function () {
   });
 });
 
-function percentage(num, per) {
-  return num / 100 * per;
+            $(document).ready(function () {
+                $('.new-product').click(function () {
+                    $('.new-product').click(function () {
+
+                    });
+                    addItem();
+                });
+            });
+
+            var total_items = 1;
+
+            function addItem() {
+                tableID = document.getElementById("table-rows");
+
+                total_items++
+
+
+                var row = tableID.insertRow(0);
+                var cell1 = tableID.insertCell(0);
+                var cell2 = tableID.insertCell(1);
+                var cell3 = tableID.insertCell(2);
+                var cell4 = tableID.insertCell(3);
+                cell1.innerHTML = '<input id="amount1" type="number" autocomplete="amount"\n' +
+                    '                                           class="form-control product amount1" min="1"\n' +
+                    '                                           name="amount" value="{{old(\'amount\')}}"\n' +
+                    '                                           required autofocus>';
+                // cell2.innerHTML = "NEW CELL2";
+                // cell3.innerHTML = "NEW CELL1";
+                // cell4.innerHTML = "NEW CELL2";
+                // tableID.innerHTML = '<ol><li>html data</li></ol>';
+            }
+
+
+            function roundTo(n, digits) {
+                if (digits === undefined) {
+                    digits = 0;
+                }
+
+                var multiplicator = Math.pow(10, digits);
+                n = parseFloat((n * multiplicator).toFixed(11));
+                n = (Math.round(n) / multiplicator).toFixed(2);
+                return n;
+            }
+
+function vatPercentage(num, per) {
+    let Amount = num / 100 * per;
+  return roundTo(Amount, 2);
 }
 
-function CalculateItemsValue() {
-  var total_items = 1;
-  var total = 0.00;
-  var noVatTotal = 0.00;
 
-  for (i = 1; i <= total_items; i++) {
+
+function CalculateItemsValue() {
+
+
+
+  var total = [0.00];
+    var noVatTotal = [0.00];
+    var vat = [0.00];
+    var subtotal = 0.00;
+    var discountAmount = 0.00
+
+    for (i = 1; i <= total_items; i++) {
       amountID = document.getElementById("amount" + i);
     priceID = document.getElementById("price" + i);
     vatID = document.getElementById("vat" + i);
-      console.log(parseFloat(priceID.value))
 
-    noVatTotal[i] = noVatTotal + parseFloat(amountID.value) * parseFloat(priceID.value);
-      console.log(parseFloat(amountID.value))
-    total[i] = percentage(noVatTotal[i], parseInt(vatID.selectedIndex));
-      if(total[i] == "undefined"){
-          document.getElementById("total" + i).innerHTML = "€0.00";
-      }else {
-          document.getElementById("total" + i).innerHTML = "€" + total[i];
-      }
+
+
+
+      noVatTotal[i] = roundTo(parseFloat(amountID.value) * parseFloat(priceID.value), 2);
+
+
+
+        console.log(noVatTotal[i])
+    vat[i] = vatPercentage(noVatTotal[i], parseFloat(vatID.value));
+        console.log(vat[i])
+    total[i] = roundTo(parseFloat(noVatTotal[i]) + parseFloat(vat[i]), 2);
+    if(total[i] !== 'NaN'){
+        document.getElementById("total" + i).innerHTML = "€" + total[i];
+        subtotal = parseFloat(subtotal) + parseFloat(total[i]);
+    }
+
+
+
+
   }
 
-  document.getElementById("total").innerHTML = "€" + total;
+    // console.log(subtotal)
+    discountID = document.getElementById("discount");
+    // console.log(discount.value)
+    discountAmount = vatPercentage(subtotal, parseFloat(discount.value));
+   console.log(discountAmount)
+    if(parseFloat(discountID.value) !== 'NaN') {
+        document.getElementById("discount-price").innerHTML = parseFloat(discountID.value) + "% Discount -€" + parseFloat(discountAmount);
+    }
+    subtotal = roundTo(parseFloat(subtotal) - parseFloat(discountAmount), 2);
+    console.log(subtotal)
+    if(subtotal !== 'NaN') {
+        document.getElementById("subtotal").innerHTML = "Subtotal €" + subtotal;
+    }
+    if(subtotal !== 'NaN') {
+        document.getElementById("total").innerHTML = "total €" + subtotal;
+    }
 }
+
+
 
 /***/ }),
 
