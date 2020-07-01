@@ -27,9 +27,10 @@
                 <table class="w-100 border-bottom border-top">
                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
                         <th>Number</th>
+                        <th>Title</th>
                         <th>Company</th>
                         <th>Client</th>
-                        <th>Amount</th>
+                        <th>Total</th>
                         <th>Sent Date</th>
                         <th>Due Date</th>
                         <th>Sign Date</th>

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="clients/create">
+            <form method="POST" action="estimates/create">
             <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -69,35 +69,35 @@
                                 <th class="order">Tax</th>
                                 <th class="order">Total</th>
                             </tr>
-                            <tbody>
+                            <tbody id="order-table">
                             <tr id="table-rows">
                                 <th scope="row">
                                     <input id="amount1" type="number" autocomplete="amount"
-                                           class="form-control product amount1" min="1"
-                                           name="amount" value="{{old('amount')}}"
+                                           class="form-control product copy" min="1"
+                                           name="amount1" value="{{old('amount')}}"
                                            required autofocus>
                                 </th>
                                 <td>
                                     <input type="text" autocomplete="description"
-                                           class="form-control"
-                                           name="description" value="{{old('description')}}"
+                                           class="form-control copy"
+                                           name="description1" value="{{old('description')}}"
                                            required autofocus>
                                 </td>
                                 <td>
                                     <input id="price1" type="number" autocomplete="price"
-                                           class="form-control product"
-                                           name="price" value="{{old('price')}}"
+                                           class="form-control product copy"
+                                           name="price1" value="{{old('price')}}"
                                            min="0.00" step="0.01" placeholder="0.00"
                                            required autofocus>
                                 </td>
                                 <td>
-                                    <select id="vat1" name="vat" class="form-control product">
+                                    <select id="vat1" name="vat1" class="form-control product copy">
                                         <option value="21">21% full VAT</option>
                                         <option value="9">9% lowered VAT</option>
                                         <option value="0">0% no VAT</option>
                                     </select>
                                 </td>
-                                <th id="total1">€0.00</th>
+                                <th class="copy" id="total1">€0.00</th>
                             </tr>
                             </tbody>
                         </table>
@@ -142,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-
+                    <input type="hidden" name="total_items" id="total_items" value="1">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button class="btn btn-primary float-right w-25">Save</button>
                 </div>

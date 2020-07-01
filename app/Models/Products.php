@@ -13,13 +13,13 @@ class Products extends Authenticatable
 {
     use Notifiable , SoftDeletes, UsesUuid;
 
-    protected $table = 'invoices';
+    protected $table = 'products';
 
     protected $primaryKey = 'id';
 
 
     protected $fillable = [
-       'number', 'company_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date'
+       'description', 'amount', 'estimate_id', 'tax', 'price'
     ];
 
 
@@ -33,9 +33,9 @@ class Products extends Authenticatable
         return $this->hasOne(Client::class ,'id', 'client_id');
     }
 
-    public function products()
+    public function estimate()
     {
-        return $this->hasOne(Products::class ,'id', 'estimate_id');
+        return $this->hasOne(Estimate::class ,'id', 'estimate_id');
     }
 
 }

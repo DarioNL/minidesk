@@ -37423,7 +37423,7 @@ $(document).ready(function () {
       $('.product').click(function () {
 
       });
-    CalculateItemsValue();
+      CalculateItemsValue();
   });
 });
 
@@ -37439,25 +37439,36 @@ $(document).ready(function () {
             var total_items = 1;
 
             function addItem() {
-                tableID = document.getElementById("table-rows");
+                tableID = document.getElementById("order-table");
 
                 total_items++
+                document.getElementById("total_items").value = total_items;
+                var newFields = document.getElementById('table-rows').cloneNode(true);
+                newFields.id = '';
 
 
-                var row = tableID.insertRow(0);
-                var cell1 = tableID.insertCell(0);
-                var cell2 = tableID.insertCell(1);
-                var cell3 = tableID.insertCell(2);
-                var cell4 = tableID.insertCell(3);
-                cell1.innerHTML = '<input id="amount1" type="number" autocomplete="amount"\n' +
-                    '                                           class="form-control product amount1" min="1"\n' +
-                    '                                           name="amount" value="{{old(\'amount\')}}"\n' +
-                    '                                           required autofocus>';
-                // cell2.innerHTML = "NEW CELL2";
-                // cell3.innerHTML = "NEW CELL1";
-                // cell4.innerHTML = "NEW CELL2";
-                // tableID.innerHTML = '<ol><li>html data</li></ol>';
+                    var newRows = newFields.querySelectorAll('.copy');
+                console.log(newRows)
+
+                for (var i=0;i<newRows.length;i++) {
+                    var theName = newRows[i].name
+                    if (theName)
+                        newRows[i].name = theName.replace('1', total_items);
+                    var theId = newRows[i].id
+                    if (theId)
+                        newRows[i].id = theId.replace('1', total_items);
+                    var theValue = newRows[i].value
+                    if (theValue)
+                        newRows[i].Value = '';
+                    var theClass = newRows[i].class
+                }
+                console.log(newRows)
+
+
+                var insertHere = document.getElementById('table-rows');
+                insertHere.parentNode.insertBefore(newFields,insertHere);
             }
+
 
 
             function roundTo(n, digits) {
@@ -37492,15 +37503,7 @@ function CalculateItemsValue() {
       amountID = document.getElementById("amount" + i);
     priceID = document.getElementById("price" + i);
     vatID = document.getElementById("vat" + i);
-
-
-
-
       noVatTotal[i] = roundTo(parseFloat(amountID.value) * parseFloat(priceID.value), 2);
-
-
-
-        console.log(noVatTotal[i])
     vat[i] = vatPercentage(noVatTotal[i], parseFloat(vatID.value));
         console.log(vat[i])
     total[i] = roundTo(parseFloat(noVatTotal[i]) + parseFloat(vat[i]), 2);
@@ -37509,14 +37512,10 @@ function CalculateItemsValue() {
         subtotal = parseFloat(subtotal) + parseFloat(total[i]);
     }
 
-
-
-
   }
 
-    // console.log(subtotal)
     discountID = document.getElementById("discount");
-    // console.log(discount.value)
+
     discountAmount = vatPercentage(subtotal, parseFloat(discount.value));
    console.log(discountAmount)
     if(parseFloat(discountID.value) !== 'NaN') {
@@ -37530,7 +37529,10 @@ function CalculateItemsValue() {
     if(subtotal !== 'NaN') {
         document.getElementById("total").innerHTML = "total €" + subtotal;
     }
+    document.getElementById("total_items").value = total_items;
 }
+
+
 
 
 

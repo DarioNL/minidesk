@@ -15,9 +15,9 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('company_id');
+            $table->uuid('estimate_id');
             $table->string('description');
-            $table->decimal('tax_percentage', 6, 4);
+            $table->integer('tax');
             $table->integer('amount')->default(1);
             $table->decimal('price',9,2);
             $table->timestamps();
