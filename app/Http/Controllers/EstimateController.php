@@ -156,12 +156,11 @@ class EstimateController extends Controller
 
     public function accept($id){
         $estimate = Estimate::all()->find($id);
-        if ($estimate->sign_date != null){
-          return back();
+        if ($estimate->sign_date = null){
+            $estimate->sign_date = Carbon::now();
+            $estimate->number = '#of'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
+            $estimate->save();
         }
-        $estimate->sign_date = Carbon::now();
-        $estimate->number = '#of'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
-        $estimate->save();
 
         return back();
     }
