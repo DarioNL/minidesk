@@ -37436,7 +37436,8 @@ $(document).ready(function () {
                 });
             });
 
-            var total_items = 1;
+            itemsID = document.getElementById("total_items")
+            var total_items = parseInt(itemsID.value);
 
             function addItem() {
                 tableID = document.getElementById("order-table");
@@ -37516,7 +37517,7 @@ function CalculateItemsValue() {
 
     discountID = document.getElementById("discount");
 
-    discountAmount = vatPercentage(subtotal, parseFloat(discount.value));
+    discountAmount = vatPercentage(subtotal, parseFloat(discountID.value));
    console.log(discountAmount)
     if(parseFloat(discountID.value) !== 'NaN') {
         document.getElementById("discount-price").innerHTML = parseFloat(discountID.value) + "% Discount -€" + parseFloat(discountAmount);

@@ -21,9 +21,9 @@ class CreateEstimatesTable extends Migration
             $table->uuid('company_id');
             $table->uuid('client_id');
             $table->decimal('total',9,2);
-            $table->decimal('discount',9,2);
-            $table->decimal('amount',9,2);
-            $table->timestamp('send_date');
+            $table->integer('discount')->nullable()->default(0);
+            $table->decimal('amount',9,2)->nullable()->default(0.00);
+            $table->timestamp('send_date')->nullable();
             $table->timestamp('due_date');
             $table->timestamp('sign_date')->nullable();
             $table->timestamps();

@@ -16,7 +16,8 @@ $(document).ready(function () {
     });
 });
 
-var total_items = 1;
+itemsID = document.getElementById("total_items")
+var total_items = parseInt(itemsID.value);
 
 function addItem() {
     tableID = document.getElementById("order-table");
@@ -42,7 +43,6 @@ function addItem() {
             newRows[i].Value = '';
         var theClass = newRows[i].class
     }
-    console.log(newRows)
 
 
     var insertHere = document.getElementById('table-rows');
@@ -85,7 +85,6 @@ function CalculateItemsValue() {
         vatID = document.getElementById("vat" + i);
         noVatTotal[i] = roundTo(parseFloat(amountID.value) * parseFloat(priceID.value), 2);
         vat[i] = vatPercentage(noVatTotal[i], parseFloat(vatID.value));
-        console.log(vat[i])
         total[i] = roundTo(parseFloat(noVatTotal[i]) + parseFloat(vat[i]), 2);
         if(total[i] !== 'NaN'){
             document.getElementById("total" + i).innerHTML = "€" + total[i];
@@ -96,8 +95,7 @@ function CalculateItemsValue() {
 
     discountID = document.getElementById("discount");
 
-    discountAmount = vatPercentage(subtotal, parseFloat(discount.value));
-    console.log(discountAmount)
+    discountAmount = vatPercentage(subtotal, parseFloat(discountID.value));
     if(parseFloat(discountID.value) !== 'NaN') {
         document.getElementById("discount-price").innerHTML = parseFloat(discountID.value) + "% Discount -€" + parseFloat(discountAmount);
     }

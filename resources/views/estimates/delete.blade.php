@@ -1,18 +1,18 @@
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div id="deleteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Delete Client</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Delete Estimate @if($estimate->title != null){{$estimate->title}}@else{{$estimate->number}}@endif</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete {{$client->first_name}} {{$client->last_name}}?
+                Are you sure you want to delete estimate @if($estimate->title != null){{$estimate->title}}?@else {{$estimate->number}}?@endif
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form method="POST" action="/clients/{{$client->id}}/delete">
+                <form method="POST" action="/estimates/{{$estimate->id}}/delete">
                     @method('delete')
                     @csrf
                     <button type="submit" class="btn btn-danger">Delete</button>

@@ -1,8 +1,7 @@
 @if(count($estimates))
 @foreach($estimates as $estimate)
 
-    @include('estimates.delete', ['client' => $estimate])
-    @include('estimates.edit', ['client' => $estimate])
+    @include('estimates.delete', ['estimate' => $estimate])
     <tr class="clickable-row border-bottom" data-href="/estimates/{{$estimate->id}}">
         <td class="pl-3">{{$estimate->number}}</td>
         @if($estimate->title != null)
@@ -43,14 +42,15 @@
             </button>
 
             <div class="dropdown-menu dropdown-menu-right">
-                <a onclick="$('#editModal').modal('show')" class="dropdown-item"
-                   type="button">Edit</a>
                 <button onclick="$('#deleteModal').modal('show')" class="dropdown-item deleteitem" type="button">Delete</button>
             </div>
         </td>
     </tr>
+    </tbody>
+    </table>
+    @include('estimates.edit', ['estimate' => $estimate])
 @endforeach
 @else
-    <td colspan="9" class="text-center">No Estimates found</td>
+    <td colspan="10" class="text-center">No Estimates found</td>
 @endif
 

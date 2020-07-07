@@ -46,7 +46,7 @@
                             <input type="text" autocomplete="title"
                                    class="form-control"
                                    name="title" value="{{old('title')}}"
-                                   required autofocus>
+                                   autofocus>
 
 
                             @error('title')
@@ -69,7 +69,7 @@
                                 <th class="order">Tax</th>
                                 <th class="order">Total</th>
                             </tr>
-                            <tbody id="order-table">
+                            <tbody id="order-table" class="product">
                             <tr id="table-rows">
                                 <th scope="row">
                                     <input id="amount1" type="number" autocomplete="amount"

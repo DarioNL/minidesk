@@ -19,7 +19,7 @@ class Estimate extends Authenticatable
 
 
     protected $fillable = [
-       'total', 'discount', 'sign_id', 'company_id', 'client_id', 'amount', 'send_date', 'due_date',
+       'total', 'discount', 'sign_id', 'company_id', 'client_id', 'amount', 'send_date', 'due_date', 'title',
     ];
 
 

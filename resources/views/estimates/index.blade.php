@@ -5,7 +5,7 @@
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
         <div class="float-left">
-        <h3 class="float-left pt-2">All Clients</h3>
+        <h3 class="float-left pt-2">All Estimates</h3>
         </div>
         <div class="float-right">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
@@ -39,8 +39,6 @@
                     </tr>
                     <tbody id="append_hook">
                     @include('estimates.scroll', ['estimates' => $estimates])
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>

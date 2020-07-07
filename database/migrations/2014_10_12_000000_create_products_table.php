@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->integer('tax');
             $table->integer('amount')->default(1);
             $table->decimal('price',9,2);
+            $table->decimal('total',9,2);
             $table->timestamps();
             $table->softDeletes();
         });
