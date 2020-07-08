@@ -1,7 +1,7 @@
 @extends('mail.mail')
 
 @section('content')
-    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:570px;">
         <tr>
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
@@ -49,7 +49,7 @@
             <td align="left"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;">
                 <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
-                    Whe recommend changing the password as soon as possible!
+                    For the best security change the password as soon as possible
                 </p>
             </td>
         </tr>

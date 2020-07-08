@@ -1,4 +1,4 @@
-@extends('mail.mail')
+@extends('notifications.email')
 
 @section('content')
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:570px;">
@@ -6,7 +6,7 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
                 <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
-                    Hello {{ $name }}!
+                  Hello {{$client->first_name}} {{$client->last_name}} here is your login info!
                 </h2>
             </td>
         </tr>
@@ -14,9 +14,8 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 20px; padding-bottom:20px">
                 <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
-                    You can Reset your password <a href="{{env('APP_URL')}}/forgot/{{$token}}/reset">here</a>. Or paste this url in your
-                    browser: {{env('APP_URL')}}/forgot/{{$token}}/reset
-                    This Token is valid for 24 hours.
+                    You can login <a href="{{env('APP_URL')}}/login">here</a>. Or paste this url in your
+                    browser: {{env('APP_URL')}}/login
                 </p>
             </td>
         </tr>
@@ -26,11 +25,21 @@
                     <tr>
                         <td width="75%" align="left"
                             style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding-bottom:30px">
-                            Token
+                            Email
                         </td>
                         <td width="25%" align="left"
                             style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-bottom:30px">
-                            {{$token}}
+                            {{$client->email}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="75%" align="left"
+                            style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 800; line-height: 24px; padding-bottom:30px">
+                            Password
+                        </td>
+                        <td width="25%" align="left"
+                            style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-bottom:30px">
+                            {{$client->password}}
                         </td>
                     </tr>
                 </table>

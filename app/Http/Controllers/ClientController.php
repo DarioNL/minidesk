@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Company;
+use App\Notifications\credentials;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -56,7 +57,7 @@ class ClientController extends Controller
 
         if ($request->has('send_login')) {
             if ($request->post('send_login') == true) {
-                $client->sendLoginInfo($client->email, $password);
+                $client->notify(new credentials($client));
             }
         }
 
@@ -111,7 +112,7 @@ class ClientController extends Controller
         if ($request->has('send_login')) {
             $password = Str::random(10);
             if ($request->post('send_login') == true) {
-                $client->sendLoginInfo($client->email, $password);
+                $client->notify(new credentials($client));
                 return back();
             }
         }

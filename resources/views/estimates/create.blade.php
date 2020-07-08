@@ -69,7 +69,7 @@
                                 <th class="order">Tax</th>
                                 <th class="order">Total</th>
                             </tr>
-                            <tbody id="order-table" class="product">
+                            <tbody id="order-table">
                             <tr id="table-rows">
                                 <th scope="row">
                                     <input id="amount1" type="number" autocomplete="amount"
