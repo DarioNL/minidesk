@@ -100,9 +100,17 @@ class EstimateController extends Controller
     public function update(Request $request, $id)
     {
         $estimate = Estimate::all()->find($id);
+        $products = Products::all()->where('estimate_id', '=', $id);
+
+        $request->validate([
+            'client' => 'required',
+            'due_date' => 'required',
+            'discount' => 'required',
+            'total_items' => 'required',
+        ]);
 
         $validate_array = [];
-        for ($i = 1; $i < $estimate->products; $i++) {
+        for ($i = 1; $i < $request->post('total_items'); $i++) {
 
             $request->validate([
                 'amount' . $i => 'required',
@@ -115,18 +123,20 @@ class EstimateController extends Controller
 
         $sign_id = Str::random(50);
         $total= (float) 0.00;
+        $productTotal =[0];
 
         for ($i = 1; $i < $request->post('total_items')+1; $i++) {
             $noVatTotal = $request->post('price' . $i) * $request->post('amount' . $i);
             $vat = $noVatTotal / 100 * $request->post('vat' . $i);
             $vatTotal = $noVatTotal + $vat;
             $total = $total + $vatTotal;
+            $productTotal[$i] = $total;
         }
 
         $amount = $total / 100 * $request->post('discount');
         $total = $total - $amount;
 
-         $estimate->update([
+        $estimate->update([
             'title' => $request->post('title'),
             'sign_id' => $sign_id,
             'due_date' => $request->post('due_date'),
@@ -137,8 +147,10 @@ class EstimateController extends Controller
             'client_id' => $request->post('client'),
         ]);
 
-         $i = 1;
-        foreach ($estimate->products as $product) {
+        $i = 0;
+
+        foreach ($products as $product) {
+            $i++;
             $product->update([
                 'description' => $request->post('description' . $i),
                 'amount' => $request->post('amount' . $i),
@@ -146,9 +158,8 @@ class EstimateController extends Controller
                 'price' => $request->post('price' . $i),
                 'estimate_id' => $estimate->id,
                 'discount' => $request->post('discount'),
-                'total' => $total,
+                'total' => $productTotal[$i],
             ]);
-            $i++;
         }
 
         return back();

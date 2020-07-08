@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="estimates/create">
+            <form method="POST" action="/estimates/{{$estimate->id}}/edit">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -95,7 +95,7 @@
                                                    required autofocus>
                                         </td>
                                         <td>
-                                            <select id="vat{{$i}}"  name="vat1" class="form-control product copy">
+                                            <select id="vat{{$i}}"  name="vat{{$i}}" class="form-control product copy">
                                                 <option @if($product-> tax == 21) selected @endif value="21">21% full VAT</option>
                                                 <option @if($product-> tax == 9) selected @endif value="9">9% lowered VAT</option>
                                                 <option @if($product-> tax == 0) selected @endif value="0">0% no VAT</option>
