@@ -39,7 +39,7 @@ class ClientController extends Controller
         ]);
 
 
-        Client::create([
+       $client = Client::create([
             'first_name' => $request->post('first_name'),
             'last_name' => $request->post('last_name'),
             'address' => $request->post('address'),
@@ -55,9 +55,9 @@ class ClientController extends Controller
         ]);
 
         if ($request->has('send_login')) {
-//            if ($request->post('send_login') == true) {
-//                $user->sendLoginInfo($user->email, $password);
-//            }
+            if ($request->post('send_login') == true) {
+                $client->sendLoginInfo($client->email, $password);
+            }
         }
 
 
@@ -109,9 +109,11 @@ class ClientController extends Controller
         ]);
 
         if ($request->has('send_login')) {
-//            if ($request->post('send_login') == true) {
-//                $user->sendLoginInfo($user->email, $password);
-//            }
+            $password = Str::random(10);
+            if ($request->post('send_login') == true) {
+                $client->sendLoginInfo($client->email, $password);
+                return back();
+            }
         }
 
 

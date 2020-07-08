@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Mail\LoginInfo;
 use App\Models\Concerns\UsesUuid;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Mail;
 
 
 class Client extends Authenticatable
@@ -31,6 +33,12 @@ class Client extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function sendLoginInfo($email, $password)
+    {
+        Mail::to($email)->send(new LoginInfo($email, $password));
+    }
+
 
     public function Company()
     {
