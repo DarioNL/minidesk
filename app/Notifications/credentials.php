@@ -17,9 +17,10 @@ class credentials extends Notification
      *
      * @param $client
      */
-    public function __construct($client)
+    public function __construct($client, $password)
     {
         $this->client = $client;
+        $this->password = $password;
     }
 
     /**
@@ -43,8 +44,8 @@ class credentials extends Notification
     {
 
         return (new MailMessage)
-                    ->view(
-                        'vendor.notifications.credentials' , ['client' => $this->client]
+                    ->markdown(
+                        'vendor.notifications.credentials' , ['client' => $this->client, 'password' => $this->password]
                     );
     }
 

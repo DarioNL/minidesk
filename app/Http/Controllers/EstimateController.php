@@ -91,10 +91,13 @@ class EstimateController extends Controller
     public function show($id)
     {
         $estimate = Estimate::all()->find($id);
-        $products = $estimate->products;
-        $clients = Client::all()->where('company_id', Auth::id());
+        if ($estimate->company_id = Auth::id()){
+            $products = $estimate->products;
+            $clients = Client::all()->where('company_id', Auth::id());
 
-        return view('estimates.show', compact('estimate', 'products', 'clients'));
+            return view('estimates.show', compact('estimate', 'products', 'clients'));
+        }
+        return back();
     }
 
     public function update(Request $request, $id)

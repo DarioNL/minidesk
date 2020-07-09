@@ -1,4 +1,5 @@
-@extends('notifications.email')
+@extends('vendor.mail.html.header2')
+@extends('vendor.mail.html.mail')
 
 @section('content')
     <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:570px;">
@@ -39,7 +40,7 @@
                         </td>
                         <td width="25%" align="left"
                             style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-bottom:30px">
-                            {{$client->password}}
+                            {{$password}}
                         </td>
                     </tr>
                 </table>
@@ -49,7 +50,7 @@
             <td align="left"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 10px;">
                 <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
-                    For the best security change the password as soon as possible
+                    For the best security change the password as soon as possible<br><br> Regards,<br> Minidesk
                 </p>
             </td>
         </tr>
