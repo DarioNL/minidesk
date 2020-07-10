@@ -37,5 +37,4 @@ class Estimate extends Authenticatable
     {
         return $this->hasMany(Products::class ,'estimate_id', 'id');
     }
-
 }

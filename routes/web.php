@@ -9,11 +9,10 @@ Route::get('/', 'Auth\LoginController@showLoginForm');
 Auth::routes();
 
 Route::group(['middleware' => ['auth:web,clients']], function () {
-    Route::get('/', 'DashboardController@index');
     Route::get('/dashboard', 'DashboardController@index');
 });
 
-Route::group(['middleware' => ['auth:web']], function () {
+Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () {
     Route::get('/clients', 'ClientController@index');
     Route::post('/clients/create', 'ClientController@postCreate');
     Route::get('/clients/{id}', 'ClientController@show');
@@ -27,7 +26,8 @@ Route::group(['middleware' => ['auth:web']], function () {
     Route::delete('/estimates/{id}/delete', 'EstimateController@destroy');
 });
 
-Route::group(['middleware' => ['auth:clients']], function () {
+Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function () {
     Route::get('/estimates', 'client\ClientEstimateController@index');
     Route::get('/estimates/{id}', 'client\ClientEstimateController@show');
+    Route::get('/estimates/{id}/{sign-id}/accept', 'client\ClientEstimateController@sign');
 });

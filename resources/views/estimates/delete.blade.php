@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form method="POST" action="/estimates/{{$estimate->id}}/delete">
+                <form method="POST" action="/company/estimates/{{$estimate->id}}/delete">
                     @method('delete')
                     @csrf
                     <button type="submit" class="btn btn-danger">Delete</button>

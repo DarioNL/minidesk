@@ -2,7 +2,7 @@
 @foreach($estimates as $estimate)
 
     @include('estimates.delete', ['estimate' => $estimate])
-    <tr class="clickable-row border-bottom" data-href="/estimates/{{$estimate->id}}">
+    <tr class="clickable-row border-bottom" data-href="/company/estimates/{{$estimate->id}}">
         <td class="pl-3">{{$estimate->number}}</td>
         @if($estimate->title != null)
             <td class="text-muted">{{$estimate->title}}</td>

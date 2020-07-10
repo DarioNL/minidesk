@@ -3,7 +3,7 @@
 
     @include('clients.delete', ['client' => $client])
     @include('clients.edit', ['client' => $client])
-    <tr class="clickable-row border-bottom" data-href="/clients/{{$client->id}}">
+    <tr class="clickable-row border-bottom" data-href="/company/clients/{{$client->id}}">
         <td class="pl-3">{{$client->first_name}}</td>
         <td class="pl-3">{{$client->last_name}}</td>
         <td class="pl-3">@if($client->company->logo != null)
