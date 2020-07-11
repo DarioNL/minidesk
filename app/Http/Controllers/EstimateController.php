@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Estimate;
 use App\Models\Client;
 use App\Models\Products;
+use App\Notifications\sendEstimate;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -168,7 +169,8 @@ class EstimateController extends Controller
         return back();
     }
 
-    public function accept($id){
+    public function accept($id)
+    {
         $estimate = Estimate::all()->find($id);
         if ($estimate->sign_date = null){
             $estimate->sign_date = Carbon::now();
@@ -176,6 +178,33 @@ class EstimateController extends Controller
             $estimate->save();
         }
 
+        return back();
+    }
+
+    public function send(Request $request, $id)
+    {
+        $request->validate([
+            'send_date' => 'required',
+            'color' => 'required',
+        ]);
+
+        $estimate = Estimate::all()->find($id);
+
+
+        $send_date = $request->post('send_date');
+        $color = $request->post('color');
+
+        if ($send_date = Carbon::today()){
+            $estimate->notify(new sendEstimate($estimate, $color));
+            $estimate->update([
+                'send_date' => $send_date,
+            ]);
+            return back();
+        }
+
+        $estimate->update([
+            'send_date' => $send_date,
+        ]);
         return back();
     }
 

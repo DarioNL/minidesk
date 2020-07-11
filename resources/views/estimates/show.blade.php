@@ -5,6 +5,7 @@
     @include('estimates.delete', ['estimate' => $estimate])
     @include('estimates.edit', ['estimate' => $estimate])
     @include('estimates.accept', ['estimate' => $estimate])
+    @include('estimates.send', ['estimate' => $estimate])
 
 
     <div class="card table-container align-items-center w-100">
@@ -29,7 +30,7 @@
                 <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
                 <button onclick="$('#acceptModal').modal('show')" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
                 <a class="btn btn-info text-white"><i class="uil uil-print"></i> Print</a>
-                <a class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</a>
+                <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
                 <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
             </div>
             <div class="w-100 float-right border-bottom border-top">

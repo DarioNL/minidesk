@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
     Route::post('/estimates/create', 'EstimateController@postCreate');
     Route::post('/estimates/{id}/edit', 'EstimateController@update');
     Route::post('/estimates/{id}/accept', 'EstimateController@accept');
+    Route::post('/estimates/{id}/send', 'EstimateController@send');
     Route::delete('/estimates/{id}/delete', 'EstimateController@destroy');
 });
 
