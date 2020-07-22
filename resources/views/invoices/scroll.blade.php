@@ -1,20 +1,40 @@
-@if(count($estimates))
-@foreach($estimates as $client)
+@if(count($invoices))
+@foreach($invoices as $invoice)
 
-    @include('clients.delete', ['client' => $client])
-    @include('clients.edit', ['client' => $client])
-    <tr class="clickable-row border-bottom" data-href="/clients/{{$client->id}}">
-        <td class="pl-3">{{$client->first_name}}</td>
-        <td class="pl-3">{{$client->last_name}}</td>
-        <td class="pl-3">@if($client->company->logo != null)
-                <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+    @include('estimates.delete', ['estimate' => $invoice])
+    <tr class="clickable-row border-bottom" data-href="/company/estimates/{{$estimate->id}}">
+        <td class="pl-3">{{$estimate->number}}</td>
+        @if($estimate->title != null)
+            <td class="text-muted">{{$estimate->title}}</td>
+        @else
+            <td class="text-muted">{{$estimate->number}}</td>
+        @endif
+        <td class="pl-3">@if($estimate->company->logo != null)
+                <img src="{{asset('/images/'.$estimate->company->id.$estimates->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-            @endif{{$client->company->name}}</td>
-        <td class="text-muted">{{$client->email}}</td>
-        <td class="text-muted">{{$client->city}}, {{$client->zipcode}}</td>
-        <td class="text-muted">{{$client->phone}}</td>
-        @php($data = explode(' ', $client->created_at))
+            @endif{{$estimate->company->name}}</td>
+        <td class="pl-3">@if($estimate->client->logo != null)
+                <img src="{{asset('/images/'.$estimate->client->id.$estimate->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+            @else
+                <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+            @endif{{$estimate->client->first_name}} {{$estimate->client->last_name}}</td>
+        <td class="text-muted">€{{$estimate->total}}</td>
+        @if($estimate->send_at != null)
+        @php($date = explode(' ', $estimate->Send_at))
+            <td class="text-muted">{{$date[0]}}</td>
+        @else
+            <td class="text-muted">Not sent</td>
+        @endif
+        @php($dueDate = explode(' ', $estimate->due_date))
+        <td class="text-muted">{{$dueDate[0]}}</td>
+        @if($estimate->signed_at != null)
+            @php($signDate = explode(' ', $estimate->signed_at))
+            <td class="text-muted">{{$signDate[0]}}</td>
+        @else
+            <td class="text-muted">Not signed</td>
+        @endif
+        @php($data = explode(' ', $estimate->created_at))
         <td class="text-muted">{{$data[0]}}</td>
         <td width="1" class="text-center desktoptd last-child">
             <button class="btn btn-light btn-ellipsis" data-toggle="dropdown">
@@ -22,15 +42,15 @@
             </button>
 
             <div class="dropdown-menu dropdown-menu-right">
-                <a onclick="$('#editModal').modal('show')" class="dropdown-item"
-                   type="button">Edit</a>
                 <button onclick="$('#deleteModal').modal('show')" class="dropdown-item deleteitem" type="button">Delete</button>
             </div>
         </td>
     </tr>
+    </tbody>
+    </table>
+    @include('estimates.edit', ['estimate' => $estimate])
 @endforeach
 @else
-    <td colspan="4">No clients found</td>
-    <td width="1"></td>
+    <td colspan="10" class="text-center">No Estimates found</td>
 @endif
 

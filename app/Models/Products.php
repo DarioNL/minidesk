@@ -19,7 +19,7 @@ class Products extends Authenticatable
 
 
     protected $fillable = [
-       'description', 'amount', 'estimate_id', 'tax', 'price', 'total'
+       'description', 'amount', 'estimate_id', 'tax', 'price', 'total', 'invoice'
     ];
 
 
@@ -36,6 +36,11 @@ class Products extends Authenticatable
     public function estimate()
     {
         return $this->hasOne(Estimate::class ,'id', 'estimate_id');
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne(Invoice::class ,'id', 'invoice_id');
     }
 
 }

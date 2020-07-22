@@ -25,6 +25,13 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
     Route::post('/estimates/{id}/accept', 'EstimateController@accept');
     Route::post('/estimates/{id}/send', 'EstimateController@send');
     Route::delete('/estimates/{id}/delete', 'EstimateController@destroy');
+    Route::get('/invoices', 'InvoiceController@index');
+    Route::get('/invoices/{id}', 'InvoiceController@show');
+    Route::post('/invoices/create', 'InvoiceController@postCreate');
+    Route::post('/invoices/{id}/edit', 'InvoiceController@update');
+    Route::post('/invoices/{id}/accept', 'InvoiceController@accept');
+    Route::post('/invoices/{id}/send', 'InvoiceController@send');
+    Route::delete('/invoices/{id}/delete', 'InvoiceController@destroy');
 });
 
 Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function () {

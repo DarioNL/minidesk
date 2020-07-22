@@ -1,4 +1,4 @@
-@extends('vendor.mail.html.header2')
+@extends('vendor.mail.html.header')
 @extends('vendor.mail.html.mail')
 
 @section('content')
