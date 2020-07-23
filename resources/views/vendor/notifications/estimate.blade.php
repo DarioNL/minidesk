@@ -7,7 +7,7 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
                 <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
-                  Hello {{$client->first_name}} {{$client->last_name}} You have a new estimate!
+                  Hello {{$estimate->client->first_name}} {{$estimate->client->last_name}} You have a new estimate!
                 </h2>
             </td>
         </tr>
@@ -15,8 +15,8 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 20px; padding-bottom:20px">
                 <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
-                    You can sign it <a class="btn btn-success" href="{{env('APP_URL')}}/login">Sign</a>. Or paste this url in your
-                    browser: {{env('APP_URL')}}/login
+                    You can sign it <a class="btn btn-success" href="{{env('APP_URL')}}'/estimates/{{$estimate->sign_id}}/sign">Sign</a>. Or paste this url in your
+                    browser: {{env('APP_URL')}}'/estimates/{{$estimate->id}}/sign'
                 </p>
             </td>
         </tr>
@@ -40,7 +40,11 @@
                         </td>
                         <td width="25%" align="left"
                             style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-bottom:30px">
+                            @if($estimate->title != null)
                             {{$estimate->title}}
+                            @else
+                            {{$estimate->number}}
+                            @endif
                         </td>
                     </tr>
                 </table>

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('estimates/{id}/sign', 'client\ClientEstimateController@sign');
 
 Auth::routes();
 
@@ -30,5 +31,5 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
 Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function () {
     Route::get('/estimates', 'client\ClientEstimateController@index');
     Route::get('/estimates/{id}', 'client\ClientEstimateController@show');
-    Route::get('/estimates/{id}/{sign-id}/accept', 'client\ClientEstimateController@sign');
+    Route::post('/estimates/{id}/{sign-id}/accept', 'client\ClientEstimateController@sign');
 });

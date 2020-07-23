@@ -18,6 +18,7 @@ class CreateInvoicesTable extends Migration
             $table->string('title')->nullable();
             $table->string('number');
             $table->string('pay_id');
+            $table->string('color')->nullable()->default('#0000A0');
             $table->uuid('company_id');
             $table->uuid('client_id');
             $table->decimal('amount',9,2);

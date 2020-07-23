@@ -38,6 +38,7 @@
                                     </span>
                             @enderror
                         </div>
+
                     </div>
 
                     <div class="row">
@@ -53,6 +54,21 @@
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
+                            @enderror
+                        </div>
+
+                        <div class="col-6">
+                            <label for="color" class="font-weight-bolder text-muted col-form-label">{{__('Color')}}</label>
+                            <input type="color" autocomplete="color"
+                                   class="form-control"
+                                   name="color" value="#0000A0"
+                                   required autofocus>
+
+
+                            @error('color')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                             @enderror
                         </div>
                     </div>

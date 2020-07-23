@@ -32,6 +32,15 @@ class ClientEstimateController extends client
         return back();
     }
 
+    public function sign($id)
+    {
+        $estimate = Estimate::all()->where('sign_id', '=', $id);
+        $estimate = $estimate[0];
+
+
+        return view('estimates.client.sign',  compact('estimate'));
+    }
+
     public function accept($id){
         $estimate = Estimate::all()->find($id);
         if ($estimate->sign_date = null){

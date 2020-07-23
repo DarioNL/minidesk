@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use niklasravnsborg\LaravelPdf\Pdf;
+use niklasravnsborg\LaravelPdf\PdfServiceProvider;
+use setasign\Fpdi\PdfParser\StreamReader;
+use Whoops\Util\TemplateHelper;
 
 class EstimateController extends Controller
 {
@@ -194,16 +198,18 @@ class EstimateController extends Controller
         $send_date = $request->post('send_date');
         $color = $request->post('color');
 
-        if ($send_date = Carbon::today()){
-            $estimate->notify(new sendEstimate($estimate, $color));
+        if ($send_date == date('Y-m-d')){
+            $estimate->client->notify(new sendEstimate($estimate, $color));
             $estimate->update([
                 'send_date' => $send_date,
+                'color' => $color
             ]);
             return back();
         }
 
         $estimate->update([
             'send_date' => $send_date,
+            'color' => $color
         ]);
         return back();
     }
