@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Create New Estimate</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Create New Invoice</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="estimates/create">
+            <form method="POST" action="invoices/create">
             <div class="modal-body">
                     @csrf
                     <div class="row">

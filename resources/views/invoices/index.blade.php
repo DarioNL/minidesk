@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-@include('estimates.create', ['clients' => $clients])
+@include('invoices.create', ['clients' => $clients])
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
         <div class="float-left">
-        <h3 class="float-left pt-2">All Estimates</h3>
+        <h3 class="float-left pt-2">All Invoices</h3>
         </div>
         <div class="float-right">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
@@ -38,7 +38,7 @@
                         <th class="desktoptd">Actions</th>
                     </tr>
                     <tbody id="append_hook">
-                    @include('invoices.scroll', ['invoices' => $invioces])
+                    @include('invoices.scroll', ['invoices' => $invoices])
             </div>
         </div>
     </div>

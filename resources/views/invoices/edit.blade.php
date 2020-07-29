@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Edit Estimate @if($estimate->title != null){{$estimate->title}}@else{{$estimate->number}}@endif</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Edit Invoice @if($invoice->title != null){{$invoice->title}}@else{{$invoice->number}}@endif</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/estimates/{{$estimate->id}}/edit">
+            <form method="POST" action="/company/invoices/{{$invoice->id}}/edit">
                 <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -16,7 +16,7 @@
                             @if(count($clients))
                                 <select name="client" class="select2 form-control">
                                     @foreach($clients as $client)
-                                        <option @if($estimate->client == $client->id) selected @endif value="{{$client->id}}" title="">{{$client->first_name}} {{$client->last_name}}</option>
+                                        <option @if($invoice->client == $client->id) selected @endif value="{{$client->id}}" title="">{{$client->first_name}} {{$client->last_name}}</option>
                                     @endforeach
                                 </select>
                             @else
@@ -24,7 +24,7 @@
                             @endif
                             <a class="float-right" href="/clients">Create new client</a>
                         </div>
-                        @php($dueDate = explode(' ', $estimate->due_date))
+                        @php($dueDate = explode(' ', $invoice->due_date))
                         <div class="col-6">
                             <label for="DueDate" class="font-weight-bolder text-muted col-form-label">{{__('Due Date')}}</label>
                             <input type="date" autocomplete="due_date"
@@ -46,7 +46,7 @@
                             <label for="title" class="font-weight-bolder text-muted col-form-label">{{__('Title (optional)')}}</label>
                             <input type="text" autocomplete="title"
                                    class="form-control"
-                                   name="title" value="{{$estimate->title}}"
+                                   name="title" value="{{$invoice->title}}"
                                    required autofocus>
 
 
@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    @php($products = \App\Models\Products::all()->where('estimate_id', '=', $estimate->id))
+                    @php($products = \App\Models\Products::all()->where('invoice_id', '=', $invoice->id))
                     <div class="row">
                         <div class="col-12">
                             <a class="new-product" href="#">+ Add new product</a>
@@ -114,7 +114,7 @@
                                 <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Discount %')}}</label>
                                 <input type="number" id="discount" autocomplete="discount"
                                        class="form-control product" min="0"
-                                       name="discount" value="{{$estimate->discount}}"
+                                       name="discount" value="{{$invoice->discount}}"
                                        required autofocus>
                             </div>
                         </div>
@@ -122,14 +122,14 @@
                     <div class="row col-12">
                         <div class="w-100 text-secondary">
                             <div id="discount-price" class="float-right">
-                                {{$estimate->discount}}% Discount -€{{$estimate->amount}}
+                                {{$invoice->discount}}% Discount -€{{$invoice->amount}}
                             </div>
                         </div>
                     </div>
                     <div class="row col-12">
                         <div class="w-100 text-secondary">
                             <div id="subtotal" class="float-right">
-                                Subtotal €{{$estimate->total}}
+                                Subtotal €{{$invoice->total}}
                             </div>
                         </div>
                     </div>
@@ -139,7 +139,7 @@
                     <div class="row col-12">
                         <div class="w-100 text-secondary">
                             <div id="total" class="float-right">
-                                total €{{$estimate->total}}
+                                total €{{$invoice->total}}
                             </div>
                         </div>
                     </div>

@@ -21,6 +21,7 @@ class CreateInvoicesTable extends Migration
             $table->uuid('company_id');
             $table->uuid('client_id');
             $table->decimal('amount',9,2);
+            $table->decimal('total',9,2);
             $table->timestamp('send_date');
             $table->timestamp('due_date');
             $table->timestamp('sign_date')->nullable();
