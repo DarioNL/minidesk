@@ -25,7 +25,7 @@
                 </h5>
             </div>
             <div class="float-right mb-3">
-                <a href="/clients/{{$invoice->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                <a href="/company/clients/{{$invoice->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
                 <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
                 <a class="btn btn-info text-white"><i class="uil uil-print"></i> Print</a>
                 <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>

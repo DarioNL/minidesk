@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Company;
 use App\Models\Invoice;
 use App\Models\Products;
 use App\Notifications\sendEstimate;
+use App\Notifications\sendInvoice;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,8 +61,9 @@ class InvoiceController extends Controller
         $amount = $total / 100 * $request->post('discount');
         $total = $total - $amount;
 
-        $invoice = Invoice::create([
+        $estimate = Invoice::create([
             'title' => $request->post('title'),
+            'sign_id' => $sign_id,
             'due_date' => $request->post('due_date'),
             'discount' => $request->post('discount'),
             'total' => $total,
@@ -75,11 +78,17 @@ class InvoiceController extends Controller
                 'amount' => $request->post('amount' . $i),
                 'tax' => $request->post('vat' . $i),
                 'price' => $request->post('price' . $i),
-                'invoice_id' => $invoice->id,
+                'invoice_id' => $estimate->id,
                 'discount' => $request->post('discount'),
                 'total' => $productTotal[$i],
             ]);
         }
+        $discription = $estimate->nummber;
+
+        if ($estimate->title != null) {
+            $discription->title;
+        }
+
 
         return back();
     }
@@ -88,7 +97,7 @@ class InvoiceController extends Controller
     public function show($id)
     {
         $invoice = Invoice::all()->find($id);
-        if ($invoice->company_id = Auth::id()) {
+        if ($invoice->company_id = Auth::id()){
             $products = $invoice->products;
             $clients = Client::all()->where('company_id', Auth::id());
 
@@ -122,10 +131,10 @@ class InvoiceController extends Controller
 
 
         $sign_id = Str::random(50);
-        $total = (float)0.00;
-        $productTotal = [0];
+        $total= (float) 0.00;
+        $productTotal =[0];
 
-        for ($i = 1; $i < $request->post('total_items') + 1; $i++) {
+        for ($i = 1; $i < $request->post('total_items')+1; $i++) {
             $noVatTotal = $request->post('price' . $i) * $request->post('amount' . $i);
             $vat = $noVatTotal / 100 * $request->post('vat' . $i);
             $vatTotal = $noVatTotal + $vat;
@@ -165,41 +174,61 @@ class InvoiceController extends Controller
         return back();
     }
 
+    public function accept($id)
+    {
+        $invoice = Invoice::all()->find($id);
+        if ($invoice->sign_date = null){
+            $invoice->sign_date = Carbon::now();
+            $invoice->number = '#of'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
+            $invoice->save();
+        }
+
+        return back();
+    }
+
     public function send(Request $request, $id)
     {
+
+
         $request->validate([
             'send_date' => 'required',
             'color' => 'required',
+            'mollie_key' => 'required',
         ]);
+
+        $user = Company::all()->find(Auth::id());
 
         $invoice = Invoice::all()->find($id);
-        $discription = $invoice->nummber;
-
+        $description = $invoice->number;
         if ($invoice->title != null) {
-            $discription = $invoice->title;
+            $description = $invoice->title;
         }
+        $invoice->number = '#FAC'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
+        $invoice->save();
 
-        $payment = Mollie::api()->payments->create([
-            "amount" => [
-                "currency" => "EUR",
-                "value" => $invoice->total // You must send the correct number of decimals, thus we enforce the use of strings
+
+
+        Mollie::api()->setApiKey($request->post('mollie_key'));
+        $payment = Mollie::api()->payments()->create([
+            'amount' => [
+                'currency' => 'EUR',
+                'value' => $invoice->total,
             ],
-            "description" => $discription,
-            "redirectUrl" => route('order.success'),
-            "webhookUrl" => route('webhooks.mollie'),
-            "metadata" => [
-                "order_id" => $invoice->number,
-            ],
+            'description' => 'Invoice  ' . $description,
+            'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
+            'redirectUrl' => config('app.url') . '/invoice/validation',
+            'method' => 'creditcard',
+            'metadata' => array(
+                'order_id' => $invoice->number
+            )
         ]);
-
-        if ($payment) {
-
-
+        if($payment) {
+//
             $send_date = $request->post('send_date');
             $color = $request->post('color');
 
             if ($send_date = Carbon::today()) {
-                $invoice->notify(new sendEstimate($invoice, $color));
+                $invoice->notify(new sendInvoice($invoice, $color));
                 $invoice->update([
                     'send_date' => $send_date,
                 ]);
@@ -209,24 +238,27 @@ class InvoiceController extends Controller
             $invoice->update([
                 'send_date' => $send_date,
             ]);
+
             return back();
         }
-        return back();
+        else{
+            $invoice->number = null;
+            $invoice->save();
+         return back();
+        }
     }
 
-    public
-    function destroy($id)
-    {
+    public function destroy($id){
         $invoice = Invoice::all()->find($id);
 
-        foreach ($invoice->products as $product) {
+        foreach ($invoice->products as $product){
             $product->delete();
-            $product->description = 'deleted_' . time() . '_' . $product->description;
+            $product->description = 'deleted_'.time().'_'.$product->description;
             $product->save();
         }
 
         $invoice->delete();
-        $invoice->number = 'deleted_' . time() . '_' . $invoice->number;
+        $invoice->number = 'deleted_'.time().'_'.$invoice->number;
         $invoice->sign_id = null;
         $invoice->save();
         return response()->json([

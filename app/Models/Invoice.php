@@ -33,6 +33,11 @@ class Invoice extends Authenticatable
         return $this->hasOne(Client::class ,'id', 'client_id');
     }
 
+    public function Estimate()
+    {
+        return $this->hasOne(Estimate::class ,'id', 'estimate_id');
+    }
+
     public function products()
     {
         return $this->hasMany(Products::class, 'invoice_id', 'id');

@@ -39,6 +39,32 @@
                         @enderror
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="mollie_key" class="font-weight-bolder text-muted col-form-label">{{__('Mollie Key')}}</label>
+                        <input type="text" autocomplete="mollie_key"
+                               class="form-control"
+                               name="mollie_key" value="{{$invoice->company->mollie_key}}"
+                               required autofocus>
+
+
+                        @error('mollie_key')
+                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="true" name="save_key" id="save_key">
+                            <label class="form-check-label" for="save_key">
+                                Save Mollie Key
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

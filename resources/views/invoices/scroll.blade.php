@@ -46,10 +46,9 @@
             </div>
         </td>
     </tr>
-    </tbody>
-    </table>
-    @include('invoices.edit', ['invoice' => $invoice])
 @endforeach
+</tbody>
+    </table>
 @else
     <td colspan="10" class="text-center">No Invoices found</td>
 @endif

@@ -69,7 +69,6 @@
                 </tr>
                 <tr>
                     <td align="center" style="padding: 35px 35px 20px 35px; background-color: #ffffff;" bgcolor="#ffffff">
-                        @yield('content')
                     </td>
                 </tr>
             </table>

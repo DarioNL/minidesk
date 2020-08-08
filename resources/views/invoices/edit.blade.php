@@ -58,7 +58,7 @@
                         </div>
                     </div>
 
-                    @php($products = \App\Models\Products::all()->where('invoice_id', '=', $invoice->id))
+                    @php($products = \App\Models\Products::all()->where('estimate_id', '=', $invoice->id))
                     <div class="row">
                         <div class="col-12">
                             <a class="new-product" href="#">+ Add new product</a>

@@ -9,7 +9,7 @@
         </div>
         <div class="float-right">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
-                 + Create New Invoices
+                 + Create New Invoice
             </button>
         </div>
         </div>
