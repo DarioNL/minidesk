@@ -174,18 +174,6 @@ class InvoiceController extends Controller
         return back();
     }
 
-    public function accept($id)
-    {
-        $invoice = Invoice::all()->find($id);
-        if ($invoice->sign_date = null){
-            $invoice->sign_date = Carbon::now();
-            $invoice->number = '#of'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
-            $invoice->save();
-        }
-
-        return back();
-    }
-
     public function send(Request $request, $id)
     {
 
@@ -216,19 +204,23 @@ class InvoiceController extends Controller
             ],
             'description' => 'Invoice  ' . $description,
             'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
-            'redirectUrl' => config('app.url') . '/invoice/validation',
+            'redirectUrl' => 'http://localhost:8000/company/invoices',
             'method' => 'creditcard',
             'metadata' => array(
                 'order_id' => $invoice->number
             )
         ]);
+
+
         if($payment) {
+            $invoice->pay_id = $payment->_links->checkout->href;
+            $invoice->save();
 //
             $send_date = $request->post('send_date');
             $color = $request->post('color');
 
             if ($send_date = Carbon::today()) {
-                $invoice->notify(new sendInvoice($invoice, $color));
+                $invoice->client->notify(new sendInvoice($invoice, $color));
                 $invoice->update([
                     'send_date' => $send_date,
                 ]);

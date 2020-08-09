@@ -33,7 +33,7 @@
             </div>
             <div class="w-100 float-right border-bottom border-top">
                 <h5 class="pt-3 pb-3">
-                Pay Url = {{env('APP_URL')}}/pay/{{$invoice->id}}
+                Pay Url = {{$invoice->pay_id ? $invoice->pay_id : 'Not Send'}}
                 </h5>
             </div>
             <div class="w-100 float-right">

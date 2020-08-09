@@ -7,7 +7,7 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
                 <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
-                  Hello {{$client->first_name}} {{$client->last_name}} You have a new invoice!
+                  Hello {{$invoice->client->first_name}} {{$invoice->client->last_name}} You have a new invoice!
                 </h2>
             </td>
         </tr>
@@ -15,8 +15,8 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 20px; padding-bottom:20px">
                 <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
-                    You can pay it <a class="btn btn-success" href="/login">Pay</a>. Or paste this url in your
-                    browser: pay
+                    You can pay it <a class="btn btn-success" href="{{$invoice->pay_id}}">Pay</a>. Or paste this url in your
+                    browser: {{$invoice->pay_id}}
                 </p>
             </td>
         </tr>

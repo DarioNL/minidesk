@@ -44,9 +44,9 @@ class sendInvoice extends Notification
     {
 
         return (new MailMessage)
-                    ->markdown(
-                        'vendor.notifications.invoice' , ['invoice' => $this->invoice, 'color' => $this->color]
-                    );
+            ->markdown(
+                'vendor.notifications.invoice' , ['invoice' => $this->invoice, 'color' => $this->color]
+            );
     }
 
     /**
