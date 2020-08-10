@@ -15,7 +15,8 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('estimate_id');
+            $table->uuid('estimate_id')->nullable()->default(null);
+            $table->uuid('invoice_id')->nullable()->default(null);
             $table->string('description');
             $table->integer('tax');
             $table->integer('amount')->default(1);

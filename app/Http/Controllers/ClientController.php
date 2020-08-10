@@ -56,8 +56,10 @@ class ClientController extends Controller
         ]);
 
         if ($request->has('send_login')) {
+            $client->save();
             if ($request->post('send_login') == true) {
-                $client->notify(new credentials($client));
+                $client->notify(new credentials($client, $password));
+                return back();
             }
         }
 

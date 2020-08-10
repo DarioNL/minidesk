@@ -19,8 +19,8 @@ class Invoice extends Authenticatable
 
 
     protected $fillable = [
-        'company_id', 'sign_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date', 'color', 'total',
-    ];
+        'company_id', 'pay_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date', 'invoice', 'total', 'invoice_id'
+
 
 
     public function Company()
@@ -31,6 +31,16 @@ class Invoice extends Authenticatable
     public function Client()
     {
         return $this->hasOne(Client::class ,'id', 'client_id');
+    }
+
+    public function Estimate()
+    {
+        return $this->hasOne(Estimate::class ,'id', 'estimate_id');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Products::class, 'invoice_id', 'id');
     }
 
 

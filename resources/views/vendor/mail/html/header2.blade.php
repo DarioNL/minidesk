@@ -72,7 +72,12 @@
                                                 <tr>
                                                     <td align="left" valign="top" style="box-sizing: border-box; position: relative; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 36px; font-weight: 800; line-height: 48px;" class="mobile-center">
                                                         <h1 style="box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; position: relative; margin-top: 0; text-align: left; font-size: 36px; font-weight: 800; margin: 0; color: #ffffff;">
-                                                            {{$estimate->company->name}}</h1>
+                                                            @if( isset($estimate))
+                                                                {{$estimate->company->name}}
+                                                            @else
+                                                                {{$invoice->company->name}}
+                                                            @endif
+                                                        </h1>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -105,3 +110,5 @@
                         </td>
                     </tr>
                 </table>
+
+
