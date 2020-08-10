@@ -29,7 +29,7 @@
                 <div class="card-header">Sign Estimate @if($estimate->title != null){{$estimate->title}}@else{{$estimate->number}}@endif</div>
 
                 <div class="card-body">
-                    <form method="POST" action="/estimates/{{$estimate->id}}/{{$estimate->client_id}}/accept ">
+                    <form method="post" action="/estimates/{{$estimate->id}}/accept ">
                         @csrf
 
                         <input type="hidden" name="token" value="{{ $estimate->sign_id }}">
@@ -66,7 +66,7 @@
                             <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="first_name" type="password" class="form-control" name="first_name" required autocomplete="first_name">
+                                <input id="first_name" type="text" class="form-control" name="first_name" required autocomplete="first_name">
 
                                 @error('first_name')
                                 <span class="invalid-feedback" role="alert">
@@ -80,7 +80,7 @@
                             <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="last_name" type="password" class="form-control" name="last_name" required autocomplete="last_name">
+                                <input id="last_name" type="text" class="form-control" name="last_name" required autocomplete="last_name">
 
                                 @error('last_name')
                                 <span class="invalid-feedback" role="alert">
@@ -93,7 +93,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="sign" id="sign" {{ old('sign') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="sign" id="sign" {{ old('sign') ? 'checked' : '' }} required>
 
                                     <label class="form-check-label" for="sign">
                                         {{ __('I Sign This Estimate') }}

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="estimates/create">
+            <form method="POST" action="estimates/company/create">
             <div class="modal-body">
                     @csrf
                     <div class="row">

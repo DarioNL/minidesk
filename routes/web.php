@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('estimates/{id}/sign', 'client\ClientEstimateController@sign');
+Route::post('estimates/{id}/accept', 'client\ClientEstimateController@accept');
 
 Auth::routes();
 

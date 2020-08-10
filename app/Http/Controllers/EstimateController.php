@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Estimate;
 use App\Models\Client;
+use App\Models\Invoice;
 use App\Models\Products;
 use App\Notifications\sendEstimate;
 use Carbon\Carbon;
@@ -180,6 +181,21 @@ class EstimateController extends Controller
             $estimate->sign_date = Carbon::now();
             $estimate->number = '#of'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
             $estimate->save();
+
+            $invoice = Invoice::create([
+                'title' => $estimate->title,
+                'due_date' => $estimate->due_date,
+                'discount' => $estimate->discount,
+                'total' => $estimate->total,
+                'amount' => $estimate->amount,
+                'company_id' => Auth::id(),
+                'client_id' => $estimate->client,
+            ]);
+            foreach ($estimate->products as $product){
+                $product->invoice_id = $invoice;
+                $product->save();
+            }
+            return back();
         }
 
         return back();
