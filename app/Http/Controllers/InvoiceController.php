@@ -62,7 +62,7 @@ class InvoiceController extends Controller
         $amount = $total / 100 * $request->post('discount');
         $total = $total - $amount;
 
-        $estimate = Invoice::create([
+        $invoice = Invoice::create([
             'title' => $request->post('title'),
             'sign_id' => $sign_id,
             'due_date' => $request->post('due_date'),
@@ -79,7 +79,7 @@ class InvoiceController extends Controller
                 'amount' => $request->post('amount' . $i),
                 'tax' => $request->post('vat' . $i),
                 'price' => $request->post('price' . $i),
-                'invoice_id' => $estimate->id,
+                'invoice_id' => $invoice->id,
                 'discount' => $request->post('discount'),
                 'total' => $productTotal[$i],
             ]);
