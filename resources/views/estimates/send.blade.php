@@ -28,7 +28,7 @@
                         <label for="color" class="font-weight-bolder text-muted col-form-label">{{__('Color')}}</label>
                         <input type="color" autocomplete="color"
                                class="form-control"
-                               name="color" value="{{old('color')}}"
+                               name="color" value="#0000A0"
                                required autofocus>
 
 

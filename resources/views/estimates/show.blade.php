@@ -21,15 +21,16 @@
                 </h5>
             </div>
             <div>
+                @php($date = explode(' ', $estimate->send_date))
                 <h5 class="float-left text-muted mr-2 desktoptd">
-                    <i class="uil uil-envelope"></i> @if($estimate->send_date != null)Send On :{{ $estimate->send_date}}@else Not send @endif
+                    <i class="uil uil-envelope"></i> @if($estimate->send_date != null)Send On : {{ $date[0]}}@else Not send @endif
                 </h5>
             </div>
             <div class="float-right mb-3">
                 <a href="/clients/{{$estimate->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
                 <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
                 <button onclick="$('#acceptModal').modal('show')" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
-                <a class="btn btn-info text-white"><i class="uil uil-print"></i> Print</a>
+                <button onclick="" class="btn btn-info text-white"><i class="uil uil-print"></i> Print</button>
                 <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
                 <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
             </div>
@@ -40,7 +41,7 @@
             </div>
             <div class="w-100 float-right">
                 <h5 class="pt-3 float-right pb-3">
-                    <i class="uil uil-envelope"></i>  {{$estimate->send_date ? $estimate->send_date : 'Not Send'}}
+                    <i class="uil uil-envelope"></i>  {{$date[0] ? $date[0] : 'Not Send'}}
                 </h5>
                 <h4 class="pt-3 pb-3">
                     <i class="uil uil-bag"></i>  {{$estimate->company->name}}

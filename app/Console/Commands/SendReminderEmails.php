@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Estimate;
 use App\Models\Invoice;
 use App\Notifications\sendInvoice;
+use App\Notifications\sendEstimate;
 use Carbon\Carbon;
 use Faker\Provider\DateTime;
 use Illuminate\Console\Command;
@@ -44,11 +45,11 @@ class SendReminderEmails extends Command
     public function handle()
     {
 
-        $estimates = Estimate::all()->where('send_date', '=', date('Y-m-d'));
+
+        $estimates = Estimate::all()->where('send_date', '=', Date('Y-m-d'). ' 00:00:00');
 
         foreach ($estimates as $estimate){
-
-
+            $estimate->client->notify(new sendEstimate($estimate, $estimate->color));
         }
 
         $invoices = Invoice::all()->where('send_date', '=', date('Y-m-d').' 00:00:00');
@@ -86,6 +87,7 @@ class SendReminderEmails extends Command
                 $invoice->save();
                 dd('Creating mollie payment failed.');
             }
+
         }
     }
 }
