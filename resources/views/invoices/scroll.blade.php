@@ -1,5 +1,5 @@
-@if(count($clients))
-@foreach($clients as $client)
+@if(count($estimates))
+@foreach($estimates as $client)
 
     @include('clients.delete', ['client' => $client])
     @include('clients.edit', ['client' => $client])

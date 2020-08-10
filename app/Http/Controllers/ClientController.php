@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Company;
+use App\Notifications\credentials;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -39,7 +40,7 @@ class ClientController extends Controller
         ]);
 
 
-        Client::create([
+       $client = Client::create([
             'first_name' => $request->post('first_name'),
             'last_name' => $request->post('last_name'),
             'address' => $request->post('address'),
@@ -55,9 +56,9 @@ class ClientController extends Controller
         ]);
 
         if ($request->has('send_login')) {
-//            if ($request->post('send_login') == true) {
-//                $user->sendLoginInfo($user->email, $password);
-//            }
+            if ($request->post('send_login') == true) {
+                $client->notify(new credentials($client));
+            }
         }
 
 
@@ -109,9 +110,13 @@ class ClientController extends Controller
         ]);
 
         if ($request->has('send_login')) {
-//            if ($request->post('send_login') == true) {
-//                $user->sendLoginInfo($user->email, $password);
-//            }
+            $password = Str::random(10);
+            $client->password = bcrypt($password);
+            $client->save();
+            if ($request->post('send_login') == true) {
+                $client->notify(new credentials($client, $password));
+                return back();
+            }
         }
 
 

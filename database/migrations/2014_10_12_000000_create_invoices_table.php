@@ -15,9 +15,12 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('title')->nullable();
             $table->string('number');
-            $table->uuid('company_id')->nullable()->default(null);
-            $table->uuid('client_id')->nullable()->default(null);
+            $table->string('pay_id');
+            $table->string('color')->nullable()->default('#0000A0');
+            $table->uuid('company_id');
+            $table->uuid('client_id');
             $table->decimal('amount',9,2);
             $table->timestamp('send_date');
             $table->timestamp('due_date');

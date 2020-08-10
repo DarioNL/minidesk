@@ -3,7 +3,7 @@
 
     @include('clients.delete', ['client' => $client])
     @include('clients.edit', ['client' => $client])
-    <tr class="clickable-row border-bottom" data-href="/clients/{{$client->id}}">
+    <tr class="clickable-row border-bottom" data-href="/company/clients/{{$client->id}}">
         <td class="pl-3">{{$client->first_name}}</td>
         <td class="pl-3">{{$client->last_name}}</td>
         <td class="pl-3">@if($client->company->logo != null)
@@ -30,7 +30,6 @@
     </tr>
 @endforeach
 @else
-    <td colspan="4">No clients found</td>
-    <td width="1"></td>
+    <td colspan="8" class="text-center">No Clients found</td>
 @endif
 

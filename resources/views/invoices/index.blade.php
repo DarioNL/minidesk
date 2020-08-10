@@ -37,7 +37,7 @@
                         <th class="desktoptd">Actions</th>
                     </tr>
                     <tbody id="append_hook">
-                    @include('clients.scroll', ['clients' => $clients])
+                    @include('clients.scroll', ['clients' => $estimates])
                     </tbody>
                 </table>
             </div>

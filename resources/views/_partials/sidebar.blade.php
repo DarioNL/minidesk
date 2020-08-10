@@ -27,17 +27,17 @@
         </a>
     </div>
     <div class="row m-0 px-3 py-2 sidebar-link">
-        <a href="/clients" class="sidebar-link-item text-white text-decoration-none">
+        <a href="/company/clients" class="sidebar-link-item text-white text-decoration-none">
             Clients
         </a>
     </div>
     <div class="row m-0 px-3 py-2 sidebar-link">
-        <a href="/estimates" class="sidebar-link-item text-white text-decoration-none">
+        <a href="/company/estimates" class="sidebar-link-item text-white text-decoration-none">
             Estimates
         </a>
     </div>
     <div class="row m-0 px-3 py-2 sidebar-link">
-        <a href="/Invoices" class="sidebar-link-item text-white text-decoration-none">
+        <a href="/company/Invoices" class="sidebar-link-item text-white text-decoration-none">
             Invoices
         </a>
     </div>
