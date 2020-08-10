@@ -93,15 +93,15 @@
                                     Dashboard <span class="caret"></span>
                                 </a>
 
-                                <a class="nav-link" href="/clients" role="button">
+                                <a class="nav-link" href="/company/clients" role="button">
                                     Clients <span class="caret"></span>
                                 </a>
 
-                                <a class="nav-link" href="/estimates" role="button">
+                                <a class="nav-link" href="/company/estimates" role="button">
                                     Estimates <span class="caret"></span>
                                 </a>
 
-                                <a class="nav-link" href="/Invoices" role="button" >
+                                <a class="nav-link" href="/company/Invoices" role="button" >
                                     Invoices <span class="caret"></span>
                                 </a>
 

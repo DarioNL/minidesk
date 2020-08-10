@@ -33,7 +33,7 @@
                         <th>Total</th>
                         <th>Sent Date</th>
                         <th>Due Date</th>
-                        <th>Sign Date</th>
+                        <th>Pay Date</th>
                         <th>Created At</th>
                         <th class="desktoptd">Actions</th>
                     </tr>
