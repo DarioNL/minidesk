@@ -22,7 +22,7 @@
     </div>
     </div>
     <div class="row m-0 px-3 py-2 sidebar-link">
-        <a href="/company/dashboard" class="sidebar-link-item text-white text-decoration-none">
+        <a href="/dashboard" class="sidebar-link-item text-white text-decoration-none">
             Dashboard
         </a>
     </div>

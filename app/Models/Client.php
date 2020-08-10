@@ -47,12 +47,12 @@ class Client extends Authenticatable
 
     public function Estimates()
     {
-        $this->hasMany(Estimate::class , 'client_id', 'id');
+        return $this->hasMany(Estimate::class , 'client_id', 'id');
     }
 
     public function Invoices()
     {
-        $this->hasMany(Estimate::class , 'client_id', 'id');
+        return $this->hasMany(Estimate::class , 'client_id', 'id');
     }
 
 
