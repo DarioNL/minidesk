@@ -26,7 +26,7 @@
 
         <div class="col-xs-4">
             <h1>
-                {{$estimate->company->name}}
+                {{$invoice->company->name}}
             </h1>
         </div>
     </div>
@@ -37,10 +37,10 @@
         <div class="col-xs-6">
             <h4>To:</h4>
             <address>
-                <strong>{{$estimate->client->first_name}} {{$estimate->client->last_name}}</strong><br>
-                <span>{{$estimate->client->email}}.</span> <br>
-                <span>{{$estimate->client->house_number}} {{$estimate->client->address}}.</span> <br>
-                <span>{{$estimate->client->zipcode}} {{$estimate->client->city}}.</span> <br>
+                <strong>{{$invoice->client->first_name}} {{$invoice->client->last_name}}</strong><br>
+                <span>{{$invoice->client->email}}.</span> <br>
+                <span>{{$invoice->client->house_number}} {{$invoice->client->address}}.</span> <br>
+                <span>{{$invoice->client->zipcode}} {{$invoice->client->city}}.</span> <br>
             </address>
         </div>
 
@@ -48,16 +48,16 @@
             <table style="width: 100%">
                 <tbody>
                 <tr>
-                    <th>Estimate Number:</th>
-                    <td class="text-right">{{$estimate->number}}</td>
+                    <th>Invoice Number:</th>
+                    <td class="text-right">{{$invoice->number}}</td>
                 </tr>
                 <tr>
-                    <th>Estimate Title:</th>
-                    <td class="text-right">@if($estimate->title != null) {{$estimate->title}} @else{{$estimate->number}} @endif</td>
+                    <th>Invoice Title:</th>
+                    <td class="text-right">@if($invoice->title != null) {{$invoice->title}} @else{{$invoice->number}} @endif</td>
                 </tr>
                 <tr>
                     <th> Due Date: </th>
-                    @php($dueDate = explode(' ', $estimate->due_date))
+                    @php($dueDate = explode(' ', $invoice->due_date))
                     <td class="text-right">{{$dueDate[0]}}</td>
                 </tr>
                 </tbody>
@@ -69,7 +69,7 @@
                 <tbody>
                 <tr class="well" style="padding: 5px">
                     <th style="padding: 5px"><div> Total Price </div></th>
-                    <td style="padding: 5px" class="text-right"><strong> €{{$estimate->total}} </strong></td>
+                    <td style="padding: 5px" class="text-right"><strong> €{{$invoice->total}} </strong></td>
                 </tr>
                 </tbody>
             </table>
@@ -87,7 +87,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($estimate->products as $product)
+        @foreach($invoice->products as $product)
         <tr>
             <td>{{$product->amount}}</td>
             <td>{{$product->description}}</td>
@@ -106,7 +106,7 @@
                 <tbody>
                 <tr class="well" style="padding: 5px">
                     <th style="padding: 5px"><div> Discount % </div></th>
-                    <td style="padding: 5px" class="text-right"><strong> {{$estimate->discount}}%  -€{{$estimate->amount}}</strong></td>
+                    <td style="padding: 5px" class="text-right"><strong> {{$invoice->discount}}%  -€{{$invoice->amount}}</strong></td>
                 </tr>
                 </tbody>
             </table>
@@ -125,11 +125,11 @@
     </div>
 
     <div>
-        <strong>{{$estimate->company->name}}</strong><br>
-        {{$estimate->company->house_nummber}} {{$estimate->company->adress}}. <br>
-        <span>{{$estimate->company->zipcode}} {{$estimate->company->city}}<br>
-        P: {{$estimate->company->phone}} <br>
-        E: {{$estimate->company->email}} <br>
+        <strong>{{$invoice->company->name}}</strong><br>
+        {{$invoice->company->house_nummber}} {{$invoice->company->adress}}. <br>
+        <span>{{$invoice->company->zipcode}} {{$invoice->company->city}}<br>
+        P: {{$invoice->company->phone}} <br>
+        E: {{$invoice->company->email}} <br>
 
         <br>
     </div>

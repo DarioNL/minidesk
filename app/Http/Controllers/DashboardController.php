@@ -21,4 +21,5 @@ class DashboardController extends Controller
 
         return view('home',  compact('clients', 'estimates', 'invoices'));
     }
+
 }

@@ -12,6 +12,8 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth:web,clients']], function () {
     Route::get('/dashboard', 'DashboardController@index');
+    Route::get('/pdf', 'DashboardController@pdf');
+
 });
 
 Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () {

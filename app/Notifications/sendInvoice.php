@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Barryvdh\DomPDF\Facade;
 use http\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -42,11 +43,14 @@ class sendInvoice extends Notification
      */
     public function toMail($notifiable)
     {
+        $invoice = $this->invoice;
+        $pdf = Facade::loadView('invoices.pdf', compact('invoice'));
 
         return (new MailMessage)
             ->markdown(
                 'vendor.notifications.invoice' , ['invoice' => $this->invoice, 'color' => $this->color]
-            );
+            )
+            ->attachData($pdf->output(), 'estimate '.$invoice->number.'.pdf');
     }
 
     /**
