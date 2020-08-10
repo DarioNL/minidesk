@@ -7,18 +7,18 @@ use App\Models\Client;
 use App\Models\Invoice;
 use App\Models\Products;
 use App\Notifications\sendEstimate;
+use Barryvdh\DomPDF\Facade;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
-use niklasravnsborg\LaravelPdf\Pdf;
-use niklasravnsborg\LaravelPdf\PdfServiceProvider;
 use setasign\Fpdi\PdfParser\StreamReader;
 use Whoops\Util\TemplateHelper;
 
 class EstimateController extends Controller
 {
+
 
     public function index()
     {
@@ -211,6 +211,8 @@ class EstimateController extends Controller
         $estimate = Estimate::all()->find($id);
 
 
+
+
         $send_date = $request->post('send_date');
         $color = $request->post('color');
 
@@ -249,4 +251,5 @@ class EstimateController extends Controller
 
 
     }
+
 }
