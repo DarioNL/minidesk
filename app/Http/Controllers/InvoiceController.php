@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Mollie\Laravel\Facades\Mollie;
+use mysql_xdevapi\Exception;
 
 class InvoiceController extends Controller
 {
@@ -184,60 +185,63 @@ class InvoiceController extends Controller
             'mollie_key' => 'required',
         ]);
 
+        $send_date = $request->post('send_date');
+
         $user = Company::all()->find(Auth::id());
 
         $invoice = Invoice::all()->find($id);
-        $description = $invoice->number;
-        if ($invoice->title != null) {
-            $description = $invoice->title;
+        if ($request->has('save_key')) {
+            $invoice->company->mollie_key = $request->post('mollie_key');
+            $invoice->company->save();
         }
-        $invoice->number = '#FAC'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
-        $invoice->save();
-
-
-
-        Mollie::api()->setApiKey($request->post('mollie_key'));
-        $payment = Mollie::api()->payments()->create([
-            'amount' => [
-                'currency' => 'EUR',
-                'value' => $invoice->total,
-            ],
-            'description' => 'Invoice  ' . $description,
-            'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
-            'redirectUrl' => 'http://localhost:8000/company/invoices',
-            'method' => 'creditcard',
-            'metadata' => array(
-                'order_id' => $invoice->number
-            )
-        ]);
-
-
-        if($payment) {
-            $invoice->pay_id = $payment->_links->checkout->href;
+        if ($send_date == date('Y-m-d')) {
+            $description = $invoice->number;
+            if ($invoice->title != null) {
+                $description = $invoice->title;
+            }
+            $invoice->number = '#FAC' . random_int(0, 9) . random_int(0, 9) . random_int(0, 9) . random_int(0, 9);
             $invoice->save();
-//
-            $send_date = $request->post('send_date');
-            $color = $request->post('color');
 
-            if ($send_date = Carbon::today()) {
+            Mollie::api()->setApiKey($request->post('mollie_key'));
+            $payment = Mollie::api()->payments()->create([
+                'amount' => [
+                    'currency' => 'EUR',
+                    'value' => $invoice->total,
+                ],
+                'description' => 'Invoice  ' . $description,
+                'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
+                'redirectUrl' => 'http://localhost:8000/company/invoices',
+                'method' => 'creditcard',
+                'metadata' => array(
+                    'order_id' => $invoice->number
+                )
+            ]);
+
+
+            if ($payment) {
+                $invoice->pay_id = $payment->_links->checkout->href;
+                $invoice->save();
+                $send_date = $request->post('send_date');
+                $color = $request->post('color');
+
+
                 $invoice->client->notify(new sendInvoice($invoice, $color));
                 $invoice->update([
                     'send_date' => $send_date,
                 ]);
                 return back();
+
+            } else {
+                $invoice->number = null;
+                $invoice->save();
+                return back();
             }
-
-            $invoice->update([
-                'send_date' => $send_date,
-            ]);
-
-            return back();
         }
-        else{
-            $invoice->number = null;
-            $invoice->save();
-         return back();
-        }
+        $invoice->update([
+            'send_date' => $send_date,
+            'color' => $request->post('color')
+        ]);
+        return back();
     }
 
     public function destroy($id){

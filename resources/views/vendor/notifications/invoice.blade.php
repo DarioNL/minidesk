@@ -7,7 +7,7 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
                 <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
-                    Hello {{$invoice->client->first_name}} {{$invoice->client->last_name}} You have a new estimate!
+                    Hello {{$invoice->client->first_name}} {{$invoice->client->last_name}} You have a new invoice!
                 </h2>
             </td>
         </tr>
