@@ -15,7 +15,7 @@ class DashboardController extends Controller
     {
         $user = Auth::id();
         $company = Company::all()->find($user);
-        $clients = $company->client;
+        $clients = $company->clients;
         $estimates = $company->estimates;
         $invoices = $company->invoices;
 
