@@ -64,7 +64,6 @@ class InvoiceController extends Controller
 
         $invoice = Invoice::create([
             'title' => $request->post('title'),
-            'sign_id' => $sign_id,
             'due_date' => $request->post('due_date'),
             'discount' => $request->post('discount'),
             'total' => $total,
