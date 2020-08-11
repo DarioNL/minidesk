@@ -92,7 +92,7 @@
             <td>{{$product->amount}}</td>
             <td>{{$product->description}}</td>
             <td>€{{$product->price}}</td>
-            <td>{{$product->tax}}</td>
+            <td>{{$product->tax}}%</td>
             <td class="text-right">{{$product->total}}</td>
         </tr>
         @endforeach
@@ -126,7 +126,7 @@
 
     <div>
         <strong>{{$estimate->company->name}}</strong><br>
-        {{$estimate->company->house_nummber}} {{$estimate->company->adress}}. <br>
+        {{$estimate->company->house_number}} {{$estimate->company->address}}. <br>
         <span>{{$estimate->company->zipcode}} {{$estimate->company->city}}<br>
         P: {{$estimate->company->phone}} <br>
         E: {{$estimate->company->email}} <br>

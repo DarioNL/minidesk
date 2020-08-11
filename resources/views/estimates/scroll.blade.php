@@ -46,10 +46,10 @@
             </div>
         </td>
     </tr>
+
+@endforeach
     </tbody>
     </table>
-    @include('estimates.edit', ['estimate' => $estimate])
-@endforeach
 @else
     <td colspan="10" class="text-center">No Estimates found</td>
 @endif

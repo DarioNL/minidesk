@@ -92,7 +92,7 @@
             <td>{{$product->amount}}</td>
             <td>{{$product->description}}</td>
             <td>€{{$product->price}}</td>
-            <td>{{$product->tax}}</td>
+            <td>{{$product->tax}}%</td>
             <td class="text-right">{{$product->total}}</td>
         </tr>
         @endforeach
@@ -126,7 +126,7 @@
 
     <div>
         <strong>{{$invoice->company->name}}</strong><br>
-        {{$invoice->company->house_nummber}} {{$invoice->company->adress}}. <br>
+        {{$invoice->company->house_number}} {{$invoice->company->address}}. <br>
         <span>{{$invoice->company->zipcode}} {{$invoice->company->city}}<br>
         P: {{$invoice->company->phone}} <br>
         E: {{$invoice->company->email}} <br>

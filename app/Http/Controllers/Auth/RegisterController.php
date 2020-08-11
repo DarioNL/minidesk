@@ -52,7 +52,7 @@ class RegisterController extends Controller
             $user = Auth::guard()->user();
             $user->last_login = date('Y-m-d H:i:s');
             $user->save();
-            return redirect()->to('/home');
+            return redirect()->to('/dashboard');
         }
 
     }

@@ -15,8 +15,11 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 20px; padding-bottom:20px">
                 <p style="font-size: 16px; font-weight: 400; line-height: 24px; color: #777777;">
-                    You can sign it <a class="btn btn-success" href="localhost:8000/estimates/{{$estimate->sign_id}}/sign">Sign</a>. Or paste this url in your
-                    browser: 'localhost:8000/estimates/{{$estimate->id}}/sign'
+                    @if($estimate->sign_id != null)
+                    You can sign it <a class="btn btn-success" href="localhost:8000/estimates/{{$estimate->sign_id}}/sign">Sign</a>.
+                    @else
+                        This estimate is already accepted.
+                    @endif
                 </p>
             </td>
         </tr>

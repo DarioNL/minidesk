@@ -91,7 +91,7 @@ class EstimateController extends Controller
         }
 
 
-        return redirect('/estimates');
+        return back();
     }
 
     public function show($id)
@@ -148,6 +148,7 @@ class EstimateController extends Controller
         $estimate->update([
             'title' => $request->post('title'),
             'sign_id' => $sign_id,
+            'sign_date' => null,
             'due_date' => $request->post('due_date'),
             'discount' => $request->post('discount'),
             'total' => $total,
@@ -177,9 +178,10 @@ class EstimateController extends Controller
     public function accept($id)
     {
         $estimate = Estimate::all()->find($id);
-        if ($estimate->sign_date = null){
+        if ($estimate->sign_date == null){
             $estimate->sign_date = Carbon::now();
             $estimate->number = '#of'.random_int(0, 9).random_int(0, 9).random_int(0, 9).random_int(0, 9);
+            $estimate->sign_id = null;
             $estimate->save();
 
             $invoice = Invoice::create([
@@ -189,10 +191,10 @@ class EstimateController extends Controller
                 'total' => $estimate->total,
                 'amount' => $estimate->amount,
                 'company_id' => Auth::id(),
-                'client_id' => $estimate->client,
+                'client_id' => $estimate->client->id,
             ]);
             foreach ($estimate->products as $product){
-                $product->invoice_id = $invoice;
+                $product->invoice_id = $invoice->id;
                 $product->save();
             }
             return back();
