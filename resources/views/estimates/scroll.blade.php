@@ -14,11 +14,15 @@
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$estimate->company->name}}</td>
-        <td class="pl-3">@if($estimate->client->logo != null)
-                <img src="{{asset('/images/'.$estimate->client->id.$estimate->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
-            @else
-                <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-            @endif{{$estimate->client->first_name}} {{$estimate->client->last_name}}</td>
+        @if($estimate->client != null)
+            <td class="pl-3">@if($estimate->client->logo != null)
+                    <img src="{{asset('/images/'.$estimate->client->id.$estimate->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                @else
+                    <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                @endif{{$estimate->client->first_name}} {{$estimate->client->last_name}}</td>
+        @else
+        <td class="text-muted">No Client</td>
+        @endif
         <td class="text-muted">€{{$estimate->total}}</td>
         @if($estimate->send_at != null)
         @php($date = explode(' ', $estimate->Send_at))

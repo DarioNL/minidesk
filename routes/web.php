@@ -42,4 +42,7 @@ Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function 
     Route::get('/estimates', 'client\ClientEstimateController@index');
     Route::get('/estimates/{id}', 'client\ClientEstimateController@show');
     Route::post('/estimates/{id}/{sign-id}/accept', 'client\ClientEstimateController@sign');
+    Route::get('/invoices', 'client\ClientInvoicesController@index');
+    Route::get('/invoices/{id}', 'client\ClientInvoicesController@show');
+    Route::get('/invoices/{id}/{payment_id}/success', 'client\ClientInvoicesController@success');
 });

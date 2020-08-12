@@ -14,11 +14,15 @@
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$invoice->company->name}}</td>
-        <td class="pl-3">@if($invoice->client->logo != null)
-                <img src="{{asset('/images/'.$invoice->client->id.$invoice->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
-            @else
-                <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-            @endif{{$invoice->client->first_name}} {{$invoice->client->last_name}}</td>
+        @if($invoice->client != null)
+            <td class="pl-3">@if($invoice->client->logo != null)
+                    <img src="{{asset('/images/'.$invoice->client->id.$invoice->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                @else
+                    <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                @endif{{$invoice->client->first_name}} {{$invoice->client->last_name}}</td>
+        @else
+            <td class="text-muted">No Client</td>
+        @endif
         <td class="text-muted">€{{$invoice->total}}</td>
         @if($invoice->send_at != null)
         @php($date = explode(' ', $invoice->Send_at))
@@ -47,8 +51,7 @@
         </td>
     </tr>
 @endforeach
-</tbody>
-    </table>
+
 @else
     <td colspan="10" class="text-center">No Invoices found</td>
 @endif

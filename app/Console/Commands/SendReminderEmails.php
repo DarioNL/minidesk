@@ -70,7 +70,7 @@ class SendReminderEmails extends Command
                 ],
                 'description' => 'Invoice  ' . $description,
                 'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
-                'redirectUrl' => 'http://localhost:8000/company/invoices',
+                'redirectUrl' => 'http://localhost:8000/company/invoices/succesw',
                 'method' => 'creditcard',
                 'metadata' => array(
                     'order_id' => $invoice->number

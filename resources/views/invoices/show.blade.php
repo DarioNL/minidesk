@@ -48,7 +48,7 @@
                     <i class="uil uil-calendar-alt"></i>  {{$dueDate[0]}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-user"></i>  {{$invoice->client->first_name}} {{$invoice->client->last_name}}
+                    <i class="uil uil-user"></i> @if($invoice->clients != null) {{$invoice->client->first_name}} {{$invoice->client->last_name}}@else No client @endif
                 </h4>
                 <h5 class="pt-3 text-muted">
                     <i class="uil uil-location-point"></i>  {{$invoice->company->address}} {{$invoice->company->house_number}}

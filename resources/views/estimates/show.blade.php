@@ -27,7 +27,7 @@
                 </h5>
             </div>
             <div class="float-right mb-3">
-                <a href="/clients/{{$estimate->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                <a href="/company/clients/{{$estimate->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
                 <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
                 <button onclick="$('#acceptModal').modal('show')" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
                 <button onclick="" class="btn btn-info text-white"><i class="uil uil-print"></i> Print</button>
@@ -51,7 +51,7 @@
                     <i class="uil uil-calendar-alt"></i>  {{$dueDate[0]}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-user"></i>  {{$estimate->client->first_name}} {{$estimate->client->last_name}}
+                    <i class="uil uil-user"></i>  @if($estimate->clients != null) {{$estimate->client->first_name}} {{$estimate->client->last_name}}@else No client @endif
                 </h4>
                 <h5 class="pt-3 text-muted">
                     <i class="uil uil-location-point"></i>  {{$estimate->company->address}} {{$estimate->company->house_number}}
