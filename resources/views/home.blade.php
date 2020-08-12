@@ -7,9 +7,10 @@
             <div class="card">
                 <div class="card-text">
                     <div class="row m-0 ">
+                        @auth('web')
                         <div class="col-md-4 text-center p-2 col-sm-12">
-                            <h4 class="text-muted">Clients</h4>
-                            <p class="text-muted">{{count($clients)}}</p>
+                                <h4 class="text-muted">Clients</h4>
+                                <p class="text-muted">{{count($clients)}}</p>
                         </div>
                         <div class="col-md-4 text-center p-2 col-sm-12">
                             <h4 class="text-muted">Estimates</h4>
@@ -20,6 +21,17 @@
                             <h4 class="text-muted">Invoices</h4>
                             <p class="text-muted">{{count($invoices)}}</p>
                         </div>
+                        @else
+                            <div class="col-md-6 text-center p-2 col-sm-12">
+                                <h4 class="text-muted">Estimates</h4>
+                                <p class="text-muted">{{count($estimates)}}</p>
+                            </div>
+
+                            <div class="col-md-6 text-center p-2 col-sm-12">
+                                <h4 class="text-muted">Invoices</h4>
+                                <p class="text-muted">{{count($invoices)}}</p>
+                            </div>
+                        @endauth
                     </div>
 
                     <section id="tabs" class="project-tab w-100">
@@ -39,20 +51,43 @@
                                                 <table class="table-fullscreen
                                                  border-bottom border-top">
                                                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                                                        <th>First Name</th>
-                                                        <th>Last Name</th>
-                                                        <th>Company Name</th>
-                                                        <th>Email</th>
-                                                        <th>Address</th>
-                                                        <th>Phone</th>
-                                                        <th>Created At</th>
-                                                        <th class="desktoptd">Actions</th>
+                                                        @auth('web')
+                                                            <th>First Name</th>
+                                                            <th>Last Name</th>
+                                                            <th>Company Name</th>
+                                                            <th>Email</th>
+                                                            <th>Address</th>
+                                                            <th>Phone</th>
+                                                            <th>Created At</th>
+                                                            <th class="desktoptd">Actions</th>
+                                                        @else
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Address</th>
+                                                            <th>Phone</th>
+                                                        @endauth
                                                     </tr>
                                                     <tbody id="append_hook">
+                                                    @auth('web')
                                                     @include('clients.scroll', ['clients' => $clients])
+                                                    @else
+                                                        <tr class="border-bottom">
+                                                            <td class="text-muted">{{$client->company->name}}</td>
+                                                            <td class="pl-3">@if($client->company->logo != null)
+                                                                    <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                                                                @else
+                                                                    <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                                                                @endif</td>
+                                                            <td class="text-muted">{{$client->company->email}}</td>
+                                                            <td class="text-muted">{{$client->company->city}}, {{$client->company->zipcode}}</td>
+                                                            <td class="text-muted">{{$client->company->phone}}</td>
+                                                        </tr>
+                                                    @endauth
                                                     </tbody>
                                                 </table>
-                                                <a href="/company/clients" class="text-center">Show All Clients</a>
+                                                @auth('web')
+                                                    <a href="/company/clients" class="text-center">Show All Clients</a>
+                                                @endauth
                                             </div>
                                             <div class="tab-pane home-tab fade text-center" id="nav-estimates" role="tabpanel" aria-labelledby="nav-profile-tab">
                                                 <table class="w-100 border-bottom border-top">

@@ -88,7 +88,7 @@
                                                         <th>Phone</th>
                                                     </tr>
                                                     <tbody id="append_hook">
-                                                    <tr class="clickable-row border-bottom" data-href="/clients/{{$client->id}}">
+                                                    <tr class="border-bottom">
                                                         <td class="text-muted">{{$client->company->name}}</td>
                                                         <td class="pl-3">@if($client->company->logo != null)
                                                                 <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
