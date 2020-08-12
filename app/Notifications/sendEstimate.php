@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use Barryvdh\DomPDF\Facade;
 use http\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -42,11 +43,17 @@ class sendEstimate extends Notification
      */
     public function toMail($notifiable)
     {
+        $estimate = $this->estimate;
+        $pdf = Facade::loadView('estimates.pdf', compact('estimate'));
+
+
+
 
         return (new MailMessage)
-                    ->markdown(
-                        'vendor.notifications.estimate' , ['estimate' => $this->estimate, 'color' => $this->color]
-                    );
+            ->markdown(
+                'vendor.notifications.estimate' , ['estimate' => $this->estimate, 'color' => $this->color]
+            )
+            ->attachData($pdf->output(), 'estimate '.$estimate->number.'.pdf');
     }
 
     /**

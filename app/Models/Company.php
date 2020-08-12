@@ -35,16 +35,16 @@ class Company extends Authenticatable
 
     public function Clients()
     {
-        $this->hasMany(Client::class , 'company_id', 'id');
+       return $this->hasMany(Client::class , 'company_id', 'id');
     }
 
     public function Estimates()
     {
-        $this->hasMany(Estimate::class , 'company_id', 'id');
+       return $this->hasMany(Estimate::class , 'company_id', 'id');
     }
 
     public function Invoices()
     {
-        $this->hasMany(Estimate::class , 'company_id', 'id');
+      return  $this->hasMany(Invoice::class , 'company_id', 'id');
     }
 }

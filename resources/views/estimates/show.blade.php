@@ -36,7 +36,7 @@
             </div>
             <div class="w-100 float-right border-bottom border-top">
                 <h5 class="pt-3 pb-3">
-                Sign Url = {{env('APP_URL')}}/sign-estimate/{{$estimate->id}}
+                Sign Url = @if($estimate->sign_id != null){{env('APP_URL')}}/sign-estimate/{{$estimate->sign_id}}@else This document has already been accepted.@endif
                 </h5>
             </div>
             <div class="w-100 float-right">

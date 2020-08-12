@@ -87,6 +87,10 @@
   .table-container {
     margin-top: 4%;
   }
+
+    .home-tab{
+        min-width: 1126px;
+    }
 }
 
 .btn-primary {
