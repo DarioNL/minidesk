@@ -101,7 +101,7 @@
                                     Estimates <span class="caret"></span>
                                 </a>
 
-                                <a class="nav-link" href="/company/Invoices" role="button" >
+                                <a class="nav-link" href="/company/invoices" role="button" >
                                     Invoices <span class="caret"></span>
                                 </a>
 

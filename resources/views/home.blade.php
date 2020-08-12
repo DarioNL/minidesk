@@ -6,17 +6,17 @@
         <div class="mt-5">
             <div class="card">
                 <div class="card-text">
-                    <div class="row m-0">
-                        <div class="col-4 text-center p-2">
+                    <div class="row m-0 ">
+                        <div class="col-md-4 text-center p-2 col-sm-12">
                             <h4 class="text-muted">Clients</h4>
                             <p class="text-muted">{{count($clients)}}</p>
                         </div>
-                        <div class="col-4 text-center p-2">
+                        <div class="col-md-4 text-center p-2 col-sm-12">
                             <h4 class="text-muted">Estimates</h4>
                             <p class="text-muted">{{count($estimates)}}</p>
                         </div>
 
-                        <div class="col-4 text-center p-2">
+                        <div class="col-md-4 text-center p-2 col-sm-12">
                             <h4 class="text-muted">Invoices</h4>
                             <p class="text-muted">{{count($invoices)}}</p>
                         </div>
@@ -36,7 +36,8 @@
                                     <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-content" id="nav-tabContent">
                                             <div class="tab-pane home-tab fade show active text-center" id="nav-company" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                <table class="w-100 border-bottom border-top">
+                                                <table class="table-fullscreen
+                                                 border-bottom border-top">
                                                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
                                                         <th>First Name</th>
                                                         <th>Last Name</th>

@@ -486,3 +486,9 @@ table tfoot td {
   text-decoration: none;
 }
 
+.table-fullscreen {
+    left:0;
+    right:0;
+
+}
+
