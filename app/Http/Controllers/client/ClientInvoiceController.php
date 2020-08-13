@@ -12,31 +12,31 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
-class ClientEstimateController extends client
+class ClientInvoiceController extends client
 {
 
     public function index()
     {
         $client = Client::find(Auth::id());
-        $estimates = $client->Estimates->where('send_date', '!=', null);
+        $invoices = $client->Invoices->where('send_date', '!=', null);
 
-        return view('estimates.index', compact('estimates'));
+        return view('invoices.index', compact('invoices'));
     }
 
     public function show($id)
     {
-        $estimate = Estimate::find($id);
-        if ($estimate->client_id = Auth::id()){
-            $products = $estimate->products;
+        $invoice = Invoice::find($id);
+        if ($invoice->client_id = Auth::id()){
+            $products = $invoice->products;
 
-            return view('estimates.show', compact('estimate', 'products'));
+            return view('invoices.show', compact('invoice', 'products'));
         }
         return back();
     }
 
     public function sign($id)
     {
-        $estimate = Estimate::all()->where('sign_id', '=', $id);
+        $estimate = Estimate::where('sign_id', '=', $id);
         $estimate = $estimate[0];
 
 
@@ -53,7 +53,7 @@ class ClientEstimateController extends client
              Rule::exists('clients', 'last_name'),
              'sign' => 'required'
         ]);
-        $estimate = Estimate::find($id);
+        $estimate = Estimate::all()->find($id);
 
         if (Auth::guard('clients')->attempt(['email' => $request->email, 'password' => $request->password])) {
             $user = Auth::guard('clients')->user();

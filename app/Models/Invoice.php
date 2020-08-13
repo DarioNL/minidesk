@@ -19,7 +19,7 @@ class Invoice extends Authenticatable
 
 
     protected $fillable = [
-        'company_id', 'pay_id', 'client_id', 'amount', 'sent_date', 'due_date', 'sign_date', 'invoice', 'total', 'estimate_id', 'title'
+        'company_id', 'pay_id', 'client_id', 'amount', 'sent_date', 'due_date', 'invoice', 'total', 'estimate_id', 'title'
         ];
 
 

@@ -13,13 +13,21 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $user = Auth::id();
-        $company = Company::all()->find($user);
-        $clients = $company->clients;
-        $estimates = $company->estimates;
-        $invoices = $company->invoices;
+        if (Auth::guard('web')->check()) {
+            $user = Auth::id();
+            $company = Company::find($user);
+            $clients = $company->clients;
+            $estimates = $company->estimates;
+            $invoices = $company->invoices;
 
-        return view('home',  compact('clients', 'estimates', 'invoices'));
+            return view('home', compact('clients', 'estimates', 'invoices'));
+        }
+        $user = Auth::id();
+        $client = Client::find($user);
+        $company = $client->company;
+        $estimates = $client->Estimates;
+        $invoices = $client->Invoices;
+        return view('home', compact('client', 'estimates', 'invoices'));
     }
 
 }

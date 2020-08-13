@@ -2,9 +2,11 @@
 
 @section('content')
 
-    @include('invoices.delete', ['invoice' => $invoice])
-    @include('invoices.edit', ['invoice' => $invoice])
-    @include('invoices.send', ['invoice' => $invoice])
+    @auth('web')
+        @include('invoices.delete', ['invoice' => $invoice])
+        @include('invoices.edit', ['invoice' => $invoice])
+        @include('invoices.send', ['invoice' => $invoice])
+    @endauth
 
 
     <div class="card table-container align-items-center w-100">
@@ -14,22 +16,37 @@
             </div>
         </div>
         <div class="card-body w-100 pt-2">
-            <div class="text-secondary mb-5 text-muted">
+            <div class="text-secondary mb-5">
                 <h5 class="float-left text-muted mr-2 mt-1 desktoptd">
-                    {{$invoice->sign_date ? 'Accepted' : 'Unaccepted'}}
+                    @if(!$invoice->pay_date)
+                        <h5 class="float-left text-danger mr-2 mt-1 desktoptd">
+                            {{$invoice->pay_date ? 'Accepted' : 'Unaccepted'}}
+                        </h5>
+                    @else
+                        <h5 class="float-left text-success mr-2 mt-1 desktoptd">
+                            {{$invoice->pay_date ? 'Accepted' : 'Unaccepted'}}
+                        </h5>
+                    @endif
                 </h5>
             </div>
             <div>
+                @php($date = explode(' ', $invoice->send_date))
                 <h5 class="float-left text-muted mr-2 desktoptd">
-                    <i class="uil uil-envelope"></i> @if($invoice->send_date != null)Send On :{{ $invoice->send_date}}@else Not send @endif
+                    <i class="uil uil-envelope"></i> @if($invoice->send_date != null)Send On : {{$date[0]}}@else Not send @endif
                 </h5>
             </div>
             <div class="float-right mb-3">
-                <a href="/company/clients/{{$invoice->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
-                <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
-                <a class="btn btn-info text-white"><i class="uil uil-print"></i> Print</a>
-                <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
-                <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                @auth('web')
+                    <a href="/company/clients/{{$invoice->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                    <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
+                    <a class="btn btn-info text-white"><i class="uil uil-print"></i> Print</a>
+                    <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                @else
+                    @if(!$invoice->pay_date)
+                        <a class="btn btn-success" href="{{$invoice->pay_id}}"> <i class="uil uil-wallet"></i> Pay</a>
+                    @endif
+                @endauth
             </div>
             <div class="w-100 float-right border-bottom border-top">
                 <h5 class="pt-3 pb-3">
@@ -37,9 +54,6 @@
                 </h5>
             </div>
             <div class="w-100 float-right">
-                <h5 class="pt-3 float-right pb-3">
-                    <i class="uil uil-envelope"></i>  {{$invoice->send_date ? $invoice->send_date : 'Not Send'}}
-                </h5>
                 <h4 class="pt-3 pb-3">
                     <i class="uil uil-bag"></i>  {{$invoice->company->name}}
                 </h4>

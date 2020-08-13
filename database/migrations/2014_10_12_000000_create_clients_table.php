@@ -19,7 +19,6 @@ class CreateClientsTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('address')->nullable();
             $table->string('house_number')->nullable();
@@ -27,10 +26,7 @@ class CreateClientsTable extends Migration
             $table->string('zipcode')->nullable();
             $table->string('city')->nullable();
             $table->string('phone')->nullable();
-            $table->string('country')->nullable();
             $table->string('logo')->nullable();
-            $table->string('invoices')->nullable();
-            $table->string('estimates')->nullable();
             $table->timestamp('last_login')->nullable();
             $table->rememberToken();
             $table->timestamps();

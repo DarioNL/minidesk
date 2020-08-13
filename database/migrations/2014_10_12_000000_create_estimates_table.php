@@ -18,7 +18,7 @@ class CreateEstimatesTable extends Migration
             $table->string('number')->default('draft');
             $table->string('title')->nullable();
             $table->string('sign_id')->nullable();
-            $table->string('color')->nullable()->default('#0000A0');
+            $table->string('color')->nullable()->default(null);
             $table->uuid('company_id');
             $table->uuid('client_id');
             $table->decimal('total',9,2);

@@ -87,6 +87,10 @@
     .table-container {
         margin-top: 4%;
     }
+
+    .home-tab{
+        min-width: 1126px;
+    }
 }
 
 .btn-primary {
@@ -255,26 +259,25 @@
     margin-top: 15rem;
 }
 
-.order-table{
+.order-table {
     font-size: 10px;
     color: gray;
-    margin-top: 2rem
+    margin-top: 2rem;
 }
 
-.order-table-header{
+.order-table-header {
     padding: 0;
     background: #eaeaea;
 }
 
-.order-table-header:hover{
+.order-table-header:hover {
     background: #eaeaea;
 }
 
-.order{
+.order {
     padding: 10px;
     font-size: 15px;
 }
-
 
 table {
     width: 100%;
@@ -483,4 +486,9 @@ table tfoot td {
     text-decoration: none;
 }
 
+.table-fullscreen {
+    left:0;
+    right:0;
+
+}
 

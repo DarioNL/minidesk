@@ -65,7 +65,11 @@
                                     @else
                                         <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
                                     @endif
-                                     {{ Auth::user()->name }} <span class="caret"></span>
+                                        @auth('web')
+                                            {{ Auth::user()->name }} <span class="caret"></span>
+                                        @else
+                                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
+                                        @endauth
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -88,22 +92,35 @@
 
 
                                 <div class="mobile">
+                                    @auth('web')
+                                        <a class="nav-link" href="/dashboard" role="button">
+                                            Dashboard <span class="caret"></span>
+                                        </a>
 
-                                <a class="nav-link" href="/dashboard" role="button">
-                                    Dashboard <span class="caret"></span>
-                                </a>
+                                        <a class="nav-link" href="/company/clients" role="button">
+                                            Clients <span class="caret"></span>
+                                        </a>
 
-                                <a class="nav-link" href="/company/clients" role="button">
-                                    Clients <span class="caret"></span>
-                                </a>
+                                        <a class="nav-link" href="/company/estimates" role="button">
+                                            Estimates <span class="caret"></span>
+                                        </a>
 
-                                <a class="nav-link" href="/company/estimates" role="button">
-                                    Estimates <span class="caret"></span>
-                                </a>
+                                        <a class="nav-link" href="/company/invoices" role="button" >
+                                            Invoices <span class="caret"></span>
+                                        </a>
+                                    @else
+                                        <a class="nav-link" href="/dashboard" role="button">
+                                            Dashboard <span class="caret"></span>
+                                        </a>
 
-                                <a class="nav-link" href="/company/invoices" role="button" >
-                                    Invoices <span class="caret"></span>
-                                </a>
+                                        <a class="nav-link" href="/client/estimates" role="button">
+                                            Estimates <span class="caret"></span>
+                                        </a>
+
+                                        <a class="nav-link" href="/client/invoices" role="button" >
+                                            Invoices <span class="caret"></span>
+                                        </a>
+                                    @endauth
 
                                 </div>
 

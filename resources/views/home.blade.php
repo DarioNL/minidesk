@@ -62,6 +62,7 @@
                                                             <th class="desktoptd">Actions</th>
                                                         @else
                                                             <th>Name</th>
+                                                            <th>Logo</th>
                                                             <th>Email</th>
                                                             <th>Address</th>
                                                             <th>Phone</th>
@@ -104,9 +105,12 @@
                                                         <th class="desktoptd">Actions</th>
                                                     </tr>
                                                     <tbody id="append_hook">
-                                                    @php($clients = \App\Models\Client::all())
                                                     @include('estimates.scroll', ['estimates' => $estimates])
-                                                    <a href="/company/clients" class="text-center">Show All Estimates</a>
+                                                    @auth('web')
+                                                    <a href="/company/estimates" class="text-center">Show All Estimates</a>
+                                                    @else
+                                                        <a href="/client/estimates" class="text-center">Show All Estimates</a>
+                                                    @endauth
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -126,9 +130,12 @@
                                                         <th class="desktoptd">Actions</th>
                                                     </tr>
                                                     <tbody id="append_hook">
-                                                    @php($clients = \App\Models\Client::all())
                                                     @include('invoices.scroll', ['invoices' => $invoices])
-                                                    <a href="/company/clients" class="text-center">Show All Invoices</a>
+                                                    @auth('web')
+                                                        <a href="/company/invoices" class="text-center">Show All Invoices</a>
+                                                    @else
+                                                        <a href="/client/invoices" class="text-center">Show All Invoices</a>
+                                                    @endauth
                                                     </tbody>
                                                 </table>
                                             </div>

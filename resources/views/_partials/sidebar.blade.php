@@ -17,10 +17,15 @@
             Welcome,<br>
         </span>
         <h5 class="text-white">
+            @auth('web')
             {{Auth::user()->name}}
+            @else
+                {{Auth::user()->first_name}} {{Auth::user()->last_name}}
+            @endauth
         </h5>
     </div>
     </div>
+    @auth('web')
     <div class="row m-0 px-3 py-2 sidebar-link">
         <a href="/dashboard" class="sidebar-link-item text-white text-decoration-none">
             Dashboard
@@ -41,4 +46,22 @@
             Invoices
         </a>
     </div>
+    @else
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/dashboard" class="sidebar-link-item text-white text-decoration-none">
+                Dashboard
+            </a>
+        </div>
+
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/client/estimates" class="sidebar-link-item text-white text-decoration-none">
+                Estimates
+            </a>
+        </div>
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/client/invoices" class="sidebar-link-item text-white text-decoration-none">
+                Invoices
+            </a>
+        </div>
+    @endauth
 </div>

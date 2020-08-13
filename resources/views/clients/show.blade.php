@@ -71,38 +71,13 @@
                             <div class="col-md-12">
                                 <nav>
                                     <div class="nav nav-tabs nav-fill" data-toggle="tab" id="nav-tab" role="tablist">
-                                        <a class="nav-item nav-link active" id="nav-company-tab" data-toggle="tab" href="#nav-company" role="tab" aria-controls="nav-company" aria-selected="false">Company</a>
-                                        <a class="nav-item nav-link" id="nav-estimates-tab" data-toggle="tab" href="#nav-estimates" role="tab" aria-controls="nav-estimates" aria-selected="false">Estimates</a>
+                                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-estimates" role="tab" aria-controls="nav-estimates" aria-selected="false">Estimates</a>
                                         <a class="nav-item nav-link" id="nav-invoices-tab" data-toggle="tab" href="#nav-invoices" role="tab" aria-controls="nav-invoices" aria-selected="false">Invoices</a>
                                     </div>
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">
                                         <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-company" role="tabpanel" aria-labelledby="nav-home-tab">
-                                                <table class="w-100 border-bottom border-top">
-                                                    <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                                                        <th>Name</th>
-                                                        <th>logo</th>
-                                                        <th>Email</th>
-                                                        <th>Address</th>
-                                                        <th>Phone</th>
-                                                    </tr>
-                                                    <tbody id="append_hook">
-                                                    <tr class="border-bottom">
-                                                        <td class="text-muted">{{$client->company->name}}</td>
-                                                        <td class="pl-3">@if($client->company->logo != null)
-                                                                <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
-                                                            @else
-                                                                <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-                                                            @endif</td>
-                                                        <td class="text-muted">{{$client->company->email}}</td>
-                                                        <td class="text-muted">{{$client->company->city}}, {{$client->company->zipcode}}</td>
-                                                        <td class="text-muted">{{$client->company->phone}}</td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <div class="tab-pane fade" id="nav-estimates" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                            <div class="tab-pane fade show active" id="nav-estimates" role="tabpanel" aria-labelledby="nav-home-tab">
                                                 <table class="w-100 border-bottom border-top">
                                                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
                                                         <th>Number</th>

@@ -52,7 +52,7 @@ class Client extends Authenticatable
 
     public function Invoices()
     {
-        return $this->hasMany(Estimate::class , 'client_id', 'id');
+        return $this->hasMany(Invoice::class , 'client_id', 'id');
     }
 
 

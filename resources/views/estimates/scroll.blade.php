@@ -2,7 +2,7 @@
 @foreach($estimates as $estimate)
 
     @include('estimates.delete', ['estimate' => $estimate])
-    <tr class="clickable-row border-bottom" data-href="/company/estimates/{{$estimate->id}}">
+    <tr class="clickable-row border-bottom" @auth('web') data-href="/company/estimates/{{$estimate->id}}" @else data-href="/client/estimates/{{$estimate->id}}" @endauth">
         <td class="pl-3">{{$estimate->number}}</td>
         @if($estimate->title != null)
             <td class="text-muted">{{$estimate->title}}</td>
@@ -36,6 +36,7 @@
         @endif
         @php($data = explode(' ', $estimate->created_at))
         <td class="text-muted">{{$data[0]}}</td>
+    @auth('web')
         <td width="1" class="text-center desktoptd last-child">
             <button class="btn btn-light btn-ellipsis" data-toggle="dropdown">
                 <i class="uil uil-ellipsis-v"></i>
@@ -45,6 +46,7 @@
                 <button onclick="$('#deleteModal').modal('show')" class="dropdown-item deleteitem" type="button">Delete</button>
             </div>
         </td>
+        @endauth
     </tr>
 
 @endforeach

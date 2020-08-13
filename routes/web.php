@@ -41,5 +41,7 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
 Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function () {
     Route::get('/estimates', 'client\ClientEstimateController@index');
     Route::get('/estimates/{id}', 'client\ClientEstimateController@show');
-    Route::post('/estimates/{id}/{sign-id}/accept', 'client\ClientEstimateController@sign');
+    Route::post('/estimates/{id}/{sign-id}\accept', 'client\ClientEstimateController@sign');
+    Route::get('/invoices', 'client\ClientInvoiceController@index');
+    Route::get('/invoices/{id}', 'client\ClientInvoiceController@show');
 });

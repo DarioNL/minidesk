@@ -2,10 +2,12 @@
 
 @section('content')
 
-    @include('estimates.delete', ['estimate' => $estimate])
-    @include('estimates.edit', ['estimate' => $estimate])
-    @include('estimates.accept', ['estimate' => $estimate])
-    @include('estimates.send', ['estimate' => $estimate])
+    @auth('web')
+        @include('estimates.delete', ['estimate' => $estimate])
+        @include('estimates.edit', ['estimate' => $estimate])
+        @include('estimates.accept', ['estimate' => $estimate])
+        @include('estimates.send', ['estimate' => $estimate])
+    @endauth
 
 
     <div class="card table-container align-items-center w-100">
@@ -15,10 +17,16 @@
             </div>
         </div>
         <div class="card-body w-100 pt-2">
-            <div class="text-secondary mb-5 text-muted">
-                <h5 class="float-left text-muted mr-2 mt-1 desktoptd">
-                    {{$estimate->sign_date ? 'Accepted' : 'Unaccepted'}}
-                </h5>
+            <div class="text-secondary mb-5">
+                @if($estimate->sign_date != null)
+                    <h5 class="float-left text-success mr-2 mt-1 desktoptd">
+                        {{$estimate->sign_date ? 'Accepted' : 'Unaccepted'}}
+                    </h5>
+                @else
+                    <h5 class="float-left text-danger mr-2 mt-1 desktoptd">
+                        {{$estimate->sign_date ? 'Accepted' : 'Unaccepted'}}
+                    </h5>
+                @endif
             </div>
             <div>
                 @php($date = explode(' ', $estimate->send_date))
@@ -27,16 +35,24 @@
                 </h5>
             </div>
             <div class="float-right mb-3">
-                <a href="/clients/{{$estimate->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
-                <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
-                <button onclick="$('#acceptModal').modal('show')" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
-                <button onclick="" class="btn btn-info text-white"><i class="uil uil-print"></i> Print</button>
-                <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
-                <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                @auth('web')
+                    <a href="/company/clients/{{$estimate->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                    <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
+                    @if(!$estimate->sign_date)
+                        <button onclick="$('#acceptModal').modal('show')" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
+                    @endif
+                    <button onclick="" class="btn btn-info text-white"><i class="uil uil-print"></i> Print</button>
+                    <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                @else
+                    @if(!$estimate->sign_date)
+                        <a href="{{env('APP_URL')}}/estimates/{{$estimate->sign_id}}/sign" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Sign</a>
+                    @endif
+                @endauth
             </div>
             <div class="w-100 float-right border-bottom border-top">
                 <h5 class="pt-3 pb-3">
-                Sign Url = @if($estimate->sign_id != null){{env('APP_URL')}}/sign-estimate/{{$estimate->sign_id}}@else This document has already been accepted.@endif
+                Sign Url = @if(!$estimate->sign_date){{env('APP_URL')}}/estimates/{{$estimate->sign_id}}/sign @else This document has already been accepted.@endif
                 </h5>
             </div>
             <div class="w-100 float-right">

@@ -1,17 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
+    @auth('web')
 @include('estimates.create', ['clients' => $clients])
+    @endauth
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
         <div class="float-left">
         <h3 class="float-left pt-2">All Estimates</h3>
         </div>
+            @auth('web')
         <div class="float-right">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">
                  + Create New Estimate
             </button>
         </div>
+            @endauth
         </div>
         <div class="card-body w-100 pt-2">
             <div class="card-title mb-5 text-muted">
@@ -35,7 +39,9 @@
                         <th>Due Date</th>
                         <th>Sign Date</th>
                         <th>Created At</th>
-                        <th class="desktoptd">Actions</th>
+                        @auth('web')
+                        <th class="desktoptd">Actions
+                        @endauth
                     </tr>
                     <tbody id="append_hook">
                     @include('estimates.scroll', ['estimates' => $estimates])
