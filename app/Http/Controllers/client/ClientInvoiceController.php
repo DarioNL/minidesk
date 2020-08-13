@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Mollie\Laravel\Facades\Mollie;
 
 class ClientInvoiceController extends client
 {
@@ -26,7 +27,7 @@ class ClientInvoiceController extends client
     public function show($id)
     {
         $invoice = Invoice::find($id);
-        if ($invoice->client_id = Auth::id()){
+        if ($invoice->client_id = Auth::id()) {
             $products = $invoice->products;
 
             return view('invoices.show', compact('invoice', 'products'));
@@ -34,52 +35,26 @@ class ClientInvoiceController extends client
         return back();
     }
 
-    public function sign($id)
+    public function webhook()
     {
-        $estimate = Estimate::where('sign_id', '=', $id);
-        $estimate = $estimate[0];
 
-
-        return view('estimates.client.sign',  compact('estimate'));
     }
 
-    public function accept(Request $request,$id){
-         $request->validate([
-            'password' => 'required',
-            'email' => 'required',
-            'first_name' => 'required',
-             Rule::exists('clients', 'first_name'),
-            'last_name' => 'required',
-             Rule::exists('clients', 'last_name'),
-             'sign' => 'required'
-        ]);
-        $estimate = Estimate::all()->find($id);
 
-        if (Auth::guard('clients')->attempt(['email' => $request->email, 'password' => $request->password])) {
-            $user = Auth::guard('clients')->user();
-            $user->last_login = date('Y-m-d H:i:s');
-            $user->save();
-            $estimate->sign_date = Carbon::now();
-            $estimate->sign_id = null;
-            $estimate->number = '#of' . random_int(0, 9) . random_int(0, 9) . random_int(0, 9) . random_int(0, 9);
-            $estimate->save();
-
-            $invoice = Invoice::create([
-                'title' => $estimate->title,
-                'due_date' => $estimate->due_date,
-                'discount' => $estimate->discount,
-                'total' => $estimate->total,
-                'amount' => $estimate->amount,
-                'company_id' => $estimate->company_id,
-                'client_id' => $estimate->client_id,
-            ]);
-            foreach ($estimate->products as $product) {
-                $product->invoice_id = $invoice->id;
-                $product->save();
+    public function success($id)
+    {
+        $invoice = Invoice::find($id);
+        if ($invoice->pay_date == null) {
+            Mollie::api()->setApiKey($invoice->company->mollie_key);
+            $payment = Mollie::api()->payments()->get($invoice->payment_id);
+            if ($payment->status = 'paid') {
+                $invoice->pay_date = Carbon::now();
+                $invoice->save();
+//                $invoice->client->notify(new sendInvoice($invoice, '#2ea44f'));
+                return redirect('/dashboard');
             }
-            return redirect()->to('/dashboard');
         }
-            return back()->onlyInput();
+        return redirect('/dashboard');
     }
 
 }

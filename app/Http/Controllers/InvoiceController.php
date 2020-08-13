@@ -209,7 +209,7 @@ class InvoiceController extends Controller
                 ],
                 'description' => 'Invoice  ' . $description,
                 'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
-                'redirectUrl' => 'http://localhost:8000/company/invoices',
+                'redirectUrl' => 'http://localhost:8000/invoices/'.$invoice->id.'/success',
                 'method' => 'creditcard',
                 'metadata' => array(
                     'order_id' => $invoice->number
@@ -218,6 +218,7 @@ class InvoiceController extends Controller
 
 
             if ($payment) {
+                $invoice->payment_id = $payment->id;
                 $invoice->pay_id = $payment->_links->checkout->href;
                 $invoice->save();
                 $send_date = $request->post('send_date');

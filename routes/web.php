@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('estimates/{id}/sign', 'client\ClientEstimateController@sign');
 Route::post('estimates/{id}/accept', 'client\ClientEstimateController@accept');
+Route::get('/invoices/{id}/success', 'client\ClientInvoiceController@success');
+
 
 Auth::routes();
 
@@ -44,4 +46,6 @@ Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function 
     Route::post('/estimates/{id}/{sign-id}\accept', 'client\ClientEstimateController@sign');
     Route::get('/invoices', 'client\ClientInvoiceController@index');
     Route::get('/invoices/{id}', 'client\ClientInvoiceController@show');
+    Route::get('/invoices{id}/success', 'client\ClientInvoiceController@succes');
+    Route::name('webhooks.payment')->post('webhooks/payment', 'client\ClientController@webhook');
 });
