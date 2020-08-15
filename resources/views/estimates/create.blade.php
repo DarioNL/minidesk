@@ -14,7 +14,7 @@
                         <div class="col-6">
                             <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Client')}}</label>
                             @if(count($clients))
-                                <select name="client" class="select2 form-control">
+                                <select name="client" class="form-control">
                                     @foreach($clients as $client)
                                         <option value="{{$client->id}}" title="">{{$client->first_name}} {{$client->last_name}}</option>
                                     @endforeach

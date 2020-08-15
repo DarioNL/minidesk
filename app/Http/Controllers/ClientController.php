@@ -130,6 +130,18 @@ class ClientController extends Controller
         $client->delete();
         $client->email = 'deleted_'.time().'_'.$client->email;
         $client->save();
+
+        foreach ($client->Estimates as $estimate){
+            $estimate->client_id = null;
+            $estimate->save();
+        }
+
+        foreach ($client->invoices as $invoice){
+            $invoice->client_id = null;
+            $invoice->save();
+        }
+
+
         return response()->json([
             'message' => 'Deleted client'
         ])->setStatusCode(200);

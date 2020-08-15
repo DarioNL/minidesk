@@ -2,6 +2,11 @@
 @foreach($estimates as $estimate)
 
     @include('estimates.delete', ['estimate' => $estimate])
+    @if(!$estimate->client)
+    @include('estimates.link', ['estimate' => $estimate])
+    @else
+    @include('estimates.unlink', ['estimate' => $estimate])
+    @endif
     <tr class="clickable-row border-bottom" @auth('web') data-href="/company/estimates/{{$estimate->id}}" @else data-href="/client/estimates/{{$estimate->id}}" @endauth">
         <td class="pl-3">{{$estimate->number}}</td>
         @if($estimate->title != null)
@@ -14,11 +19,15 @@
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$estimate->company->name}}</td>
+    @if($estimate->client)
         <td class="pl-3">@if($estimate->client->logo != null)
                 <img src="{{asset('/images/'.$estimate->client->id.$estimate->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$estimate->client->first_name}} {{$estimate->client->last_name}}</td>
+    @else
+        <td>No client</td>
+    @endif
         <td class="text-muted">€{{$estimate->total}}</td>
         @if($estimate->send_at != null)
         @php($date = explode(' ', $estimate->Send_at))
@@ -44,14 +53,17 @@
 
             <div class="dropdown-menu dropdown-menu-right">
                 <button onclick="$('#deleteModal').modal('show')" class="dropdown-item deleteitem" type="button">Delete</button>
+                @if(!$estimate->client)
+                <button onclick="$('#linkModal').modal('show')" class="dropdown-item deleteitem" type="button">Link</button>
+                @else
+                <button onclick="$('#unlinkModal').modal('show')" class="dropdown-item deleteitem" type="button">Unlink</button>
+                @endif
             </div>
         </td>
         @endauth
     </tr>
 
 @endforeach
-    </tbody>
-    </table>
 @else
     <td colspan="10" class="text-center">No Estimates found</td>
 @endif

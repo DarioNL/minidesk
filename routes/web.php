@@ -26,6 +26,8 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
     Route::delete('/clients/{id}/delete', 'ClientController@destroy');
     Route::get('/estimates', 'EstimateController@index');
     Route::get('/estimates/{id}', 'EstimateController@show');
+    Route::post('/estimates/{id}/link', 'EstimateController@link');
+    Route::post('/estimates/{id}/unlink', 'EstimateController@unlink');
     Route::post('/estimates/create', 'EstimateController@postCreate');
     Route::post('/estimates/{id}/edit', 'EstimateController@update');
     Route::post('/estimates/{id}/accept', 'EstimateController@accept');
@@ -33,6 +35,8 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
     Route::delete('/estimates/{id}/delete', 'EstimateController@destroy');
     Route::get('/invoices', 'InvoiceController@index');
     Route::get('/invoices/{id}', 'InvoiceController@show');
+    Route::post('/invoices/{id}/link', 'InvoiceController@link');
+    Route::post('/invoices/{id}/unlink', 'InvoiceController@unlink');
     Route::post('/invoices/create', 'InvoiceController@postCreate');
     Route::post('/invoices/{id}/edit', 'InvoiceController@update');
     Route::post('/invoices/{id}/accept', 'InvoiceController@accept');

@@ -244,6 +244,24 @@ class InvoiceController extends Controller
         return back();
     }
 
+    public function link(Request $request, $id){
+        $invoice = Invoice::find($id);
+
+        $invoice->client_id = $request->post('client');
+        $invoice->save();
+
+        return back();
+    }
+
+    public function unlink($id){
+        $invoice = Invoice::find($id);
+
+        $invoice->client_id = null;
+        $invoice->save();
+
+        return back();
+    }
+
     public function destroy($id){
         $invoice = Invoice::all()->find($id);
 

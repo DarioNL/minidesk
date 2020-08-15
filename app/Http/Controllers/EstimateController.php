@@ -234,6 +234,24 @@ class EstimateController extends Controller
         return back();
     }
 
+    public function link(Request $request, $id){
+        $estimate = Estimate::find($id);
+
+        $estimate->client_id = $request->post('client');
+        $estimate->save();
+
+        return back();
+    }
+
+    public function unlink($id){
+        $estimate = Estimate::find($id);
+
+        $estimate->client_id = null;
+        $estimate->save();
+
+        return back();
+    }
+
     public function destroy($id){
         $estimate = Estimate::all()->find($id);
 

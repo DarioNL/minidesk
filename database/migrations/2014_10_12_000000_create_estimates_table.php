@@ -20,7 +20,7 @@ class CreateEstimatesTable extends Migration
             $table->string('sign_id')->nullable();
             $table->string('color')->nullable()->default(null);
             $table->uuid('company_id');
-            $table->uuid('client_id');
+            $table->uuid('client_id')->nullable()->default(null);
             $table->decimal('total',9,2);
             $table->integer('discount')->nullable()->default(0);
             $table->decimal('amount',9,2)->nullable()->default(0.00);

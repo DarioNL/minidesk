@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Accept Estimate @if($estimate->title != null){{$estimate->title}}@else{{$estimate->number}}@endif</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Send Estimate @if($estimate->title != null){{$estimate->title}}@else{{$estimate->number}}@endif</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
