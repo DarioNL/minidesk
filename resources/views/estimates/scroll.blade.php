@@ -15,13 +15,13 @@
             <td class="text-muted">{{$estimate->number}}</td>
         @endif
         <td class="pl-3">@if($estimate->company->logo != null)
-                <img src="{{asset('/images/'.$estimate->company->id.$estimates->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                <img src="{{asset($estimate->company->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$estimate->company->name}}</td>
     @if($estimate->client)
         <td class="pl-3">@if($estimate->client->logo != null)
-                <img src="{{asset('/images/'.$estimate->client->id.$estimate->client->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                <img src="{{asset($estimate->client->logo)}}" class="sidebar-logo d-block ui-w-30 bg-white rounded-circle" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$estimate->client->first_name}} {{$estimate->client->last_name}}</td>

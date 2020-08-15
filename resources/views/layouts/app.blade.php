@@ -61,7 +61,7 @@
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     @if(Auth::user()->logo != null)
-                                        <img src="{{asset('/images/'.Auth::user()->id.Auth::user()->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                                        <img src="{{asset(Auth::user()->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
                                     @else
                                         <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
                                     @endif

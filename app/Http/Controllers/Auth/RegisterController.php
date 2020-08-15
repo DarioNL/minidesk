@@ -18,6 +18,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
             'address' => 'required',
@@ -26,12 +27,18 @@ class RegisterController extends Controller
             'house_number' => 'required',
             'phone' => 'required',
             'password' => 'required',
+            'logo' => ['required', 'image', 'mimes:jpg,jpeg,bmp,svg,png', 'max:5000'],
             'email' => [
                 Rule::unique('companies','email'),
                 Rule::unique('clients','email')
             ],
             'vat_number' => 'required|min:9|max:9',
         ]);
+
+        $logoUpload = $request->file('logo');
+        $logoName = time().'.'.$logoUpload->getClientOriginalExtension();
+        $logoPath = public_path('/images/');
+        $logoUpload->move($logoPath, $logoName);
 
 
         Company::create([
@@ -42,7 +49,7 @@ class RegisterController extends Controller
             'house_number' => $request->post('house_number'),
             'phone' => $request->post('phone'),
             'email' => $request->post('email'),
-            'logo' => $request->post('logo'),
+            'logo' => $logoPath.$logoName,
             'vat_number' => $request->post('vat_number'),
             'password' => bcrypt($request->post('password')),
         ]);

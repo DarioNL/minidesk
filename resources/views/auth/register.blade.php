@@ -29,7 +29,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -64,7 +64,7 @@
                             <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control" name="address" required autocomplete="address">
+                                <input id="address" type="text" class="form-control" name="address" value="{{ old('address') }} required autocomplete="address">
 
                                 @error('address')
                                 <span class="invalid-feedback" role="alert">
@@ -78,7 +78,7 @@
                             <label for="zipcode" class="col-md-4 col-form-label text-md-right">{{ __('Zipcode') }}</label>
 
                             <div class="col-md-6">
-                                <input id="zipcode" type="text" class="form-control" name="zipcode" required autocomplete="zipcode">
+                                <input id="zipcode" type="text" class="form-control" name="zipcode" value="{{ old('zipcode') }} required autocomplete="zipcode">
 
                                 @error('zipcode')
                                 <span class="invalid-feedback" role="alert">
@@ -92,7 +92,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control" name="city" required autocomplete="city">
+                                <input id="city" type="text" class="form-control" name="city" value="{{ old('city') }} required autocomplete="city">
 
                                 @error('city')
                                 <span class="invalid-feedback" role="alert">
@@ -106,7 +106,7 @@
                             <label for="house_number" class="col-md-4 col-form-label text-md-right">{{ __('House Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="house_number" type="text" class="form-control" name="house_number" required autocomplete="house_number">
+                                <input id="house_number" type="text" class="form-control" name="house_number" value="{{ old('house_number') }} required autocomplete="house_number">
 
                                 @error('house_number')
                                 <span class="invalid-feedback" role="alert">
@@ -120,7 +120,7 @@
                             <label for="house_number_suffix" class="col-md-4 col-form-label text-md-right">{{ __('House Number Suffix (optional)') }}</label>
 
                             <div class="col-md-6">
-                                <input id="house_number_suffix" type="text" class="form-control" name="house_number_suffix" autocomplete="house_number">
+                                <input id="house_number_suffix" type="text" class="form-control" name="house_number_suffix" value="{{ old('house_number_suffix') }} autocomplete="house_number">
 
                                 @error('house_number_suffix')
                                 <span class="invalid-feedback" role="alert">
@@ -134,7 +134,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="tel" class="form-control" name="phone" required autocomplete="phone">
+                                <input id="phone" type="tel" class="form-control" name="phone" value="{{ old('phone') }} required autocomplete="phone">
 
                                 @error('phone')
                                 <span class="invalid-feedback" role="alert">
@@ -148,7 +148,7 @@
                             <label for="vat_number" class="col-md-4 col-form-label text-md-right">{{ __('Vat Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="vat_number" type="text" class="form-control" maxlength="9" name="vat_number" required autocomplete="vat_number">
+                                <input id="vat_number" type="text" class="form-control" maxlength="9" name="vat_number" value="{{ old('vat_number') }} required autocomplete="vat_number">
 
                                 @error('vat_number')
                                 <span class="invalid-feedback" role="alert">
@@ -162,7 +162,7 @@
                             <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="logo" type="file" accept="image/*" class="" name="logo">
+                                <input id="logo" type="file" accept="image/*" class="" name="logo" required>
 
                                 @error('logo')
                                 <span class="invalid-feedback" role="alert">
