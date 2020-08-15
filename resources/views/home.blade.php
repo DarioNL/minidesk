@@ -75,7 +75,7 @@
                                                         <tr class="border-bottom">
                                                             <td class="text-muted">{{$client->company->name}}</td>
                                                             <td class="pl-3">@if($client->company->logo != null)
-                                                                    <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                                                                    <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="company logo">
                                                                 @else
                                                                     <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
                                                                 @endif</td>
@@ -106,13 +106,13 @@
                                                     </tr>
                                                     <tbody id="append_hook">
                                                     @include('estimates.scroll', ['estimates' => $estimates])
-                                                    @auth('web')
-                                                    <a href="/company/estimates" class="text-center">Show All Estimates</a>
-                                                    @else
-                                                        <a href="/client/estimates" class="text-center">Show All Estimates</a>
-                                                    @endauth
                                                     </tbody>
                                                 </table>
+                                                @auth('web')
+                                                    <a href="/company/estimates" class="text-center">Show All Estimates</a>
+                                                @else
+                                                    <a href="/client/estimates" class="text-center">Show All Estimates</a>
+                                                @endauth
                                             </div>
                                             <div class="tab-pane home-tab fade text-center" id="nav-invoices" role="tabpanel" aria-labelledby="nav-invoices-tab">
 
@@ -131,13 +131,13 @@
                                                     </tr>
                                                     <tbody id="append_hook">
                                                     @include('invoices.scroll', ['invoices' => $invoices])
-                                                    @auth('web')
-                                                        <a href="/company/invoices" class="text-center">Show All Invoices</a>
-                                                    @else
-                                                        <a href="/client/invoices" class="text-center">Show All Invoices</a>
-                                                    @endauth
                                                     </tbody>
                                                 </table>
+                                                @auth('web')
+                                                    <a href="/company/invoices" class="text-center">Show All Invoices</a>
+                                                @else
+                                                    <a href="/client/invoices" class="text-center">Show All Invoices</a>
+                                                @endauth
                                             </div>
                                         </div>
                                     </div>

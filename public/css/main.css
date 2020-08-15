@@ -492,3 +492,8 @@ table tfoot td {
 
 }
 
+div#no-background {
+    max-width: 80px;
+    background-image: none;
+}
+

@@ -26,7 +26,7 @@
 
         <div class="col-xs-4">
             <h1>
-                {{$invoice->company->name}}
+                 {{$invoice->company->name}}
             </h1>
         </div>
     </div>

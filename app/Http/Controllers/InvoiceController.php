@@ -193,6 +193,10 @@ class InvoiceController extends Controller
             $invoice->company->mollie_key = $request->post('mollie_key');
             $invoice->company->save();
         }
+        if (!$invoice->company->mollie_key){
+            $invoice->company->mollie_key = $request->post('mollie_key');
+            $invoice->company->save();
+        }
         if ($send_date == date('Y-m-d')) {
             $description = $invoice->number;
             if ($invoice->title != null) {
@@ -201,20 +205,24 @@ class InvoiceController extends Controller
             $invoice->number = '#FAC' . random_int(0, 9) . random_int(0, 9) . random_int(0, 9) . random_int(0, 9);
             $invoice->save();
 
-            Mollie::api()->setApiKey($request->post('mollie_key'));
-            $payment = Mollie::api()->payments()->create([
-                'amount' => [
-                    'currency' => 'EUR',
-                    'value' => $invoice->total,
-                ],
-                'description' => 'Invoice  ' . $description,
-                'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
-                'redirectUrl' => 'http://localhost:8000/invoices/'.$invoice->id.'/success',
-                'method' => 'creditcard',
-                'metadata' => array(
-                    'order_id' => $invoice->number
-                )
-            ]);
+            try {
+                Mollie::api()->setApiKey($request->post('mollie_key'));
+                $payment = Mollie::api()->payments()->create([
+                    'amount' => [
+                        'currency' => 'EUR',
+                        'value' => $invoice->total,
+                    ],
+                    'description' => 'Invoice  ' . $description,
+                    'webhookUrl' => 'https://webhook.site/ee4f2604-574a-479a-a678-cd8a4ee919f6',
+                    'redirectUrl' => 'http://localhost:8000/invoices/' . $invoice->id . '/success',
+                    'method' => 'creditcard',
+                    'metadata' => array(
+                        'order_id' => $invoice->number
+                    )
+                ]);
+            } finally {
+//                return back();
+            }
 
 
             if ($payment) {
