@@ -190,6 +190,15 @@
     padding: 4px;
 }
 
+.sidebar-company-logo {
+    width: 70%;
+    max-width: 60px;
+    margin-left: 15%;
+    z-index: 1000;
+    position: inherit;
+    padding: 4px;
+}
+
 .sidebar-logo-container {
     width: 35%;
 }
@@ -229,6 +238,11 @@
     width: 29px;
     height: 29px;
     border-radius: 50%;
+    margin-right: 10px;
+}
+
+.company-profile-img {
+    max-width: 34px;
     margin-right: 10px;
 }
 

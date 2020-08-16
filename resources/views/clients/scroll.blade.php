@@ -7,7 +7,7 @@
         <td class="pl-3">{{$client->first_name}}</td>
         <td class="pl-3">{{$client->last_name}}</td>
         <td class="pl-3">@if($client->company->logo != null)
-                <img src="{{asset($client->company->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
+                <img src="{{asset($client->company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$client->company->name}}</td>

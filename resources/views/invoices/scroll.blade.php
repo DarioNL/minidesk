@@ -15,7 +15,7 @@
             <td class="text-muted">{{$invoice->number}}</td>
         @endif
         <td class="pl-3">@if($invoice->company->logo != null)
-                <img src="{{asset($invoice->company->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
+                <img src="{{asset($invoice->company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$invoice->company->name}}</td>

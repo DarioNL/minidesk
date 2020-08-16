@@ -15,7 +15,7 @@
             <td class="text-muted">{{$estimate->number}}</td>
         @endif
         <td class="pl-3">@if($estimate->company->logo != null)
-                <img src="{{asset($estimate->company->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
+                <img src="{{asset($estimate->company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$estimate->company->name}}</td>
