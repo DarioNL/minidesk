@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
     Route::post('/clients/{id}/edit', 'ClientController@update');
     Route::delete('/clients/{id}/delete', 'ClientController@destroy');
     Route::get('/estimates', 'EstimateController@index');
+    Route::post('/estimates/search', 'EstimateController@search');
     Route::get('/estimates/{id}', 'EstimateController@show');
     Route::post('/estimates/{id}/link', 'EstimateController@link');
     Route::post('/estimates/{id}/unlink', 'EstimateController@unlink');

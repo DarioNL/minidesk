@@ -16,9 +16,10 @@
         <div class="card-body w-100 pt-2">
             <div class="card-title mb-5 text-muted">
                 <h4 class="float-right text-muted mr-2 mt-1 desktoptd">
-                    <form method="get">
+                    <form method="post" action="/company/search">
+                        @csrf
                         <i class="uil uil-search"></i>
-                        <input type="text" class="searchinput searchitem" name="search" minlength="2" placeholder="Search">
+                        <input type="text" class="select2" name="search" minlength="2" placeholder="Search">
                         <a href="/company/clients" class="text-muted text-decoration-none">x</a>
                     </form>
                 </h4>

@@ -2,7 +2,7 @@
 
 @section('content')
     @auth('web')
-@include('estimates.create', ['clients' => $clients])
+        @include('estimates.create', ['clients' => $clients])
     @endauth
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
@@ -20,10 +20,15 @@
         <div class="card-body w-100 pt-2">
             <div class="card-title mb-5 text-muted">
                 <h4 class="float-right text-muted mr-2 mt-1 desktoptd">
-                    <form method="get">
-                        <i class="uil uil-search"></i>
-                        <input type="text" class="searchinput searchitem" name="search" minlength="2" placeholder="Search">
-                        <a href="/company/clients" class="text-muted text-decoration-none">x</a>
+                    <form @auth('web') action="/company/estimates/search" @else action="/client/estimates/search" @endauth method="POST" role="search">
+                        @csrf
+                        <div class="input-group">
+                            <input type="text" class="searchinput searchitem" name="q" placeholder="Search estimates"> <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="uil uil-search"></i>
+                                </button>
+                            </span>
+                        </div>
                     </form>
                 </h4>
             </div>

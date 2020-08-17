@@ -7,11 +7,12 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Scout\Searchable;
 
 
 class Invoice extends Authenticatable
 {
-    use Notifiable , SoftDeletes, UsesUuid;
+    use Notifiable , SoftDeletes, UsesUuid, Searchable;
 
     protected $table = 'invoices';
 
@@ -44,5 +45,9 @@ class Invoice extends Authenticatable
         return $this->hasMany(Products::class, 'invoice_id', 'id');
     }
 
+    public function searchableAs()
+    {
+        return '_invoices_';
+    }
 
 }
