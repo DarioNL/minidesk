@@ -28,6 +28,16 @@ class EstimateController extends Controller
         return view('estimates.index', compact('estimates', 'clients'));
     }
 
+    public function search(Request $request)
+    {
+        $q = $request->post('q');
+        $allEstimates = Estimate::search($q)->get();
+        $estimates = $allEstimates->where('company_id', Auth::id());
+        $clients = Client::all()->where('company_id', Auth::id());
+
+        return view('estimates.index', compact('estimates', 'clients'));
+    }
+
     public function postCreate(Request $request)
     {
 

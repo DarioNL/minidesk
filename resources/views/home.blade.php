@@ -75,10 +75,10 @@
                                                         <tr class="border-bottom">
                                                             <td class="text-muted">{{$client->company->name}}</td>
                                                             <td class="pl-3">@if($client->company->logo != null)
-                                                                    <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="company logo">
+                                                                    <img src="{{asset($client->company->logo)}}" class="company-profile-img" alt="user logo">
                                                                 @else
                                                                     <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-                                                                @endif</td>
+                                                                @endif{{$client->company->name}}</td>
                                                             <td class="text-muted">{{$client->company->email}}</td>
                                                             <td class="text-muted">{{$client->company->city}}, {{$client->company->zipcode}}</td>
                                                             <td class="text-muted">{{$client->company->phone}}</td>

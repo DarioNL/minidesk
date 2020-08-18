@@ -60,16 +60,21 @@
                         <!-- Authentication Links -->
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    @auth('web')
                                     @if(Auth::user()->logo != null)
                                         <img src="{{asset(Auth::user()->logo)}}" class="company-profile-img" alt="user logo">
                                     @else
                                         <img src="{{asset('/images/blank_profile_picture.png')}}" class="company-profile-img" alt="">
                                     @endif
-                                        @auth('web')
-                                            {{ Auth::user()->name }} <span class="caret"></span>
+                                            {{ Auth::user()->name }} <span class="caret"></span>>
+                                    @else
+                                        @if(Auth::user()->logo != null)
+                                            <img src="{{asset(Auth::user()->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
                                         @else
-                                            {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
-                                        @endauth
+                                            <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                                        @endif
+                                        {{ Auth::user()->first_name }} {{ Auth::user()->last_name }} <span class="caret"></span>
+                                    @endauth
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

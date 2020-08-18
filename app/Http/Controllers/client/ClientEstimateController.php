@@ -34,6 +34,14 @@ class ClientEstimateController extends client
         return back();
     }
 
+    public function postSearch(Request $request){
+        $q = $request->post('q');
+        $allEstimates = Estimate::search($q)->get();
+        $estimates = $allEstimates->where('client_id', Auth::id());
+
+        return view('estimates.index', compact('estimates'));
+    }
+
     public function sign($id)
     {
         $estimate = Estimate::all()->where('sign_id', '=', $id);

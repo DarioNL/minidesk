@@ -35,6 +35,15 @@ class ClientInvoiceController extends client
         return back();
     }
 
+    public function postSearch(Request $request)
+    {
+        $q = $request->post('q');
+        $allInvoices = Invoice::search($q)->get();
+        $invoices = $allInvoices->where('client_id', Auth::id());
+
+        return view('invoices.index', compact('invoices'));
+    }
+
     public function webhook()
     {
 

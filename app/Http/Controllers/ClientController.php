@@ -74,6 +74,15 @@ class ClientController extends Controller
         return view('clients.show', compact('client'));
     }
 
+    public function search(Request $request)
+    {
+        $q = $request->post('q');
+        $allClients = Client::search($q)->get();
+        $clients = $allClients->where('company_id', Auth::id());
+
+        return view('clients.index', compact('clients'));
+    }
+
     public function update(Request $request, $id)
     {
         $client = Client::all()->find($id);

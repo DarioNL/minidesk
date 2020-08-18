@@ -22,9 +22,11 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
     Route::get('/clients', 'ClientController@index');
     Route::post('/clients/create', 'ClientController@postCreate');
     Route::get('/clients/{id}', 'ClientController@show');
+    Route::post('/clients/search', 'ClientController@search');
     Route::post('/clients/{id}/edit', 'ClientController@update');
     Route::delete('/clients/{id}/delete', 'ClientController@destroy');
     Route::get('/estimates', 'EstimateController@index');
+    Route::post('/estimates/search', 'EstimateController@search');
     Route::get('/estimates/{id}', 'EstimateController@show');
     Route::post('/estimates/{id}/link', 'EstimateController@link');
     Route::post('/estimates/{id}/unlink', 'EstimateController@unlink');
@@ -35,6 +37,7 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
     Route::delete('/estimates/{id}/delete', 'EstimateController@destroy');
     Route::get('/invoices', 'InvoiceController@index');
     Route::get('/invoices/{id}', 'InvoiceController@show');
+    Route::post('/invoices/search', 'InvoiceController@search');
     Route::post('/invoices/{id}/link', 'InvoiceController@link');
     Route::post('/invoices/{id}/unlink', 'InvoiceController@unlink');
     Route::post('/invoices/create', 'InvoiceController@postCreate');
@@ -47,9 +50,11 @@ Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () 
 Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function () {
     Route::get('/estimates', 'client\ClientEstimateController@index');
     Route::get('/estimates/{id}', 'client\ClientEstimateController@show');
+    Route::post('/estimates/search', 'client\ClientEstimateController@postSearch');
     Route::post('/estimates/{id}/{sign-id}\accept', 'client\ClientEstimateController@sign');
     Route::get('/invoices', 'client\ClientInvoiceController@index');
     Route::get('/invoices/{id}', 'client\ClientInvoiceController@show');
+    Route::post('/invoices/search', 'client\ClientInvoiceController@postSearch');
     Route::get('/invoices{id}/success', 'client\ClientInvoiceController@succes');
     Route::name('webhooks.payment')->post('webhooks/payment', 'client\ClientController@webhook');
 });
