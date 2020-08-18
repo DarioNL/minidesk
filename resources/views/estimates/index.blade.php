@@ -23,7 +23,7 @@
                     <form @auth('web') action="/company/estimates/search" @else action="/client/estimates/search" @endauth method="POST" role="search">
                         @csrf
                         <div class="input-group">
-                            <input type="text" class="searchinput searchitem" name="q" placeholder="Search estimates"> <span class="input-group-btn">
+                            <input type="text" class="searchinput searchitem" name="q" placeholder="Search Estimates"> <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default">
                                     <i class="uil uil-search"></i>
                                 </button>

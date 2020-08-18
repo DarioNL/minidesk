@@ -106,6 +106,16 @@ class InvoiceController extends Controller
         return back();
     }
 
+    public function search(Request $request)
+    {
+        $q = $request->post('q');
+        $allInvoices = Invoice::search($q)->get();
+        $invoices = $allInvoices->where('company_id', Auth::id());
+        $clients = Client::all()->where('company_id', Auth::id());
+
+        return view('invoices.index', compact('invoices', 'clients'));
+    }
+
     public function update(Request $request, $id)
     {
         $invoice = Invoice::all()->find($id);
@@ -273,15 +283,17 @@ class InvoiceController extends Controller
     public function destroy($id){
         $invoice = Invoice::all()->find($id);
 
-        foreach ($invoice->products as $product){
-            $product->delete();
-            $product->description = 'deleted_'.time().'_'.$product->description;
-            $product->save();
+        if ($invoice->products){
+            foreach ($invoice->products as $product){
+                $product->delete();
+                $product->description = 'deleted_'.time().'_'.$product->description;
+                $product->save();
+            }
         }
 
         $invoice->delete();
         $invoice->number = 'deleted_'.time().'_'.$invoice->number;
-        $invoice->sign_id = null;
+        $invoice->pay_id = null;
         $invoice->save();
         return response()->json([
             'message' => 'Deleted estimate'

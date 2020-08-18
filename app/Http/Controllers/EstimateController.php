@@ -31,8 +31,6 @@ class EstimateController extends Controller
     public function search(Request $request)
     {
         $q = $request->post('q');
-        $client = Client::where('first_name', 'LIKE', '%'.$q.'%')->orwhere('last_name', 'LIKE', '%'.$q.'%')->get();
-        dd($client);
         $allEstimates = Estimate::search($q)->get();
         $estimates = $allEstimates->where('company_id', Auth::id());
         $clients = Client::all()->where('company_id', Auth::id());

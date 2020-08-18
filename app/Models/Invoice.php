@@ -45,6 +45,22 @@ class Invoice extends Authenticatable
         return $this->hasMany(Products::class, 'invoice_id', 'id');
     }
 
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        // Add an extra attribute:
+        if ($this->Client){
+            $array['first_name'] = $this->Client->first_name;
+            $array['last_name'] = $this->Client->last_name;
+        }else{
+            $array['first_name'] = null;
+            $array['last_name'] = null;
+        }
+
+        return $array;
+    }
+
     public function searchableAs()
     {
         return '_invoices_';

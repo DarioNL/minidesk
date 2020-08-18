@@ -16,11 +16,15 @@
         <div class="card-body w-100 pt-2">
             <div class="card-title mb-5 text-muted">
                 <h4 class="float-right text-muted mr-2 mt-1 desktoptd">
-                    <form method="post" action="/company/search">
+                    <form action="/company/clients/search" method="POST" role="search">
                         @csrf
-                        <i class="uil uil-search"></i>
-                        <input type="text" class="select2" name="search" minlength="2" placeholder="Search">
-                        <a href="/company/clients" class="text-muted text-decoration-none">x</a>
+                        <div class="input-group">
+                            <input type="text" class="searchinput searchitem" name="q" placeholder="Search Clients"> <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="uil uil-search"></i>
+                                </button>
+                            </span>
+                        </div>
                     </form>
                 </h4>
             </div>
