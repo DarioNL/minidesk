@@ -14,12 +14,13 @@ class ClientDashboardController extends client
     public function index()
     {
         $user = Auth::id();
-        $client = Client::all()->find($user);
+        $client = Client::find($user);
         $company = $client->company;
-        $estimates = $client->estimates;
-        $invoices = $client->invoices;
-
-        return view('home',  compact('company', 'estimates', 'invoices'));
+        $estimates = $client->Estimates;
+        $acceptedEstimates = $estimates->where('sign_date', '!=', null);
+        $invoices = $client->Invoices;
+        $acceptedInvoices = $invoices->where('pay_date', '!=', null);
+        return view('home', compact('client', 'estimates', 'invoices', 'acceptedInvoices', 'acceptedEstimates'));
     }
 
 }

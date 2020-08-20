@@ -10,7 +10,7 @@ Route::post('estimates/{id}/accept', 'client\ClientEstimateController@accept');
 Route::get('/invoices/{id}/success', 'client\ClientInvoiceController@success');
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth:web,clients']], function () {
     Route::get('/dashboard', 'DashboardController@index');
@@ -18,7 +18,7 @@ Route::group(['middleware' => ['auth:web,clients']], function () {
 
 });
 
-Route::group(['middleware' => ['auth:web'], 'prefix' => 'company'], function () {
+Route::group(['middleware' => ['auth:web' , 'verified'], 'prefix' => 'company'], function () {
     Route::get('/clients', 'ClientController@index');
     Route::post('/clients/create', 'ClientController@postCreate');
     Route::get('/clients/{id}', 'ClientController@show');
