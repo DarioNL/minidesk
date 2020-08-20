@@ -39,9 +39,9 @@
         <td class="text-muted">{{$dueDate[0]}}</td>
         @if($invoice->pay_date != null)
             @php($payDate = explode(' ', $invoice->pay_date))
-            <td class="text-muted">{{$payDate[0]}}</td>
+            <td class="text-success">{{$payDate[0]}}</td>
         @else
-            <td class="text-muted">Not signed</td>
+            <td class="text-danger">Not signed</td>
         @endif
         @php($data = explode(' ', $invoice->created_at))
         <td class="text-muted">{{$data[0]}}</td>

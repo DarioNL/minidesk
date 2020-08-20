@@ -37,11 +37,11 @@
         @endif
         @php($dueDate = explode(' ', $estimate->due_date))
         <td class="text-muted">{{$dueDate[0]}}</td>
-        @if($estimate->signed_at != null)
-            @php($signDate = explode(' ', $estimate->signed_at))
-            <td class="text-muted">{{$signDate[0]}}</td>
+        @if($estimate->sign_date != null)
+            @php($signDate = explode(' ', $estimate->sign_date))
+            <td class="text-success">{{$signDate[0]}}</td>
         @else
-            <td class="text-muted">Not signed</td>
+            <td class="text-danger">Not signed</td>
         @endif
         @php($data = explode(' ', $estimate->created_at))
         <td class="text-muted">{{$data[0]}}</td>

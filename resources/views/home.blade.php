@@ -9,27 +9,28 @@
                     <div class="row m-0 ">
                         @auth('web')
                         <div class="col-md-4 text-center p-2 col-sm-12">
-                                <h4 class="text-muted">Clients</h4>
+                                <h4 class="text-muted">Clients </h4>
                                 <p class="text-muted">{{count($clients)}}</p>
                         </div>
                         <div class="col-md-4 text-center p-2 col-sm-12">
-                            <h4 class="text-muted">Estimates</h4>
-                            <p class="text-muted">{{count($estimates)}}</p>
+                            <h4 class="text-muted">Accepted Estimates</h4>
+                            <p class="text-muted">{{count($acceptedEstimates)}}/{{count($estimates)}}</p>
                         </div>
 
                         <div class="col-md-4 text-center p-2 col-sm-12">
-                            <h4 class="text-muted">Invoices</h4>
-                            <p class="text-muted">{{count($invoices)}}</p>
+                            <h4 class="text-muted">Accepted Invoices</h4>
+                            <p class="text-muted">{{count($acceptedInvoices)}}/{{count($invoices)}}</p>
                         </div>
+
                         @else
                             <div class="col-md-6 text-center p-2 col-sm-12">
-                                <h4 class="text-muted">Estimates</h4>
-                                <p class="text-muted">{{count($estimates)}}</p>
+                                <h4 class="text-muted">Accepted Estimates</h4>
+                                <p class="text-muted">{{count($acceptedEstimates)}}/{{count($estimates)}}</p>
                             </div>
 
                             <div class="col-md-6 text-center p-2 col-sm-12">
-                                <h4 class="text-muted">Invoices</h4>
-                                <p class="text-muted">{{count($invoices)}}</p>
+                                <h4 class="text-muted">Accepted Invoices</h4>
+                                <p class="text-muted">{{count($acceptedInvoices)}}/{{count($invoices)}}</p>
                             </div>
                         @endauth
                     </div>
