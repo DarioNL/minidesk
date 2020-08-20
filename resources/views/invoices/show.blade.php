@@ -37,14 +37,14 @@
             </div>
             <div class="float-right mb-3">
                 @auth('web')
-                    <a href="/company/clients/{{$invoice->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
-                    <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
-                    <a class="btn btn-info text-white"><i class="uil uil-print"></i> Print</a>
-                    <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
-                    <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                    <a href="/company/clients/{{$invoice->client_id}}" class="col-sm-12 btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                    <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
+                    <a class="btn btn-info text-white col-sm-12"><i class="col-sm-12 uil uil-print"></i> Print</a>
+                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    <button onclick="$('#editModal').modal('show')" class="col-sm-12 btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
                 @else
                     @if(!$invoice->pay_date)
-                        <a class="btn btn-success" href="{{$invoice->pay_id}}"> <i class="uil uil-wallet"></i> Pay</a>
+                        <a class="btn btn-success col-sm-12" href="{{$invoice->pay_id}}"> <i class="uil uil-wallet"></i> Pay</a>
                     @endif
                 @endauth
             </div>

@@ -35,15 +35,15 @@
             <div class="card-text">
                 <table class="w-100 border-bottom border-top">
                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                        <th>Number</th>
+                        <th class="desktoptd">Number</th>
                         <th>Title</th>
-                        <th>Company</th>
+                        <th class="desktoptd">Company</th>
                         <th>Client</th>
                         <th>Total</th>
-                        <th>Sent Date</th>
-                        <th>Due Date</th>
-                        <th>pay Date</th>
-                        <th>Created At</th>
+                        <th class="desktoptd">Sent Date</th>
+                        <th class="desktoptd">Due Date</th>
+                        <th>Sign Date</th>
+                        <th class="desktoptd">Created At</th>
                         @auth('web')
                         <th class="desktoptd">Actions</th>
                         @endauth

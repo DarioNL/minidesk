@@ -8,13 +8,13 @@
     @include('estimates.unlink', ['estimate' => $estimate])
     @endif
     <tr class="clickable-row border-bottom" @auth('web') data-href="/company/estimates/{{$estimate->id}}" @else data-href="/client/estimates/{{$estimate->id}}" @endauth">
-        <td class="pl-3">{{$estimate->number}}</td>
+        <td class="pl-3 desktoptd">{{$estimate->number}}</td>
         @if($estimate->title != null)
             <td class="text-muted">{{$estimate->title}}</td>
         @else
             <td class="text-muted">{{$estimate->number}}</td>
         @endif
-        <td class="pl-3">@if($estimate->company->logo != null)
+        <td class="pl-3 desktoptd">@if($estimate->company->logo != null)
                 <img src="{{asset($estimate->company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
@@ -31,12 +31,12 @@
         <td class="text-muted">€{{$estimate->total}}</td>
         @if($estimate->send_at != null)
         @php($date = explode(' ', $estimate->Send_at))
-            <td class="text-muted">{{$date[0]}}</td>
+            <td class="text-muted desktoptd">{{$date[0]}}</td>
         @else
-            <td class="text-muted">Not sent</td>
+            <td class="text-muted desktoptd">Not sent</td>
         @endif
         @php($dueDate = explode(' ', $estimate->due_date))
-        <td class="text-muted">{{$dueDate[0]}}</td>
+        <td class="text-muted desktoptd">{{$dueDate[0]}}</td>
         @if($estimate->sign_date != null)
             @php($signDate = explode(' ', $estimate->sign_date))
             <td class="text-success">{{$signDate[0]}}</td>
@@ -44,7 +44,7 @@
             <td class="text-danger">Not signed</td>
         @endif
         @php($data = explode(' ', $estimate->created_at))
-        <td class="text-muted">{{$data[0]}}</td>
+        <td class="text-muted desktoptd">{{$data[0]}}</td>
     @auth('web')
         <td width="1" class="text-center desktoptd last-child">
             <button class="btn btn-light btn-ellipsis" data-toggle="dropdown">

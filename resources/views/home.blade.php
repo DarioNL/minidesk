@@ -35,13 +35,13 @@
                         @endauth
                     </div>
 
-                    <section id="tabs" class="project-tab w-100">
+                    <section id="tabs" class="project-tab w-75">
                         <div class="container">
                             <div class="row">
                                 <div class="">
                                     <nav>
                                         <div class="nav nav-tabs nav-fill" data-toggle="tab" id="nav-tab" role="tablist">
-                                            <a class="nav-item nav-link active" id="nav-company-tab" data-toggle="tab" href="#nav-company" role="tab" aria-controls="nav-company" aria-selected="false">Company</a>
+                                            <a class="nav-item nav-link active" id="nav-company-tab" data-toggle="tab" href="#nav-company" role="tab" aria-controls="nav-company" aria-selected="false">@auth('web')Clients @else Company @endauth</a>
                                             <a class="nav-item nav-link" id="nav-estimates-tab" data-toggle="tab" href="#nav-estimates" role="tab" aria-controls="nav-estimates" aria-selected="false">Estimates</a>
                                             <a class="nav-item nav-link" id="nav-invoices-tab" data-toggle="tab" href="#nav-invoices" role="tab" aria-controls="nav-invoices" aria-selected="false">Invoices</a>
                                         </div>
@@ -55,11 +55,11 @@
                                                         @auth('web')
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Company Name</th>
+                                                            <th class="desktoptd">Company Name</th>
                                                             <th>Email</th>
-                                                            <th>Address</th>
+                                                            <th class="desktoptd">Address</th>
                                                             <th>Phone</th>
-                                                            <th>Created At</th>
+                                                            <th class="desktoptd">Created At</th>
                                                             <th class="desktoptd">Actions</th>
                                                         @else
                                                             <th>Name</th>
@@ -94,15 +94,15 @@
                                             <div class="tab-pane home-tab fade text-center" id="nav-estimates" role="tabpanel" aria-labelledby="nav-profile-tab">
                                                 <table class="w-100 border-bottom border-top">
                                                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                                                        <th>Number</th>
+                                                        <th class="desktoptd">Number</th>
                                                         <th>Title</th>
-                                                        <th>Company</th>
+                                                        <th class="desktoptd">Company</th>
                                                         <th>Client</th>
                                                         <th>Total</th>
-                                                        <th>Sent Date</th>
-                                                        <th>Due Date</th>
+                                                        <th class="desktoptd">Sent Date</th>
+                                                        <th class="desktoptd">Due Date</th>
                                                         <th>Sign Date</th>
-                                                        <th>Created At</th>
+                                                        <th class="desktoptd">Created At</th>
                                                         <th class="desktoptd">Actions</th>
                                                     </tr>
                                                     <tbody id="append_hook">
@@ -119,15 +119,15 @@
 
                                                 <table class="w-100 border-bottom border-top">
                                                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                                                        <th>Number</th>
+                                                        <th class="desktoptd">Number</th>
                                                         <th>Title</th>
-                                                        <th>Company</th>
+                                                        <th class="desktoptd">Company</th>
                                                         <th>Client</th>
                                                         <th>Total</th>
-                                                        <th>Sent Date</th>
-                                                        <th>Due Date</th>
+                                                        <th class="desktoptd">Sent Date</th>
+                                                        <th class="desktoptd">Due Date</th>
                                                         <th>Pay Date</th>
-                                                        <th>Created At</th>
+                                                        <th class="desktoptd">Created At</th>
                                                         <th class="desktoptd">Actions</th>
                                                     </tr>
                                                     <tbody id="append_hook">

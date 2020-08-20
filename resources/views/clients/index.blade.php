@@ -33,12 +33,11 @@
                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Company Name</th>
+                        <th class="desktoptd">Company Name</th>
                         <th>Email</th>
                         <th>Address</th>
                         <th>Phone</th>
-                        <th>Created At</th>
-                        <th class="desktoptd">Actions</th>
+                        <th class="desktoptd">Created At</th>
                     </tr>
                     <tbody id="append_hook">
                     @include('clients.scroll', ['clients' => $clients])
