@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 
-class Company extends Authenticatable
+class Company extends Authenticatable implements MustVerifyEmail
 {
 
     use Notifiable , SoftDeletes, UsesUuid;
