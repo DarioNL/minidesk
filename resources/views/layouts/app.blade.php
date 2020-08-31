@@ -113,7 +113,7 @@
                                         <a class="nav-link" href="/company/invoices" role="button" >
                                             Invoices <span class="caret"></span>
                                         </a>
-                                    @else
+                                    @elseauth('clients')
                                         <a class="nav-link" href="/dashboard" role="button">
                                             Dashboard <span class="caret"></span>
                                         </a>
@@ -125,6 +125,22 @@
                                         <a class="nav-link" href="/client/invoices" role="button" >
                                             Invoices <span class="caret"></span>
                                         </a>
+                                    @elseauth('admins')
+
+                                        <a class="nav-link" href="/dashboard" role="button">
+                                            Dashboard <span class="caret"></span>
+                                        </a>
+
+                                        <a class="nav-link" href="/admin/clients" role="button">
+                                            Clients <span class="caret"></span>
+                                        </a>
+
+                                        <a class="nav-link" href="/admins/estimates" role="button">
+                                            Estimates <span class="caret"></span>
+                                        </a>
+
+                                        <a class="nav-link" href="/admins/invoices" role="button" >
+                                            Invoices <span class="caret"></span>
                                     @endauth
 
                                 </div>
