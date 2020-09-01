@@ -2,38 +2,36 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Create New Client</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Create New Company</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/clients/create">
+            <form method="POST" action="/admin/companies/create">
             <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-6">
-                            <label for="first_name" class="font-weight-bolder text-muted col-form-label">{{__('First Name')}}</label>
-                            <input type="text" autocomplete="first_name"
+                            <label for="name" class="font-weight-bolder text-muted col-form-label">{{__('Name')}}</label>
+                            <input type="text" autocomplete="name"
                                    class="form-control"
-                                   name="first_name" value="{{old('first_name')}}"
+                                   name="name" value="{{old('name')}}"
                                    required autofocus>
 
 
-                            @error('first_name')
+                            @error('name')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                         </div>
-                        <div class="col-6">
-                            <label for="last_name" class="font-weight-bolder text-muted col-form-label">{{__('Last Name')}}</label>
-                            <input type="text" autocomplete="last_name"
-                                   class="form-control"
-                                   name="last_name" value="{{old('last_name')}}"
-                                   required autofocus>
 
+                        <div class="col-md-6">
+                            <label for="logo" class="font-weight-bolder text-muted col-form-label">{{ __('Logo') }}</label>
 
-                            @error('last_name')
+                            <input id="logo" type="file" accept="image/*" class="form-control-file" name="logo" required>
+
+                            @error('logo')
                             <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -79,7 +77,7 @@
                             <input type="text" autocomplete="city"
                                    class="form-control"
                                    name="city" value="{{old('city')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('city')
@@ -95,7 +93,7 @@
                             <input type="text" autocomplete="zipcode"
                                    class="form-control"
                                    name="zipcode" value="{{old('zipcode')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('zipcode')
@@ -129,7 +127,7 @@
                             <input type="tel" autocomplete="phone"
                                    class="form-control"
                                    name="phone" value="{{old('phone')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('phone')
@@ -146,7 +144,7 @@
                             <input type="email" autocomplete="email"
                                    class="form-control"
                                    name="email" value="{{old('email')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('email')
@@ -155,6 +153,34 @@
                             </span>
                             @enderror
                         </div>
+
+                    <div class="col-6">
+                        <label for="mollie_key" class="font-weight-bolder text-muted col-form-label">{{__('Mollie Key')}}</label>
+                        <input type="text" autocomplete="mollie_key"
+                               class="form-control"
+                               name="mollie_key" value="{{old('mollie_key')}}"
+                               autofocus required>
+
+
+                        @error('email')
+                        <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="row col-12">
+                        <div class="col-6">
+                            <label for="vat_number" class="font-weight-bolder text-muted col-form-label">{{ __('Vat Number') }}</label>
+                            <input id="vat_number" type="text" class="form-control" maxlength="9" name="vat_number" value="{{ old('vat_number') }}" required autofocus autocomplete="vat_number">
+
+                            @error('vat_number')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                        </div>
+                    </div>
 
 
                 </div>

@@ -135,12 +135,13 @@
                                             Clients <span class="caret"></span>
                                         </a>
 
-                                        <a class="nav-link" href="/admins/estimates" role="button">
+                                        <a class="nav-link" href="/admin/estimates" role="button">
                                             Estimates <span class="caret"></span>
                                         </a>
 
-                                        <a class="nav-link" href="/admins/invoices" role="button" >
+                                        <a class="nav-link" href="/admin/invoices" role="button" >
                                             Invoices <span class="caret"></span>
+                                        </a>
                                     @endauth
 
                                 </div>

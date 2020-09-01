@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Client;
 use App\Models\Company;
 use App\Notifications\credentials;
+use Carbon\Carbon;
+use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -16,72 +17,76 @@ class AdminCompanyController extends Controller
 
     public function index()
     {
-        $clients = Client::all()->where('company_id', Auth::id());
+        $companies = Company::all();
 
-        return view('clients.index', compact('clients'));
+        return view('companies.index', compact('companies'));
     }
 
     public function postCreate(Request $request)
     {
+        dd($request);
         $password = Str::random(10);
 
 
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required',
             'address' => 'required',
             'zipcode' => 'required',
             'city' => 'required',
             'house_number' => 'required',
             'phone' => 'required',
+            'password' => 'required',
+            'logo' => ['required', 'image', 'mimes:jpg,jpeg,bmp,svg,png', 'max:5000'],
             'email' => [
                 Rule::unique('companies','email'),
-                Rule::unique('clients','email')
+                Rule::unique('clients','email'),
+                Rule::unique('admins','email')
             ],
+            'vat_number' => 'required|min:9|max:9',
         ]);
 
 
-       $client = Client::create([
-            'first_name' => $request->post('first_name'),
-            'last_name' => $request->post('last_name'),
-            'address' => $request->post('address'),
-            'zipcode' => $request->post('zipcode'),
-            'house_number_suffix' => $request->post('house_number_suffix'),
-            'city' => $request->post('city'),
-            'house_number' => $request->post('house_number'),
-            'phone' => $request->post('phone'),
-            'email' => $request->post('email'),
-            'logo' => $request->post('logo'),
-            'company_id' => Auth::id(),
-            'password' => bcrypt($password),
+       $company = Company::create([
+           'name' => $request->post('name'),
+           'address' => $request->post('address'),
+           'zipcode' => $request->post('zipcode'),
+           'city' => $request->post('city'),
+           'house_number' => $request->post('house_number'),
+           'phone' => $request->post('phone'),
+           'email' => $request->post('email'),
+           'logo' => $logoPath.$logoName,
+           'vat_number' => $request->post('vat_number'),
+           'mollie_key' => $request->post('mollie_key'),
+           'password' => bcrypt($request->post('password')),
         ]);
 
         if ($request->has('send_login')) {
-            $client->save();
+            $company->email_verified_at = Carbon::now();
+            $company->save();
             if ($request->post('send_login') == true) {
-                $client->notify(new credentials($client, $password));
+                $company->notify(new credentials($client, $password));
                 return back();
             }
         }
 
 
-        return redirect('/clients');
+        return redirect('/companies');
     }
 
     public function show($id)
     {
-        $client = Client::all()->find($id);
+        $company = Company::all()->find($id);
 
-        return view('clients.show', compact('client'));
+        return view('companies.show', compact('company'));
     }
 
     public function search(Request $request)
     {
         $q = $request->post('q');
-        $allClients = Client::search($q)->get();
-        $clients = $allClients->where('company_id', Auth::id());
+        $allCompanies = Company::search($q)->get();
+        $companies = $allCompanies->where('company_id', Auth::id());
 
-        return view('clients.index', compact('clients'));
+        return view('companies.index', compact('companies'));
     }
 
     public function update(Request $request, $id)
@@ -102,10 +107,6 @@ class AdminCompanyController extends Controller
             ],
         ]);
 
-        if ($client->email != $request->post('email')) {
-            $client->email_verified_at = null;
-            $client->save();
-        }
 
 
         $client->update([
@@ -136,24 +137,24 @@ class AdminCompanyController extends Controller
     }
 
     public function destroy($id){
-        $client = Client::all()->find($id);
-        $client->delete();
-        $client->email = 'deleted_'.time().'_'.$client->email;
-        $client->save();
+        $company = Company::all()->find($id);
+        $company->delete();
+        $company->email = 'deleted_'.time().'_'.$company->email;
+        $company->save();
 
-        foreach ($client->Estimates as $estimate){
-            $estimate->client_id = null;
+        foreach ($company->Estimates as $estimate){
+            $estimate->company_id = null;
             $estimate->save();
         }
 
-        foreach ($client->invoices as $invoice){
-            $invoice->client_id = null;
+        foreach ($company->invoices as $invoice){
+            $invoice->company_id = null;
             $invoice->save();
         }
 
 
         return response()->json([
-            'message' => 'Deleted client'
+            'message' => 'Deleted company'
         ])->setStatusCode(200);
 
     }

@@ -79,7 +79,7 @@
                             <input type="text" autocomplete="city"
                                    class="form-control"
                                    name="city" value="{{old('city')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('city')
@@ -95,7 +95,7 @@
                             <input type="text" autocomplete="zipcode"
                                    class="form-control"
                                    name="zipcode" value="{{old('zipcode')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('zipcode')
@@ -129,7 +129,7 @@
                             <input type="tel" autocomplete="phone"
                                    class="form-control"
                                    name="phone" value="{{old('phone')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('phone')
@@ -146,7 +146,7 @@
                             <input type="email" autocomplete="email"
                                    class="form-control"
                                    name="email" value="{{old('email')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('email')

@@ -71,14 +71,14 @@
         </div>
 
         <div class="row m-0 px-3 py-2 sidebar-link">
-            <a href="/admin/companies" class="sidebar-link-item text-white text-decoration-none">
-                Companies
+            <a href="/admin/clients" class="sidebar-link-item text-white text-decoration-none">
+                Clients
             </a>
         </div>
 
         <div class="row m-0 px-3 py-2 sidebar-link">
-            <a href="/admin/clients" class="sidebar-link-item text-white text-decoration-none">
-                Clients
+            <a href="/admin/companies" class="sidebar-link-item text-white text-decoration-none">
+                Companies
             </a>
         </div>
 

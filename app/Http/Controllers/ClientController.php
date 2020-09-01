@@ -35,7 +35,8 @@ class ClientController extends Controller
             'phone' => 'required',
             'email' => [
                 Rule::unique('companies','email'),
-                Rule::unique('clients','email')
+                Rule::unique('clients','email'),
+                Rule::unique('admins','email')
             ],
         ]);
 

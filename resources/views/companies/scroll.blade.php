@@ -1,20 +1,19 @@
-@if(count($clients))
-@foreach($clients as $client)
+@if(count($companies))
+@foreach($companies as $company)
 
-    @include('clients.delete', ['client' => $client])
-    @include('clients.edit', ['client' => $client])
-    <tr class="clickable-row border-bottom" data-href="/company/clients/{{$client->id}}">
-        <td class="pl-3">{{$client->first_name}}</td>
-        <td class="pl-3">{{$client->last_name}}</td>
-        <td class="pl-3 desktoptd">@if($client->company->logo != null)
-                <img src="{{asset($client->company->logo)}}" class="company-profile-img" alt="user logo">
+    @include('companies.delete', ['company' => $company])
+    @include('companies.edit', ['company' => $company])
+    <tr class="clickable-row border-bottom" data-href="/company/clients/{{$company->id}}">
+        <td class="pl-3">{{$company->name}}</td>
+        <td class="pl-3 desktoptd">@if($company->logo != null)
+                <img src="{{asset($company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-            @endif{{$client->company->name}}</td>
-        <td class="text-muted">{{$client->email}}</td>
-        <td class="text-muted desktoptd">{{$client->city}}, {{$client->zipcode}}</td>
-        <td class="text-muted">{{$client->phone}}</td>
-        @php($data = explode(' ', $client->created_at))
+            @endif{</td>
+        <td class="text-muted">{{$company->email}}</td>
+        <td class="text-muted desktoptd">{{$company->city}}, {{$company->zipcode}}</td>
+        <td class="text-muted">{{$company->phone}}</td>
+        @php($data = explode(' ', $company->created_at))
         <td class="text-muted desktoptd">{{$data[0]}}</td>
         <td width="1" class="text-center desktoptd last-child">
             <button class="btn btn-light btn-ellipsis" data-toggle="dropdown">
@@ -30,6 +29,6 @@
     </tr>
 @endforeach
 @else
-    <td colspan="8" class="text-center">No Clients found</td>
+    <td colspan="8" class="text-center">No Companies found</td>
 @endif
 

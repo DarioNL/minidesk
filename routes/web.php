@@ -12,7 +12,7 @@ Route::get('/invoices/{id}/success', 'client\ClientInvoiceController@success');
 
 Auth::routes(['verify' => true]);
 
-Route::group(['middleware' => ['auth:web,client,admins']], function () {
+Route::group(['middleware' => ['auth:web,clients,admins']], function () {
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/pdf', 'DashboardController@pdf');
 
@@ -48,6 +48,12 @@ Route::group(['middleware' => ['auth:web' , 'verified'], 'prefix' => 'company'],
 });
 
 Route::group(['middleware' => ['auth:admins'], 'prefix' => 'admin'], function () {
+    Route::get('/companies', 'admin\AdminCompanyController@index');
+    Route::post('/companies/create', 'admin\AdminCompanyController@postCreate');
+    Route::get('/companies/{id}', 'admin\AdminCompanyController@show');
+    Route::post('/companies/search', 'admin\AdminCompanyController@search');
+    Route::post('/companies/{id}/edit', 'admin\AdminCompanyController@update');
+    Route::delete('/companies/{id}/delete', 'admin\AdminCompanyController@destroy');
     Route::get('/clients', 'admin\AdminClientController@index');
     Route::post('/clients/create', 'admin\AdminClientController@postCreate');
     Route::get('/clients/{id}', 'admin\AdminClientController@show');
