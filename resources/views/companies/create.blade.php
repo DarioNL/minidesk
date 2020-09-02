@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/admin/companies/create">
+            <form method="POST" enctype="multipart/form-data" action="/admin/companies/create">
             <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -155,11 +155,11 @@
                         </div>
 
                     <div class="col-6">
-                        <label for="mollie_key" class="font-weight-bolder text-muted col-form-label">{{__('Mollie Key')}}</label>
+                        <label for="mollie_key" class="font-weight-bolder text-muted col-form-label">{{__('Mollie Key (optional)')}}</label>
                         <input type="text" autocomplete="mollie_key"
                                class="form-control"
                                name="mollie_key" value="{{old('mollie_key')}}"
-                               autofocus required>
+                               autofocus>
 
 
                         @error('email')

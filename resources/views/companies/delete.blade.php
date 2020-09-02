@@ -8,11 +8,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete {{$client->first_name}} {{$client->last_name}}?
+                Are you sure you want to delete {{$company->name}}?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form method="POST" action="/company/clients/{{$client->id}}/delete">
+                <form method="POST" action="/admin/companies/{{$company->id}}/delete">
                     @method('delete')
                     @csrf
                     <button type="submit" class="btn btn-danger">Delete</button>

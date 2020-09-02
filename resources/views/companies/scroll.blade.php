@@ -9,7 +9,7 @@
                 <img src="{{asset($company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-            @endif{</td>
+            @endif</td>
         <td class="text-muted">{{$company->email}}</td>
         <td class="text-muted desktoptd">{{$company->city}}, {{$company->zipcode}}</td>
         <td class="text-muted">{{$company->phone}}</td>

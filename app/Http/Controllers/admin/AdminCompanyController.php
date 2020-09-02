@@ -24,7 +24,6 @@ class AdminCompanyController extends Controller
 
     public function postCreate(Request $request)
     {
-        dd($request);
         $password = Str::random(10);
 
 
@@ -35,7 +34,6 @@ class AdminCompanyController extends Controller
             'city' => 'required',
             'house_number' => 'required',
             'phone' => 'required',
-            'password' => 'required',
             'logo' => ['required', 'image', 'mimes:jpg,jpeg,bmp,svg,png', 'max:5000'],
             'email' => [
                 Rule::unique('companies','email'),
@@ -44,6 +42,11 @@ class AdminCompanyController extends Controller
             ],
             'vat_number' => 'required|min:9|max:9',
         ]);
+
+        $logoUpload = $request->file('logo');
+        $logoName = time().'.'.$logoUpload->getClientOriginalExtension();
+        $logoPath = '/images/';
+        $logoUpload->move($logoPath, $logoName);
 
 
        $company = Company::create([
@@ -64,7 +67,7 @@ class AdminCompanyController extends Controller
             $company->email_verified_at = Carbon::now();
             $company->save();
             if ($request->post('send_login') == true) {
-                $company->notify(new credentials($client, $password));
+                $company->notify(new credentials($company, $password));
                 return back();
             }
         }
