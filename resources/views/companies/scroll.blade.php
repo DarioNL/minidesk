@@ -3,7 +3,7 @@
 
     @include('companies.delete', ['company' => $company])
     @include('companies.edit', ['company' => $company])
-    <tr class="clickable-row border-bottom" data-href="/company/clients/{{$company->id}}">
+    <tr class="clickable-row border-bottom" data-href="/admin/companies/{{$company->id}}">
         <td class="pl-3">{{$company->name}}</td>
         <td class="pl-3 desktoptd">@if($company->logo != null)
                 <img src="{{asset($company->logo)}}" class="company-profile-img" alt="user logo">

@@ -2,35 +2,34 @@
 
 @section('content')
 
-    @include('clients.delete', ['client' => $client])
-    @include('clients.edit', ['client' => $client])
+    @include('companies.delete', ['company' => $company])
+    @include('companies.edit', ['company' => $company])
 
     <div class="card">
         <div class="card-body pt-2">
             <div class="card-title mb-5 text-muted">
-                <h3 class="float-left">{{$client->name}}</h3>
+                <h3 class="float-left">{{$company->name}}</h3>
             </div>
             <div class="card-text">
                 <div class="row">
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Name</p>
-                        {{$client->first_name}} {{$client->last_name}}
-                        <div class="text-muted">{{$client->company_name}}</div>
+                        {{$company->name}}
                     </div>
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Email</p>
-                        {{$client->email}}
+                        {{$company->email}}
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Address</p>
-                        {{$client->address ?? '-'}}  {{$client->house_number}}{{$client->house_number_suffix}}
+                        {{$company->address ?? '-'}}  {{$company->house_number}}{{$company->house_number_suffix}}
                     </div>
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Zipcode</p>
-                        {{$client->zipcode ?? '-'}}
+                        {{$company->zipcode ?? '-'}}
                     </div>
                 </div>
 
@@ -38,22 +37,22 @@
                 <div class="row mt-4">
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Company</p>
-                        @if($client->company->logo != null and $client->company != null)
-                            <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                        @if($company->logo != null)
+                            <img src="{{asset($company->logo)}}" class="company-profile-img" alt="user logo">
                         @else
                             <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-                        @endif {{ $client->Company->name ?? '-'}}
+                        @endif
                     </div>
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">City</p>
-                        {{$client->city ?? '-'}}
+                        {{$company->city ?? '-'}}
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Phone</p>
-                        {{$client->phone ?? '-'}}
+                        {{$company->phone ?? '-'}}
                     </div>
                     <div class="col-6">
                         <p></p>
@@ -73,6 +72,7 @@
                                     <div class="nav nav-tabs nav-fill" data-toggle="tab" id="nav-tab" role="tablist">
                                         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-estimates" role="tab" aria-controls="nav-estimates" aria-selected="false">Estimates</a>
                                         <a class="nav-item nav-link" id="nav-invoices-tab" data-toggle="tab" href="#nav-invoices" role="tab" aria-controls="nav-invoices" aria-selected="false">Invoices</a>
+                                        <a class="nav-item nav-link" id="nav-clients-tab" data-toggle="tab" href="#nav-clients" role="tab" aria-controls="nav-clients" aria-selected="false">Clients</a>
                                     </div>
                                 </nav>
                                 <div class="tab-content" id="nav-tabContent">
@@ -92,8 +92,7 @@
                                                         <th class="desktoptd">Actions</th>
                                                     </tr>
                                                     <tbody id="append_hook">
-                                                    @php($clients = \App\Models\Client::all())
-                                                    @include('estimates.scroll', ['estimates' => $client->Estimates])
+                                                    @include('estimates.scroll', ['estimates' => $company->Estimates])
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -113,8 +112,26 @@
                                                         <th class="desktoptd">Actions</th>
                                                     </tr>
                                                     <tbody id="append_hook">
-                                                    @php($clients = \App\Models\Client::all())
-                                                    @include('invoices.scroll', ['invoices' => $client->Invoices])
+                                                    @include('invoices.scroll', ['invoices' => $company->Invoices])
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                            <div class="tab-pane fade" id="nav-clients" role="tabpanel" aria-labelledby="nav-clients-tab">
+
+                                                <table class="w-100 border-bottom border-top">
+                                                    <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
+                                                        <th>First Name</th>
+                                                        <th>Last Name</th>
+                                                        <th class="desktoptd">Company Name</th>
+                                                        <th>Email</th>
+                                                        <th class="desktoptd">Address</th>
+                                                        <th>Phone</th>
+                                                        <th class="desktoptd">Created At</th>
+                                                        <th class="desktoptd">Actions</th>
+                                                    </tr>
+                                                    <tbody id="append_hook">
+                                                    @include('clients.scroll', ['clients' => $company->Clients])
                                                     </tbody>
                                                 </table>
                                             </div>
