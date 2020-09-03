@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/admin/company/{{$company->id}}/edit">
+            <form method="post" enctype="multipart/form-data" action="/admin/companies/{{$company->id}}/edit">
             <div class="modal-body">
                         @csrf
                         <div class="row">
@@ -29,7 +29,7 @@
                             <div class="col-md-6">
                                 <label for="logo" class="font-weight-bolder text-muted col-form-label">{{ __('Logo') }}</label>
 
-                                <input id="logo" type="file" accept="image/*" class="form-control-file" name="logo" required>
+                                <input id="logo" type="file" accept="image/*" class="form-control-file" name="logo">
 
                                 @error('logo')
                                 <span class="invalid-feedback" role="alert">

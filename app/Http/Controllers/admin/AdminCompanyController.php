@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use App\Notifications\credentials;
 use Carbon\Carbon;
+use Faker\Provider\File;
 use http\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
@@ -45,7 +47,7 @@ class AdminCompanyController extends Controller
 
         $logoUpload = $request->file('logo');
         $logoName = time().'.'.$logoUpload->getClientOriginalExtension();
-        $logoPath = '/images/';
+        $logoPath = 'images/';
         $logoUpload->move($logoPath, $logoName);
 
 
@@ -60,7 +62,7 @@ class AdminCompanyController extends Controller
            'logo' => $logoPath.$logoName,
            'vat_number' => $request->post('vat_number'),
            'mollie_key' => $request->post('mollie_key'),
-           'password' => bcrypt($request->post('password')),
+           'password' => bcrypt($password),
         ]);
 
         if ($request->has('send_login')) {
@@ -94,49 +96,65 @@ class AdminCompanyController extends Controller
 
     public function update(Request $request, $id)
     {
-        $client = Client::all()->find($id);
+        $company = Company::find($id);
+
 
         $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'name' => 'required',
             'address' => 'required',
             'zipcode' => 'required',
             'city' => 'required',
             'house_number' => 'required',
             'phone' => 'required',
+            'logo' => ['image', 'mimes:jpg,jpeg,bmp,svg,png', 'max:5000'],
             'email' => [
-                Rule::unique('companies','email'),
-                Rule::unique('clients','email')->ignore($client->id)
+                Rule::unique('companies','email')->ignore($company->id),
+                Rule::unique('clients','email'),
+                Rule::unique('admins','email')
             ],
+            'vat_number' => 'required|min:9|max:9',
         ]);
 
 
 
-        $client->update([
-            'first_name' => $request->post('first_name'),
-            'last_name' => $request->post('last_name'),
+
+
+        $company->update([
+            'name' => $request->post('name'),
             'address' => $request->post('address'),
             'zipcode' => $request->post('zipcode'),
-            'house_number_suffix' => $request->post('house_number_suffix'),
             'city' => $request->post('city'),
             'house_number' => $request->post('house_number'),
             'phone' => $request->post('phone'),
             'email' => $request->post('email'),
-            'logo' => $request->post('logo'),
+            'vat_number' => $request->post('vat_number'),
+            'mollie_key' => $request->post('mollie_key'),
         ]);
+
+
+        if ($request->file('logo')){
+            Storage::delete($company->logo);
+            $logoUpload = $request->file('logo');
+            $logoName = time() . '.' . $logoUpload->getClientOriginalExtension();
+            $logoPath = 'images/';
+            $logoUpload->move($logoPath, $logoName);
+
+            $company->logo = $logoPath.$logoName;
+            $company->save();
+        }
 
         if ($request->has('send_login')) {
             $password = Str::random(10);
-            $client->password = bcrypt($password);
-            $client->save();
+            $company->password = bcrypt($password);
+            $company->save();
             if ($request->post('send_login') == true) {
-                $client->notify(new credentials($client, $password));
-                return back();
+                $company->notify(new credentials($company, $password));
+                return redirect('admin/companies');
             }
         }
 
 
-        return back();
+        return redirect('admin/companies');
     }
 
     public function destroy($id){
