@@ -16,9 +16,10 @@ class AdminClientController extends Controller
 
     public function index()
     {
-        $clients = Client::all()->where('company_id', Auth::id());
+        $clients = Client::all();
+        $companies = Company::all();
 
-        return view('clients.index', compact('clients'));
+        return view('clients.index', compact('clients', 'companies'));
     }
 
     public function postCreate(Request $request)
@@ -36,7 +37,8 @@ class AdminClientController extends Controller
             'phone' => 'required',
             'email' => [
                 Rule::unique('companies','email'),
-                Rule::unique('clients','email')
+                Rule::unique('clients','email'),
+                Rule::unique('admins','email')
             ],
         ]);
 
@@ -52,7 +54,7 @@ class AdminClientController extends Controller
             'phone' => $request->post('phone'),
             'email' => $request->post('email'),
             'logo' => $request->post('logo'),
-            'company_id' => Auth::id(),
+            'company_id' => $request->post('company'),
             'password' => bcrypt($password),
         ]);
 
@@ -65,7 +67,7 @@ class AdminClientController extends Controller
         }
 
 
-        return redirect('/clients');
+        return redirect('admins/clients');
     }
 
     public function show($id)
@@ -98,7 +100,8 @@ class AdminClientController extends Controller
             'phone' => 'required',
             'email' => [
                 Rule::unique('companies','email'),
-                Rule::unique('clients','email')->ignore($client->id)
+                Rule::unique('clients','email')->ignore($client->id),
+                 Rule::unique('admins','email')
             ],
         ]);
 
@@ -119,6 +122,7 @@ class AdminClientController extends Controller
             'phone' => $request->post('phone'),
             'email' => $request->post('email'),
             'logo' => $request->post('logo'),
+            'company' => $request->post('company')
         ]);
 
         if ($request->has('send_login')) {
@@ -133,6 +137,23 @@ class AdminClientController extends Controller
 
 
         return back();
+    }
+
+    public function unlink($id){
+        $client = Client::find($id);
+        $client->company_id = null;
+        $client->save();
+        return redirect('clients/admins');
+    }
+
+    public function link(Request $request, $id){
+        $request->validate([
+            'company' => 'required',
+        ]);
+        $client = Client::find($id);
+        $client->company_id = $request->post('company');
+        $client->save();
+        return redirect('clients/admins');
     }
 
     public function destroy($id){

@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-@include('clients.create')
+    @auth('admins')
+        @include('clients.create', ['companies' => $companies])
+    @else
+        @include('clients.create')
+    @endauth
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
         <div class="float-left">
@@ -38,6 +42,7 @@
                         <th>Address</th>
                         <th>Phone</th>
                         <th class="desktoptd">Created At</th>
+                        <th class="desktoptd">Actions</th>
                     </tr>
                     <tbody id="append_hook">
                     @include('clients.scroll', ['clients' => $clients])

@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/clients/{{$client->id}}/edit">
+            <form method="POST" @auth('admins') action="/admin/clients/{{$client->id}}/edit" @else action="/company/clients/{{$client->id}}/edit" @endauth>
             <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -155,6 +155,22 @@
                             </span>
                             @enderror
                         </div>
+
+                    @auth('admins')
+                        <div class="col-6">
+                            <label for="company" class="font-weight-bolder text-muted col-form-label">{{__('Company')}}</label>
+                            @if(count($companies))
+                                <select name="company" class="form-control">
+                                    @foreach($companies as $company)
+                                        <option @if($company == $client->Company) selected @endif value="{{$company->id}}" title="">{{$company->name}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <p class="text-muted">No companies to link</p>
+                            @endif
+                            <a class="float-right" href="/admin/companies">Create new company</a>
+                        </div>
+                    @endauth
 
 
                 </div>

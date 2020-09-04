@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth:admins'], 'prefix' => 'admin'], function ()
     Route::get('/clients', 'admin\AdminClientController@index');
     Route::post('/clients/create', 'admin\AdminClientController@postCreate');
     Route::get('/clients/{id}', 'admin\AdminClientController@show');
+    Route::get('/clients/{id}/unlink', 'admin\AdminClientController@unlink');
+    Route::get('/clients/{id}/link', 'admin\AdminClientController@link');
     Route::post('/clients/search', 'admin\AdminClientController@search');
     Route::post('/clients/{id}/edit', 'admin\AdminClientController@update');
     Route::delete('/clients/{id}/delete', 'admin\AdminClientController@destroy');
