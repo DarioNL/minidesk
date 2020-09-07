@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Estimate;
 use App\Models\Client;
 use App\Models\Invoice;
@@ -23,32 +24,30 @@ class AdminEstimateController extends Controller
 
     public function index()
     {
-        $estimates = Estimate::all()->where('company_id', Auth::id());
-        $clients = Client::all()->where('company_id', Auth::id());
+        $estimates = Estimate::all();
+        $clients = Client::all();
+        $companies = Company::all();
 
-        return view('estimates.index', compact('estimates', 'clients'));
+        return view('estimates.index', compact('estimates', 'clients', 'companies'));
     }
 
     public function search(Request $request)
     {
         $q = $request->post('q');
-        $allEstimates = Estimate::search($q)->get();
-        $estimates = $allEstimates->where('company_id', Auth::id());
-        $clients = Client::all()->where('company_id', Auth::id());
+        $estimates = Estimate::search($q)->get();
+        $clients = Client::all();
 
         return view('estimates.index', compact('estimates', 'clients'));
     }
 
     public function postCreate(Request $request)
     {
-
-
-
         $request->validate([
             'client' => 'required',
             'due_date' => 'required',
             'discount' => 'required',
             'total_items' => 'required',
+            'company' => 'required'
         ]);
 
         $validate_array = [];
@@ -85,7 +84,7 @@ class AdminEstimateController extends Controller
             'discount' => $request->post('discount'),
             'total' => $total,
             'amount' => $amount,
-            'company_id' => Auth::id(),
+            'company_id' => $request->post('company'),
             'client_id' => $request->post('client'),
         ]);
 
@@ -110,7 +109,7 @@ class AdminEstimateController extends Controller
         $estimate = Estimate::all()->find($id);
         if ($estimate->company_id = Auth::id()){
             $products = $estimate->products;
-            $clients = Client::all()->where('company_id', Auth::id());
+            $clients = Client::all();
 
             return view('estimates.show', compact('estimate', 'products', 'clients'));
         }
@@ -127,6 +126,7 @@ class AdminEstimateController extends Controller
             'due_date' => 'required',
             'discount' => 'required',
             'total_items' => 'required',
+            'company' => 'required',
         ]);
 
         $validate_array = [];
@@ -258,6 +258,24 @@ class AdminEstimateController extends Controller
         $estimate = Estimate::find($id);
 
         $estimate->client_id = null;
+        $estimate->save();
+
+        return back();
+    }
+
+    public function linkCompany(Request $request, $id){
+        $estimate = Estimate::find($id);
+
+        $estimate->company_id = $request->post('company');
+        $estimate->save();
+
+        return back();
+    }
+
+    public function unlinkClient($id){
+        $estimate = Estimate::find($id);
+
+        $estimate->company_id = null;
         $estimate->save();
 
         return back();

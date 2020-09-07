@@ -9,14 +9,18 @@
     @else
         @include('clients.unlink', ['client' => $client])
     @endauth
-    <tr class="clickable-row border-bottom" data-href="/company/clients/{{$client->id}}">
+    <tr class="clickable-row border-bottom" @auth('admins') data-href="/admin/clients/{{$client->id}}" @else data-href="/company/clients/{{$client->id}}" @endauth>
         <td class="pl-3">{{$client->first_name}}</td>
         <td class="pl-3">{{$client->last_name}}</td>
+        @if(!$client->company)
+            <td class="pl-3 desktoptd">No Company</td>
+        @else
         <td class="pl-3 desktoptd">@if($client->company->logo != null)
                 <img src="{{asset($client->company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$client->company->name}}</td>
+        @endif
         <td class="text-muted">{{$client->email}}</td>
         <td class="text-muted desktoptd">{{$client->city}}, {{$client->zipcode}}</td>
         <td class="text-muted">{{$client->phone}}</td>
@@ -31,6 +35,18 @@
                 <a onclick="$('#editModal').modal('show')" class="dropdown-item"
                    type="button">Edit</a>
                 <button onclick="$('#deleteModal').modal('show')" class="dropdown-item deleteitem" type="button">Delete</button>
+                @auth('admins')
+                    @if(!$client->Company)
+                    <a onclick="$('#linkModal').modal('show')" class="dropdown-item"
+                       type="button">Link</a>
+                    @else
+                    <a onclick="$('#unlinkModal').modal('show')" class="dropdown-item"
+                       type="button">Unlink</a>
+                    @endif
+                @else
+                    <a onclick="$('#unlinkModal').modal('show')" class="dropdown-item"
+                       type="button">Unlink</a>
+                @endauth
             </div>
         </td>
     </tr>

@@ -57,20 +57,21 @@
                             @enderror
                         </div>
 
-                        <div class="col-6">
-                            <label for="color" class="font-weight-bolder text-muted col-form-label">{{__('Color')}}</label>
-                            <input type="color" autocomplete="color"
-                                   class="form-control"
-                                   name="color" value="#0000A0"
-                                   required autofocus>
-
-
-                            @error('color')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
-                        </div>
+                        @auth('admins')
+                            <div class="col-6">
+                                <label for="company" class="font-weight-bolder text-muted col-form-label">{{__('Company')}}</label>
+                                @if(count($companies))
+                                    <select name="company" class="form-control">
+                                        @foreach($companies as $company)
+                                            <option value="{{$company->id}}" title="">{{$company->name}}</option>
+                                        @endforeach
+                                    </select>
+                                @else
+                                    <p class="text-muted">No companies to link</p>
+                                @endif
+                                <a class="float-right" href="/admin/companies">Create new company</a>
+                            </div>
+                        @endauth
                     </div>
 
 

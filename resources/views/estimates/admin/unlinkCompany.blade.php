@@ -1,4 +1,4 @@
-<div id="unlinkModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div id="unlinkCompanyModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,9 +7,9 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" @auth('web') action="/company/estimates/{{$estimate->id}}/unlink" @else action="/admin/estimates/{{$estimate->id}}/unlink" @endauth>
+            <form method="POST" action="/admin/estimates/{{$estimate->id}}/unlink/company">
             <div class="modal-body">
-                <p>Are you sure that you want to unlink client {{$estimate->client->first_name}} {{$estimate->client->last_name}}</p>
+                <p>Are you sure that you want to unlink company {{$company->name}}</p>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 

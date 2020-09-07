@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth:web' , 'verified'], 'prefix' => 'company'],
     Route::post('/clients/search', 'ClientController@search');
     Route::post('/clients/{id}/edit', 'ClientController@update');
     Route::delete('/clients/{id}/delete', 'ClientController@destroy');
+    Route::post('/clients/{id}/unlink', 'ClientController@unlink');
     Route::get('/estimates', 'EstimateController@index');
     Route::post('/estimates/search', 'EstimateController@search');
     Route::get('/estimates/{id}', 'EstimateController@show');
@@ -57,8 +58,8 @@ Route::group(['middleware' => ['auth:admins'], 'prefix' => 'admin'], function ()
     Route::get('/clients', 'admin\AdminClientController@index');
     Route::post('/clients/create', 'admin\AdminClientController@postCreate');
     Route::get('/clients/{id}', 'admin\AdminClientController@show');
-    Route::get('/clients/{id}/unlink', 'admin\AdminClientController@unlink');
-    Route::get('/clients/{id}/link', 'admin\AdminClientController@link');
+    Route::post('/clients/{id}/unlink', 'admin\AdminClientController@unlink');
+    Route::post('/clients/{id}/link', 'admin\AdminClientController@link');
     Route::post('/clients/search', 'admin\AdminClientController@search');
     Route::post('/clients/{id}/edit', 'admin\AdminClientController@update');
     Route::delete('/clients/{id}/delete', 'admin\AdminClientController@destroy');
@@ -67,6 +68,8 @@ Route::group(['middleware' => ['auth:admins'], 'prefix' => 'admin'], function ()
     Route::get('/estimates/{id}', 'admin\AdminEstimateController@show');
     Route::post('/estimates/{id}/link', 'admin\AdminEstimateController@link');
     Route::post('/estimates/{id}/unlink', 'admin\AdminEstimateController@unlink');
+    Route::post('/estimates/{id}/link/company', 'admin\AdminEstimateController@linkCompany');
+    Route::post('/estimates/{id}/unlink/company', 'admin\AdminEstimateController@unlinkCompany');
     Route::post('/estimates/create', 'admin\AdminEstimateController@postCreate');
     Route::post('/estimates/{id}/edit', 'admin\AdminEstimateController@update');
     Route::post('/estimates/{id}/accept', 'admin\AdminEstimateController@accept');

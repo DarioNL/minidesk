@@ -143,7 +143,7 @@ class AdminClientController extends Controller
         $client = Client::find($id);
         $client->company_id = null;
         $client->save();
-        return redirect('clients/admins');
+        return redirect('admin/clients');
     }
 
     public function link(Request $request, $id){
@@ -153,7 +153,7 @@ class AdminClientController extends Controller
         $client = Client::find($id);
         $client->company_id = $request->post('company');
         $client->save();
-        return redirect('clients/admins');
+        return redirect('admin/clients');
     }
 
     public function destroy($id){

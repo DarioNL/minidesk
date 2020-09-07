@@ -7,12 +7,16 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/estimates/{{$estimate->id}}/link">
+            <form method="POST" @auth('web') action="/company/estimates/{{$estimate->id}}/link" @else action="/admin/estimates/{{$estimate->id}}/link" @endauth>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">
                         <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Clients')}}</label>
+                        @auth('web')
                         @php($clients = $estimate->company->clients)
+                        @else
+                            @php($clients = \App\Models\Client::all())
+                        @endauth
                         @if(count($clients))
                             <select name="client" class="form-control">
                                 @foreach($clients as $client)
