@@ -272,7 +272,7 @@ class AdminEstimateController extends Controller
         return back();
     }
 
-    public function unlinkClient($id){
+    public function unlinkCompany($id){
         $estimate = Estimate::find($id);
 
         $estimate->company_id = null;

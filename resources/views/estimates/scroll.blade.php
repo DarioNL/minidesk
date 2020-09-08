@@ -15,8 +15,8 @@
         @else
             @include('estimates.unlink', ['estimate' => $estimate,])
         @endif
-        @if(!$estimate->Company)
-            @include('estimates.estimates.admin.linkCompany', ['estimate' => $estimate])
+        @if(!$estimate->company)
+            @include('estimates.admin.linkCompany', ['estimate' => $estimate])
         @else
             @include('estimates.admin.unlinkCompany', ['estimate' => $estimate, 'company' => $estimate->company])
         @endif
@@ -28,11 +28,17 @@
         @else
             <td class="text-muted">{{$estimate->number}}</td>
         @endif
+    @if(!$estimate->company)
+        <td class="pl-3 desktoptd">
+            No company
+        </td>
+    @else
         <td class="pl-3 desktoptd">@if($estimate->company->logo != null)
                 <img src="{{asset($estimate->company->logo)}}" class="company-profile-img" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$estimate->company->name}}</td>
+        @endif
     @if($estimate->client)
         <td class="pl-3">@if($estimate->client->logo != null)
                 <img src="{{asset($estimate->client->logo)}}" class="sidebar-logo d-block ui-w-30 bg-white rounded-circle" alt="user logo">

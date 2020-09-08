@@ -80,6 +80,8 @@ Route::group(['middleware' => ['auth:admins'], 'prefix' => 'admin'], function ()
     Route::post('/invoices/search', 'admin\AdminInvoiceController@search');
     Route::post('/invoices/{id}/link', 'admin\AdminInvoiceController@link');
     Route::post('/invoices/{id}/unlink', 'admin\AdminInvoiceController@unlink');
+    Route::post('/invoices/{id}/link/company', 'admin\AdminInvoiceController@linkCompany');
+    Route::post('/invoices/{id}/unlink/company', 'admin\AdminInvoiceController@unlinkCompany');
     Route::post('/invoices/create', 'admin\AdminInvoiceController@postCreate');
     Route::post('/invoices/{id}/edit', 'admin\AdminInvoiceController@update');
     Route::post('/invoices/{id}/accept', 'admin\AdminInvoiceController@accept');

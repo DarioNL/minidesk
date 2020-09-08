@@ -20,10 +20,11 @@ class AdminInvoiceController extends Controller
 {
     public function index()
     {
-        $invoices = Invoice::all()->where('company_id', Auth::id());
-        $clients = Client::all()->where('company_id', Auth::id());
+        $invoices = Invoice::all();
+        $clients = Client::all();
+        $companies = Company::all();
 
-        return view('invoices.index', compact('invoices', 'clients'));
+        return view('invoices.index', compact('invoices', 'clients', 'companies'));
     }
 
     public function postCreate(Request $request)
@@ -69,7 +70,7 @@ class AdminInvoiceController extends Controller
             'discount' => $request->post('discount'),
             'total' => $total,
             'amount' => $amount,
-            'company_id' => Auth::id(),
+            'company_id' => $request->post('company'),
             'client_id' => $request->post('client'),
         ]);
 
@@ -110,8 +111,7 @@ class AdminInvoiceController extends Controller
     public function search(Request $request)
     {
         $q = $request->post('q');
-        $allInvoices = Invoice::search($q)->get();
-        $invoices = $allInvoices->where('company_id', Auth::id());
+        $invoices = Invoice::search($q)->get();
         $clients = Client::all()->where('company_id', Auth::id());
 
         return view('invoices.index', compact('invoices', 'clients'));
@@ -163,7 +163,7 @@ class AdminInvoiceController extends Controller
             'discount' => $request->post('discount'),
             'total' => $total,
             'amount' => $amount,
-            'company_id' => Auth::id(),
+            'company_id' => $request->post('company'),
             'client_id' => $request->post('client'),
         ]);
 
@@ -276,6 +276,24 @@ class AdminInvoiceController extends Controller
         $invoice = Invoice::find($id);
 
         $invoice->client_id = null;
+        $invoice->save();
+
+        return back();
+    }
+
+    public function linkCompany(Request $request, $id){
+        $invoice = Company::find($id);
+
+        $invoice->company_id = $request->post('company');
+        $invoice->save();
+
+        return back();
+    }
+
+    public function unlinkCompany($id){
+        $invoice = Company::find($id);
+
+        $invoice->company_id = null;
         $invoice->save();
 
         return back();
