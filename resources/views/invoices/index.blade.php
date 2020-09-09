@@ -50,10 +50,12 @@
                         <th>Total</th>
                         <th class="desktoptd">Sent Date</th>
                         <th class="desktoptd">Due Date</th>
-                        <th>Sign Date</th>
+                        <th>Pay Date</th>
                         <th class="desktoptd">Created At</th>
                         @auth('web')
-                        <th class="desktoptd">Actions</th>
+                            <th class="desktoptd">Actions</th>
+                        @elseauth('admins')
+                            <th class="desktoptd">Actions</th>
                         @endauth
                     </tr>
                     <tbody id="append_hook">

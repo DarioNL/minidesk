@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/invoices/{{$invoice->id}}/link">
+            <form method="POST" @auth('web') action="/company/invoices/{{$invoice->id}}/link" @else action="/admin/invoices/{{$invoice->id}}/link" @endauth>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">

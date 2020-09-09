@@ -53,6 +53,7 @@
                         <th>Sign Date</th>
                         <th class="desktoptd">Created At</th>
                         @auth('web')
+                            <th class="desktoptd">Actions
                         @elseauth('admins')
                             <th class="desktoptd">Actions
                         @endauth

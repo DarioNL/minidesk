@@ -85,11 +85,7 @@ class AdminInvoiceController extends Controller
                 'total' => $productTotal[$i],
             ]);
         }
-        $discription = $estimate->nummber;
 
-        if ($estimate->title != null) {
-            $discription->title;
-        }
 
 
         return back();
@@ -99,13 +95,11 @@ class AdminInvoiceController extends Controller
     public function show($id)
     {
         $invoice = Invoice::all()->find($id);
-        if ($invoice->company_id = Auth::id()){
             $products = $invoice->products;
             $clients = Client::all()->where('company_id', Auth::id());
+            $companies = Company::all();
 
-            return view('invoices.show', compact('invoice', 'products', 'clients'));
-        }
-        return back();
+            return view('invoices.show', compact('invoice', 'products', 'clients', 'companies'));
     }
 
     public function search(Request $request)
@@ -282,7 +276,7 @@ class AdminInvoiceController extends Controller
     }
 
     public function linkCompany(Request $request, $id){
-        $invoice = Company::find($id);
+        $invoice = Invoice::find($id);
 
         $invoice->company_id = $request->post('company');
         $invoice->save();
@@ -291,7 +285,7 @@ class AdminInvoiceController extends Controller
     }
 
     public function unlinkCompany($id){
-        $invoice = Company::find($id);
+        $invoice = Invoice::find($id);
 
         $invoice->company_id = null;
         $invoice->save();

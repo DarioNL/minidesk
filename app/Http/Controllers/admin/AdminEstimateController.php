@@ -106,14 +106,13 @@ class AdminEstimateController extends Controller
 
     public function show($id)
     {
-        $estimate = Estimate::all()->find($id);
-        if ($estimate->company_id = Auth::id()){
+        $estimate = Estimate::find($id);
+
             $products = $estimate->products;
             $clients = Client::all();
+            $companies = Company::all();
 
-            return view('estimates.show', compact('estimate', 'products', 'clients'));
-        }
-        return back();
+            return view('estimates.show', compact('estimate', 'products', 'clients','companies'));
     }
 
     public function update(Request $request, $id)
@@ -201,7 +200,7 @@ class AdminEstimateController extends Controller
                 'discount' => $estimate->discount,
                 'total' => $estimate->total,
                 'amount' => $estimate->amount,
-                'company_id' => Auth::id(),
+                'company_id' => $estimate->Company->id,
                 'client_id' => $estimate->client->id,
             ]);
             foreach ($estimate->products as $product){

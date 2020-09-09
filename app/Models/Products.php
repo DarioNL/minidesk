@@ -19,7 +19,7 @@ class Products extends Authenticatable
 
 
     protected $fillable = [
-       'description', 'amount', 'estimate_id', 'tax', 'price', 'total', 'invoice'
+       'description', 'amount', 'estimate_id', 'invoice_id', 'tax', 'price', 'total', 'invoice'
     ];
 
 

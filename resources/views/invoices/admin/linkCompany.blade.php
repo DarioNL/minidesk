@@ -2,12 +2,12 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Link Invoice @if($estimate->title != null){{$estimate->title}}@else{{$estimate->number}}@endif</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Link Invoice @if($invoice->title != null){{$invoice->title}}@else{{$invoice->number}}@endif</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/admin/estimates/{{$estimate->id}}/link/company" >
+            <form method="POST" action="/admin/invoices/{{$invoice->id}}/link/company" >
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12">

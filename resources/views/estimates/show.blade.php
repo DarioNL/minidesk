@@ -7,6 +7,11 @@
         @include('estimates.edit', ['estimate' => $estimate])
         @include('estimates.accept', ['estimate' => $estimate])
         @include('estimates.send', ['estimate' => $estimate])
+    @elseauth('admins')
+        @include('estimates.delete', ['estimate' => $estimate])
+        @include('estimates.edit', ['estimate' => $estimate, 'companies' => $companies])
+        @include('estimates.accept', ['estimate' => $estimate])
+        @include('estimates.send', ['estimate' => $estimate])
     @endauth
 
 
@@ -36,14 +41,23 @@
             </div>
             <div class="float-right mb-3">
                 @auth('web')
-                    <a href="/company/clients/{{$estimate->client_id}}" class="btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
-                    <button onclick="$('#deleteModal').modal('show')" class="btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
+                    <a href="/company/clients/{{$estimate->client_id}}" class="col-sm-12 col-md-auto btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                    <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 col-md-auto btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
                     @if(!$estimate->sign_date)
-                        <button onclick="$('#acceptModal').modal('show')" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
+                        <button onclick="$('#acceptModal').modal('show')" class="col-sm-12 col-md-auto btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
+                    @endif
+                    <button onclick="" class="btn btn-info text-white"><i class="col-sm-12 col-md-auto uil uil-print"></i> Print</button>
+                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                @elseauth('admins')
+                    <a href="/company/clients/{{$estimate->client_id}}" class="col-sm-12 col-md-auto btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                    <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 col-md-auto btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
+                    @if(!$estimate->sign_date)
+                        <button onclick="$('#acceptModal').modal('show')" class="col-sm-12 col-md-auto btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
                     @endif
                     <button onclick="" class="btn btn-info text-white"><i class="uil uil-print"></i> Print</button>
-                    <button onclick="$('#sendModal').modal('show')" class="btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
-                    <button onclick="$('#editModal').modal('show')" class="btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
                 @else
                     @if(!$estimate->sign_date)
                         <a href="{{env('APP_URL')}}/estimates/{{$estimate->sign_id}}/sign" class="btn btn-success text-white"><i class="uil uil-check-square"></i> Sign</a>
@@ -60,20 +74,20 @@
                     <i class="uil uil-envelope"></i>  {{$date[0] ? $date[0] : 'Not Send'}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-bag"></i>  {{$estimate->company->name}}
+                    <i class="uil uil-bag"></i>  {{$estimate->Company->name}}
                 </h4>
                 @php($dueDate = explode(' ', $estimate->due_date))
                 <h5 class="pt-3 float-right pb-3">
                     <i class="uil uil-calendar-alt"></i>  {{$dueDate[0]}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-user"></i>  {{$estimate->client->first_name}} {{$estimate->client->last_name}}
+                    <i class="uil uil-user"></i>  {{$estimate->Client->first_name}} {{$estimate->Client->last_name}}
                 </h4>
                 <h5 class="pt-3 text-muted">
-                    <i class="uil uil-location-point"></i>  {{$estimate->company->address}} {{$estimate->company->house_number}}
+                    <i class="uil uil-location-point"></i>  {{$estimate->Company->address}} {{$estimate->Company->house_number}}
                 </h5>
                 <h5 class="text-muted border-bottom pb-3">
-                    {{$estimate->company->zipcode}} {{$estimate->company->city}}
+                    {{$estimate->Company->zipcode}} {{$estimate->Company->city}}
                 </h5>
             </div>
             <div class="card-text">

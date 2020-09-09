@@ -21,7 +21,7 @@
             @include('estimates.admin.unlinkCompany', ['estimate' => $estimate, 'company' => $estimate->company])
         @endif
     @endauth
-    <tr class="clickable-row border-bottom" @auth('web') data-href="/company/estimates/{{$estimate->id}}" @else data-href="/client/estimates/{{$estimate->id}}" @endauth">
+    <tr class="clickable-row border-bottom" @auth('web') data-href="/company/estimates/{{$estimate->id}}" @elseauth('admins') data-href="/admin/estimates/{{$estimate->id}}" @else data-href="/client/estimates/{{$estimate->id}}" @endauth">
         <td class="pl-3 desktoptd">{{$estimate->number}}</td>
         @if($estimate->title != null)
             <td class="text-muted">{{$estimate->title}}</td>

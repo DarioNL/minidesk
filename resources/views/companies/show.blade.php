@@ -130,8 +130,9 @@
                                                         <th class="desktoptd">Created At</th>
                                                         <th class="desktoptd">Actions</th>
                                                     </tr>
+                                                    @php($companies = \App\Models\Company::all())
                                                     <tbody id="append_hook">
-                                                    @include('clients.scroll', ['clients' => $company->Clients])
+                                                    @include('clients.scroll', ['clients' => $company->Clients, 'companies' => $companies])
                                                     </tbody>
                                                 </table>
                                             </div>

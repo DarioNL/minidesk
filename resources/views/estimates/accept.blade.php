@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <form method="POST" action="/company/estimates/{{$estimate->id}}/accept">
+                <form method="POST" @auth('web') action="/company/estimates/{{$estimate->id}}/accept" @else action="/admin/estimates/{{$estimate->id}}/accept" @endauth>
                     @csrf
                     <button type="submit" class="btn btn-success">Accept</button>
                 </form>
