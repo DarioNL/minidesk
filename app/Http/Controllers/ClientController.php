@@ -135,6 +135,13 @@ class ClientController extends Controller
         return back();
     }
 
+    public function unlink($id){
+        $client = Client::find($id);
+        $client->company_id = null;
+        $client->save();
+        return redirect('company/clients');
+    }
+
     public function destroy($id){
         $client = Client::all()->find($id);
         $client->delete();

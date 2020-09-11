@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/admin/clients/{{$client->id}}/unlink">
+            <form method="POST" @auth('web') action="/company/clients/{{$client->id}}/unlink" @else action="/admin/clients/{{$client->id}}/unlink" @endauth>
             <div class="modal-body">
                 <p>Are you sure that you want to unlink client {{$client->first_name}} {{$client->last_name}}</p>
             <div class="modal-footer">
