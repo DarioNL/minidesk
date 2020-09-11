@@ -52,38 +52,38 @@
                                                 <table class="table-fullscreen
                                                  border-bottom border-top">
                                                     <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
-                                                        @auth('web')
-                                                            <th>First Name</th>
-                                                            <th>Last Name</th>
-                                                            <th class="desktoptd">Company Name</th>
-                                                            <th>Email</th>
-                                                            <th class="desktoptd">Address</th>
-                                                            <th>Phone</th>
-                                                            <th class="desktoptd">Created At</th>
-                                                            <th class="desktoptd">Actions</th>
-                                                        @else
-                                                            <th>Name</th>
-                                                            <th>Logo</th>
-                                                            <th>Email</th>
-                                                            <th>Address</th>
-                                                            <th>Phone</th>
-                                                        @endauth
+                                                            @auth('web')
+                                                                <th>First Name</th>
+                                                                <th>Last Name</th>
+                                                                <th class="desktoptd">Company Name</th>
+                                                                <th>Email</th>
+                                                                <th class="desktoptd">Address</th>
+                                                                <th>Phone</th>
+                                                                <th class="desktoptd">Created At</th>
+                                                                <th class="desktoptd">Actions</th>
+                                                            @else
+                                                                <th>Name</th>
+                                                                <th>Logo</th>
+                                                                <th>Email</th>
+                                                                <th>Address</th>
+                                                                <th>Phone</th>
+                                                            @endauth
                                                     </tr>
                                                     <tbody id="append_hook">
                                                     @auth('web')
                                                     @include('clients.scroll', ['clients' => $clients])
                                                     @else
-                                                        <tr class="border-bottom">
-                                                            <td class="text-muted">{{$client->company->name}}</td>
-                                                            <td class="pl-3">@if($client->company->logo != null)
-                                                                    <img src="{{asset($client->company->logo)}}" class="company-profile-img" alt="user logo">
-                                                                @else
-                                                                    <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-                                                                @endif{{$client->company->name}}</td>
-                                                            <td class="text-muted">{{$client->company->email}}</td>
-                                                            <td class="text-muted">{{$client->company->city}}, {{$client->company->zipcode}}</td>
-                                                            <td class="text-muted">{{$client->company->phone}}</td>
-                                                        </tr>
+{{--                                                        <tr class="border-bottom">--}}
+{{--                                                            <td class="text-muted">{{$client->company->name}}</td>--}}
+{{--                                                            <td class="pl-3">@if($client->company->logo != null)--}}
+{{--                                                                    <img src="{{asset($client->company->logo)}}" class="company-profile-img" alt="user logo">--}}
+{{--                                                                @else--}}
+{{--                                                                    <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">--}}
+{{--                                                                @endif{{$client->company->name}}</td>--}}
+{{--                                                            <td class="text-muted">{{$client->company->email}}</td>--}}
+{{--                                                            <td class="text-muted">{{$client->company->city}}, {{$client->company->zipcode}}</td>--}}
+{{--                                                            <td class="text-muted">{{$client->company->phone}}</td>--}}
+{{--                                                        </tr>--}}
                                                     @endauth
                                                     </tbody>
                                                 </table>

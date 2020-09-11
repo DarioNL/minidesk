@@ -30,7 +30,8 @@ class RegisterController extends Controller
             'logo' => ['required', 'image', 'mimes:jpg,jpeg,bmp,svg,png', 'max:5000'],
             'email' => [
                 Rule::unique('companies','email'),
-                Rule::unique('clients','email')
+                Rule::unique('clients','email'),
+                Rule::unique('admins','email')
             ],
             'vat_number' => 'required|min:9|max:9',
         ]);

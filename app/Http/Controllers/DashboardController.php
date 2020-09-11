@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Company;
+use App\Models\Estimate;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,17 @@ class DashboardController extends Controller
 
             return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices'));
         }
+        if (Auth::guard('admins')->check()) {
+            $clients = Client::all();
+            $companies = Company::all();
+            $estimates = Estimate::all();
+            $acceptedEstimates = $estimates->where('sign_date', '!=', null);
+            $invoices = Invoice::all();
+            $acceptedInvoices = $invoices->where('pay_date', '!=', null);
+
+            return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'companies'));
+        }
+
         $user = Auth::id();
         $client = Client::find($user);
         $company = $client->company;

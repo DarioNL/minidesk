@@ -35,7 +35,8 @@ class ClientController extends Controller
             'phone' => 'required',
             'email' => [
                 Rule::unique('companies','email'),
-                Rule::unique('clients','email')
+                Rule::unique('clients','email'),
+                Rule::unique('admins','email')
             ],
         ]);
 
@@ -132,6 +133,13 @@ class ClientController extends Controller
 
 
         return back();
+    }
+
+    public function unlink($id){
+        $client = Client::find($id);
+        $client->company_id = null;
+        $client->save();
+        return redirect('company/clients');
     }
 
     public function destroy($id){

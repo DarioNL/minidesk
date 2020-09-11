@@ -21,6 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->string('address')->nullable();
             $table->string('mollie_key')->nullable();
             $table->string('house_number')->nullable();
+            $table->string('house_number_suffix')->nullable();
             $table->string('city')->nullable();
             $table->string('zipcode')->nullable();
             $table->string('vat_number')->nullable();

@@ -6,7 +6,12 @@
         @include('invoices.delete', ['invoice' => $invoice])
         @include('invoices.edit', ['invoice' => $invoice])
         @include('invoices.send', ['invoice' => $invoice])
+    @elseauth('admins')
+        @include('invoices.delete', ['invoice' => $invoice])
+        @include('invoices.edit', ['invoice' => $invoice, 'companies' => $companies])
+        @include('invoices.send', ['invoice' => $invoice])
     @endauth
+
 
 
     <div class="card table-container align-items-center w-100">
@@ -37,11 +42,17 @@
             </div>
             <div class="float-right mb-3">
                 @auth('web')
-                    <a href="/company/clients/{{$invoice->client_id}}" class="col-sm-12 btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
-                    <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
-                    <a class="btn btn-info text-white col-sm-12"><i class="col-sm-12 uil uil-print"></i> Print</a>
-                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
-                    <button onclick="$('#editModal').modal('show')" class="col-sm-12 btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                    <a href="/company/clients/{{$invoice->client_id}}" class="col-sm-12 col-md-auto btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                    <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 col-md-auto btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
+                    <a class="btn btn-info text-white col-md-auto col-sm-12"><i class=" uil uil-print"></i> Print</a>
+                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
+                @elseauth('admins')
+                    <a href="/company/clients/{{$invoice->client_id}}" class="col-sm-12 col-md-auto btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
+                    <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 col-md-auto btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
+                    <a class="btn btn-info text-white col-md-auto col-sm-12"><i class="uil uil-print"></i> Print</a>
+                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
                 @else
                     @if(!$invoice->pay_date)
                         <a class="btn btn-success col-sm-12" href="{{$invoice->pay_id}}"> <i class="uil uil-wallet"></i> Pay</a>
@@ -55,20 +66,20 @@
             </div>
             <div class="w-100 float-right">
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-bag"></i>  {{$invoice->company->name}}
+                    <i class="uil uil-bag"></i>  {{$invoice->Company->name}}
                 </h4>
                 @php($dueDate = explode(' ', $invoice->due_date))
                 <h5 class="pt-3 float-right pb-3">
                     <i class="uil uil-calendar-alt"></i>  {{$dueDate[0]}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-user"></i>  {{$invoice->client->first_name}} {{$invoice->client->last_name}}
+                    <i class="uil uil-user"></i>  {{$invoice->Client->first_name}} {{$invoice->Client->last_name}}
                 </h4>
                 <h5 class="pt-3 text-muted">
-                    <i class="uil uil-location-point"></i>  {{$invoice->company->address}} {{$invoice->company->house_number}}
+                    <i class="uil uil-location-point"></i>  {{$invoice->Company->address}} {{$invoice->Company->house_number}}
                 </h5>
                 <h5 class="text-muted border-bottom pb-3">
-                    {{$invoice->company->zipcode}} {{$invoice->company->city}}
+                    {{$invoice->Company->zipcode}} {{$invoice->Company->city}}
                 </h5>
             </div>
             <div class="card-text">

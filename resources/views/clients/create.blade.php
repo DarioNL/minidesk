@@ -7,7 +7,8 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/clients/create">
+
+                <form method="POST" @auth('admins') action="/admin/clients/create" @else action="/company/clients/create" @endauth>
             <div class="modal-body">
                     @csrf
                     <div class="row">
@@ -79,7 +80,7 @@
                             <input type="text" autocomplete="city"
                                    class="form-control"
                                    name="city" value="{{old('city')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('city')
@@ -95,7 +96,7 @@
                             <input type="text" autocomplete="zipcode"
                                    class="form-control"
                                    name="zipcode" value="{{old('zipcode')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('zipcode')
@@ -129,7 +130,7 @@
                             <input type="tel" autocomplete="phone"
                                    class="form-control"
                                    name="phone" value="{{old('phone')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('phone')
@@ -146,7 +147,7 @@
                             <input type="email" autocomplete="email"
                                    class="form-control"
                                    name="email" value="{{old('email')}}"
-                                   autofocus>
+                                   autofocus required>
 
 
                             @error('email')
@@ -155,6 +156,22 @@
                             </span>
                             @enderror
                         </div>
+
+                    @auth('admins')
+                        <div class="col-6">
+                            <label for="company" class="font-weight-bolder text-muted col-form-label">{{__('Company')}}</label>
+                            @if(count($companies))
+                                <select name="company" class="form-control">
+                                    @foreach($companies as $company)
+                                        <option value="{{$company->id}}" title="">{{$company->name}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <p class="text-muted">No companies to link</p>
+                            @endif
+                            <a class="float-right" href="/admin/companies">Create new company</a>
+                        </div>
+                    @endauth
 
 
                 </div>

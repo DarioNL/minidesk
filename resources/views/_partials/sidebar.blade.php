@@ -46,7 +46,7 @@
             Invoices
         </a>
     </div>
-    @else
+    @elseauth('clients')
         <div class="row m-0 px-3 py-2 sidebar-link">
             <a href="/dashboard" class="sidebar-link-item text-white text-decoration-none">
                 Dashboard
@@ -60,6 +60,35 @@
         </div>
         <div class="row m-0 px-3 py-2 sidebar-link">
             <a href="/client/invoices" class="sidebar-link-item text-white text-decoration-none">
+                Invoices
+            </a>
+        </div>
+    @elseauth('admins')
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/dashboard" class="sidebar-link-item text-white text-decoration-none">
+                Dashboard
+            </a>
+        </div>
+
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/admin/clients" class="sidebar-link-item text-white text-decoration-none">
+                Clients
+            </a>
+        </div>
+
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/admin/companies" class="sidebar-link-item text-white text-decoration-none">
+                Companies
+            </a>
+        </div>
+
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/admin/estimates" class="sidebar-link-item text-white text-decoration-none">
+                Estimates
+            </a>
+        </div>
+        <div class="row m-0 px-3 py-2 sidebar-link">
+            <a href="/admin/invoices" class="sidebar-link-item text-white text-decoration-none">
                 Invoices
             </a>
         </div>

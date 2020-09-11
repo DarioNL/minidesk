@@ -7,7 +7,7 @@
             <td align="center"
                 style="font-family: Open Sans, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 400; line-height: 24px; padding-top: 25px;">
                 <h2 style="font-size: 30px; font-weight: 800; line-height: 36px; color: #333333; margin: 0;">
-                  Hello {{$client->first_name}} {{$client->last_name}} here is your login info!
+                  Hello @if(!empty($client->firstname)){{$client->first_name}} {{$client->last_name}}@else {{$client->name}} @endif! here is your login info!
                 </h2>
             </td>
         </tr>
