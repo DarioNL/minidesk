@@ -234,6 +234,20 @@
   background-color: #3333ff;
 }
 
+.dashboard-item{
+    box-shadow: 0 4px 25px 0 rgba(0,0,0,.1);
+    background: #FFFFFF;
+}
+
+.dashboard-content{
+    padding: 1.25rem;
+}
+
+.dashboard-icons{
+    font-size: 50px;
+    position: absolute;
+}
+
 .user-profile-img {
   width: 29px;
   height: 29px;
