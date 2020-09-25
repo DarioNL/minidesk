@@ -29,7 +29,10 @@ class DashboardController extends Controller
             $invoices = $company->invoices;
             $acceptedInvoices = $invoices->where('pay_date', '!=', null);
 
-            return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices'));
+            $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
+            $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+
+            return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'estimatesPercent', 'invoicesPercent'));
         }
         if (Auth::guard('admins')->check()) {
             $clients = Client::all();
@@ -39,7 +42,10 @@ class DashboardController extends Controller
             $invoices = Invoice::all();
             $acceptedInvoices = $invoices->where('pay_date', '!=', null);
 
-            return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'companies'));
+            $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
+            $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+
+            return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'companies', 'estimatesPercent', 'invoicesPercent'));
         }
 
         $user = Auth::id();
@@ -49,7 +55,10 @@ class DashboardController extends Controller
         $acceptedEstimates = $estimates->where('sign_date', '!=', null);
         $invoices = $client->Invoices;
         $acceptedInvoices = $invoices->where('pay_date', '!=', null);
-        return view('home', compact('client', 'estimates', 'invoices', 'acceptedInvoices', 'acceptedEstimates'));
+
+        $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
+        $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+        return view('home', compact('client', 'estimates', 'invoices', 'acceptedInvoices', 'acceptedEstimates', 'estimatesPercent', 'invoicesPercent'));
     }
 
 }

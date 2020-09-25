@@ -2,60 +2,140 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="justify-content-center">
         <div class="mt-5">
             <div class="card">
                 <div class="card-text">
                     <div class="row m-0 ">
                         @auth('web')
-                            <div class="col-md-4 text-center p-2 col-sm-12 dashboard-item">
+
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
                                 <div class="dashboard-content">
                                     <div class="float-left">
                                         <i class="dashboard-icons fas fa-user"></i>
                                     </div>
-                                    <div class="float-right">
+                                    <div class="float-right" style="margin-left: 100px">
                                         <div class="stat-text"><h4 class="count">{{count($clients)}}</h4></div>
-                                        <div class="stat-heading"><h6>Clients</h6> </div>
+                                        <div class="stat-heading"><h6>Total Clients</h6> </div>
                                     </div>
+                                </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 text-center p-2 col-sm-12 dashboard-item">
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
                                 <div class="dashboard-content">
                                     <div class="float-left">
                                         <i class="dashboard-icons fas fa-file-signature"></i>
                                     </div>
-                                    <div class="float-right">
-                                        <div class="stat-text"><h4 class="count">{{count($acceptedEstimates)}}/{{count($estimates)}}</h4></div>
-                                        <div class="stat-heading"><h6>Signed Estimates</h6> </div>
+                                    <div class="float-right" style="margin-left: 100px">
+                                        <div class="stat-text"><h4 class="count">{{count($estimates)}}</h4></div>
+                                        <div class="stat-heading"><h6>Total Estimates</h6> </div>
                                     </div>
+                                </div>
                                 </div>
                             </div>
 
-                            <div class="col-md-4 text-center p-2 col-sm-12 dashboard-item">
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
                                 <div class="dashboard-content">
                                     <div class="float-left">
-                                        <i class="dashboard-icons fas fa-file-signature"></i>
+                                        <i class="fas fa-file-invoice dashboard-icons"></i>
                                     </div>
-                                    <div class="float-right">
-                                        <div class="stat-text"><h4 class="count">{{count($acceptedInvoices)}}/{{count($invoices)}}</h4></div>
-                                        <div class="stat-heading"><h6>Payed Invoices</h6> </div>
+                                    <div class="float-right" style="margin-left: 100px">
+                                        <div class="stat-text"><h4 class="count">{{count($invoices)}}</h4></div>
+                                        <div class="stat-heading"><h6>Total Invoices</h6> </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+                        @elseauth('admins')
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
+                                    <div class="dashboard-content">
+                                        <div class="float-left">
+                                            <i class="fas fa-building"></i>
+                                        </div>
+                                        <div class="float-right" style="margin-left: 100px">
+                                            <div class="stat-text"><h4 class="count">{{count($companies)}}</h4></div>
+                                            <div class="stat-heading"><h6>Total Companies</h6> </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
+                                    <div class="dashboard-content">
+                                        <div class="float-left">
+                                            <i class="dashboard-icons fas fa-user"></i>
+                                        </div>
+                                        <div class="float-right" style="margin-left: 100px">
+                                            <div class="stat-text"><h4 class="count">{{count($clients)}}</h4></div>
+                                            <div class="stat-heading"><h6>Total Clients</h6> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
+                                    <div class="dashboard-content">
+                                        <div class="float-left">
+                                            <i class="dashboard-icons fas fa-file-signature"></i>
+                                        </div>
+                                        <div class="float-right" style="margin-left: 100px">
+                                            <div class="stat-text"><h4 class="count">{{count($estimates)}}</h4></div>
+                                            <div class="stat-heading"><h6>Total Estimates</h6> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
+                                    <div class="dashboard-content">
+                                        <div class="float-left">
+                                            <i class="fas fa-file-invoice dashboard-icons"></i>
+                                        </div>
+                                        <div class="float-right" style="margin-left: 100px">
+                                            <div class="stat-text"><h4 class="count">{{count($invoices)}}</h4></div>
+                                            <div class="stat-heading"><h6>Total Invoices</h6> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @else
-                            <div class="col-md-6 text-center p-2 col-sm-12">
-                                <h4 class="text-muted">Accepted Estimates</h4>
-                                <p class="text-muted">{{count($acceptedEstimates)}}/{{count($estimates)}}</p>
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
+                                    <div class="dashboard-content">
+                                        <div class="float-left">
+                                            <i class="dashboard-icons fas fa-file-signature"></i>
+                                        </div>
+                                        <div class="float-right" style="margin-left: 100px">
+                                            <div class="stat-text"><h4 class="count">{{count($estimates)}}</h4></div>
+                                            <div class="stat-heading"><h6>Total Estimates</h6> </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="col-md-6 text-center p-2 col-sm-12">
-                                <h4 class="text-muted">Accepted Invoices</h4>
-                                <p class="text-muted">{{count($acceptedInvoices)}}/{{count($invoices)}}</p>
+                            <div class="col-md-4 text-center p-2 col-sm-12">
+                                <div class="card dashboard-item">
+                                    <div class="dashboard-content">
+                                        <div class="float-left">
+                                            <i class="fas fa-file-invoice dashboard-icons"></i>
+                                        </div>
+                                        <div class="float-right" style="margin-left: 100px">
+                                            <div class="stat-text"><h4 class="count">{{count($invoices)}}</h4></div>
+                                            <div class="stat-heading"><h6>Total Invoices</h6> </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        @endauth
+                            @endauth
                     </div>
 
 {{--                    <section id="tabs" class="project-tab w-75">--}}
@@ -169,18 +249,65 @@
 {{--                            </div>--}}
 {{--                        </div>--}}
 {{--                    </section>--}}
+                    <div class="row">
+                        <div class="card col-6">
+                            <div class="card-header">Recent activities</div>
 
-                    <div class="card-header">Dashboard</div>
+                            <div class="card-body dashboard-item">
+                                @if (session('status'))
+                                    <div class="alert alert-success" role="alert">
+                                        {{ session('status') }}
+                                    </div>
+                                @endif
+                                <div class="">
+                                    <div class="row p-b-30">
+                                        <div class="col-auto text-right update-meta p-r-0">
+                                            @if(Auth::user()->logo != null)
+                                                <img src="{{asset(Auth::user()->logo)}}" class="company-profile-img" alt="user logo">
+                                            @else
+                                                <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                                            @endif
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
+                                        </div>
+                                        <div class="col p-l-5">
+                                            <a><h6>You are logged in!</h6></a>
+                                            <p class="text-muted m-b-0">@if(Auth::user()->name){{Auth::user()->name}}@else {{Auth::user()->first_name}} {{Auth::user()->last_name}} @endif</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    @endif
 
-                    You are logged in!
-                </div>
+                        <div class="card col-6">
+                            <div class="card-header">Stats</div>
+
+                            <div class="card-body dashboard-item">
+                                <div class="progress-box progress-1">
+                                    <h4 class="por-title">Accepted Estimates</h4>
+                                    <div class="por-txt">{{count($acceptedEstimates)}}/{{count($estimates)}} Estimates ({{$estimatesPercent}}%)</div>
+                                    <div class="progress mb-2" style="height: 5px;">
+                                        <div class="progress-bar bg-flat-color-1" role="progressbar" style="width: {{$estimatesPercent}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="progress-box progress-2">
+                                    <h4 class="por-title">Accepted Invoices</h4>
+                                    <div class="por-txt">{{count($acceptedInvoices)}}/{{count($invoices)}} Invoices ({{$invoicesPercent}}%)</div>
+                                    <div class="progress mb-2" style="height: 5px;">
+                                        <div class="progress-bar bg-flat-color-2" role="progressbar" style="width: {{$invoicesPercent}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                @auth('admins')
+                                <div class="progress-box progress-2">
+                                    <h4 class="por-title">Unique Visitors</h4>
+                                    <div class="por-txt">29,658 Users (60%)</div>
+                                    <div class="progress mb-2" style="height: 5px;">
+                                        <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                @endauth
+                            </div>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
