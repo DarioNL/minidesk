@@ -42,8 +42,16 @@ class DashboardController extends Controller
             $invoices = Invoice::all();
             $acceptedInvoices = $invoices->where('pay_date', '!=', null);
 
-            $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
-            $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+            if (count($estimates) != 0) {
+                $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
+            }else{
+                $estimatesPercent = 0;
+            }
+            if (count($invoices) != 0) {
+                $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+            }else{
+                $invoicesPercent = 0;
+            }
 
             return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'companies', 'estimatesPercent', 'invoicesPercent'));
         }

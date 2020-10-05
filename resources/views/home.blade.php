@@ -52,11 +52,11 @@
                             </div>
 
                         @elseauth('admins')
-                            <div class="col-md-4 text-center p-2 col-sm-12">
+                            <div class="col-md-3 text-center p-2 col-sm-12">
                                 <div class="card dashboard-item">
                                     <div class="dashboard-content">
                                         <div class="float-left">
-                                            <i class="fas fa-building"></i>
+                                            <i class="fas fa-building dashboard-icons"></i>
                                         </div>
                                         <div class="float-right" style="margin-left: 100px">
                                             <div class="stat-text"><h4 class="count">{{count($companies)}}</h4></div>
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 text-center p-2 col-sm-12">
+                            <div class="col-md-3 text-center p-2 col-sm-12">
                                 <div class="card dashboard-item">
                                     <div class="dashboard-content">
                                         <div class="float-left">
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 text-center p-2 col-sm-12">
+                            <div class="col-md-3 text-center p-2 col-sm-12">
                                 <div class="card dashboard-item">
                                     <div class="dashboard-content">
                                         <div class="float-left">
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 text-center p-2 col-sm-12">
+                            <div class="col-md-3 text-center p-2 col-sm-12">
                                 <div class="card dashboard-item">
                                     <div class="dashboard-content">
                                         <div class="float-left">
