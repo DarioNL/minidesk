@@ -308,6 +308,151 @@
                             </div>
                         </div>
                     </div>
+                    <section id="tabs" class="project-tab w-75">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="">
+                                                        <nav class="dashboard-item">
+                                                            <div class="nav nav-tabs nav-fill" data-toggle="tab" id="nav-tab" role="tablist">
+                                                                <a class="nav-item nav-link active" id="nav-client-tab" data-toggle="tab" href="#nav-client" role="tab" aria-controls="nav-client" aria-selected="false">@auth('web')Clients @elseauth('admins') Clients @else Company @endauth</a>
+                                                                <a class="nav-item nav-link" id="nav-estimates-tab" data-toggle="tab" href="#nav-estimates" role="tab" aria-controls="nav-estimates" aria-selected="false">Estimates</a>
+                                                                @auth('admins')
+                                                                    <a class="nav-item nav-link" id="nav-companies-tab" data-toggle="tab" href="#nav-companies" role="tab" aria-controls="nav-companies" aria-selected="false">Companies</a>
+                                                                @endauth
+                                                                <a class="nav-item nav-link" id="nav-invoices-tab" data-toggle="tab" href="#nav-invoices" role="tab" aria-controls="nav-invoices" aria-selected="false">Invoices</a>
+                                                            </div>
+                                                        </nav>
+                                                        <div class="tab-content" id="nav-tabContent">
+                                                            <div class="tab-content" id="nav-tabContent">
+                                                                <div class="tab-pane home-tab fade show active text-center" id="nav-client" role="tabpanel" aria-labelledby="nav-home-tab">
+                                                                    <table class="table-fullscreen
+                                                                     border-bottom border-top">
+                                                                        <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
+                                                                            @auth('web')
+                                                                                <th>First Name</th>
+                                                                                <th>Last Name</th>
+                                                                                <th class="desktoptd">Company Name</th>
+                                                                                <th>Email</th>
+                                                                                <th class="desktoptd">Address</th>
+                                                                                <th>Phone</th>
+                                                                                <th class="desktoptd">Created At</th>
+                                                                                <th class="desktoptd">Actions</th>
+                                                                            @elseauth('admins')
+                                                                                <th>First Name</th>
+                                                                                <th>Last Name</th>
+                                                                                <th class="desktoptd">Company Name</th>
+                                                                                <th>Email</th>
+                                                                                <th class="desktoptd">Address</th>
+                                                                                <th>Phone</th>
+                                                                                <th class="desktoptd">Created At</th>
+                                                                                <th class="desktoptd">Actions</th>
+                                                                            @else
+                                                                                <th>Name</th>
+                                                                                <th>Logo</th>
+                                                                                <th>Email</th>
+                                                                                <th>Address</th>
+                                                                                <th>Phone</th>
+                                                                            @endauth
+                                                                        </tr>
+                                                                        <tbody id="append_hook">
+                                                                        @auth('web')
+                                                                        @include('clients.scroll', ['clients' => $clients])
+                                                                        @elseauth('admins')
+                                                                            @include('clients.scroll', ['clients' => $clients])
+                                                                        @else
+                                                                            <tr class="border-bottom">
+                                                                                <td class="text-muted">{{$client->company->name}}</td>
+                                                                                <td class="pl-3">@if($client->company->logo != null)
+                                                                                        <img src="{{asset($client->company->logo)}}" class="company-profile-img" alt="user logo">
+                                                                                    @else
+                                                                                        <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                                                                                    @endif{{$client->company->name}}</td>
+                                                                                <td class="text-muted">{{$client->company->email}}</td>
+                                                                                <td class="text-muted">{{$client->company->city}}, {{$client->company->zipcode}}</td>
+                                                                                <td class="text-muted">{{$client->company->phone}}</td>
+                                                                            </tr>
+                                                                        @endauth
+                                                                        </tbody>
+                                                                    </table>
+                                                                    @auth('web')
+                                                                        <a href="/company/clients" class="text-center">Show All Clients</a>
+                                                                    @elseauth('admins')
+                                                                        <a href="/company/clients" class="text-center">Show All Clients</a>
+                                                                    @endauth
+                                                                </div>
+                                                                @auth('admins')
+                                                                    <div class="tab-pane home-tab fade text-center" id="nav-companies" role="tabpanel" aria-labelledby="nav-companies-tab">
+                                                                        <table class="w-100 border-bottom border-top">
+                                                                            <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
+                                                                                <th>Name</th>
+                                                                                <th>Logo</th>
+                                                                                <th>Email</th>
+                                                                                <th>Address</th>
+                                                                                <th>Phone</th>
+                                                                                <th>Created At</th>
+                                                                                <th>Actions</th>
+                                                                            </tr>
+                                                                            <tbody id="append_hook">
+                                                                            @include('companies.scroll', ['companies' => $companies])
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <a href="/admin/companies" class="text-center">Show All Companies</a>
+                                                                @endauth
+                                                                <div class="tab-pane home-tab fade text-center" id="nav-estimates" role="tabpanel" aria-labelledby="nav-estimates-tab">
+                                                                    <table class="w-100 border-bottom border-top">
+                                                                        <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
+                                                                            <th class="desktoptd">Number</th>
+                                                                            <th>Title</th>
+                                                                            <th class="desktoptd">Company</th>
+                                                                            <th>Client</th>
+                                                                            <th>Total</th>
+                                                                            <th class="desktoptd">Sent Date</th>
+                                                                            <th class="desktoptd">Due Date</th>
+                                                                            <th>Sign Date</th>
+                                                                            <th class="desktoptd">Created At</th>
+                                                                            <th class="desktoptd">Actions</th>
+                                                                        </tr>
+                                                                        <tbody id="append_hook">
+                                                                        @include('estimates.scroll', ['estimates' => $estimates])
+                                                                        </tbody>
+                                                                    </table>
+                                                                    @auth('web')
+                                                                        <a href="/company/estimates" class="text-center">Show All Estimates</a>
+                                                                    @else
+                                                                        <a href="/client/estimates" class="text-center">Show All Estimates</a>
+                                                                    @endauth
+                                                                </div>
+                                                                <div class="tab-pane home-tab fade text-center" id="nav-invoices" role="tabpanel" aria-labelledby="nav-invoices-tab">
+
+                                                                    <table class="w-100 border-bottom border-top">
+                                                                        <tr class="border-bottom text-white table-header" style="box-shadow: none !important; font-weight: normal">
+                                                                            <th class="desktoptd">Number</th>
+                                                                            <th>Title</th>
+                                                                            <th class="desktoptd">Company</th>
+                                                                            <th>Client</th>
+                                                                            <th>Total</th>
+                                                                            <th class="desktoptd">Sent Date</th>
+                                                                            <th class="desktoptd">Due Date</th>
+                                                                            <th>Pay Date</th>
+                                                                            <th class="desktoptd">Created At</th>
+                                                                            <th class="desktoptd">Actions</th>
+                                                                        </tr>
+                                                                        <tbody id="append_hook">
+                                                                        @include('invoices.scroll', ['invoices' => $invoices])
+                                                                        </tbody>
+                                                                    </table>
+                                                                    @auth('web')
+                                                                        <a href="/company/invoices" class="text-center">Show All Invoices</a>
+                                                                    @else
+                                                                        <a href="/client/invoices" class="text-center">Show All Invoices</a>
+                                                                    @endauth
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
             </div>
         </div>
     </div>
