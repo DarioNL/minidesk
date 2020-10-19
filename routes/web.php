@@ -15,6 +15,8 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth:web,clients,admins']], function () {
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/pdf', 'DashboardController@pdf');
+    Route::get('/settings', 'DashboardController@settings');
+
 
 });
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Client;
 use App\Models\Company;
 use App\Models\Estimate;
@@ -44,12 +45,12 @@ class DashboardController extends Controller
 
             if (count($estimates) != 0) {
                 $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
-            }else{
+            } else {
                 $estimatesPercent = 0;
             }
             if (count($invoices) != 0) {
                 $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
-            }else{
+            } else {
                 $invoicesPercent = 0;
             }
 
@@ -69,4 +70,29 @@ class DashboardController extends Controller
         return view('home', compact('client', 'estimates', 'invoices', 'acceptedInvoices', 'acceptedEstimates', 'estimatesPercent', 'invoicesPercent'));
     }
 
+
+    public function settings()
+    {
+        $user = Auth::id();
+
+        if (Auth::guard('clients')->check()) {
+            $client = Client::find($user);
+            return view('settings', compact('client'));
+        }
+
+        if (Auth::guard('web')->check()) {
+            $company = Company::find($user);
+            return view('settings', compact('company'));
+        }
+
+        if (Auth::guard('admins')->check()) {
+            $admin = Admin::find($user);
+            return view('settings', compact('admin'));
+        }
+
+
+    }
+
 }
+
+

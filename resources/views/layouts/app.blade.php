@@ -26,7 +26,7 @@
         <div class="sidebar-container col-sm-12 col-md-2 col-lg-2 col-xl-2 pr-0 position-fixed big-desktop">
             @include('_partials.sidebar')
             <div class="sidebar-footer vh-100">
-                <a href="">
+                <a href="/settings">
                 <span class="sidebar-settings text-white text-center border-right 100 float-left">
                     <i class="uil uil-setting"></i>
                 </span>
