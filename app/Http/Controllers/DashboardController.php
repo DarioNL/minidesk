@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use PhpParser\Node\Stmt\DeclareDeclare;
 
 class DashboardController extends Controller
 {
@@ -147,7 +148,7 @@ class DashboardController extends Controller
                     return redirect('/settings');
                 }
 
-                if (Auth::guard('client')->check()) {
+                if (Auth::guard('clients')->check()) {
                     $request->validate([
                         'first_name' => 'required',
                         'last_name' => 'required',
@@ -182,6 +183,7 @@ class DashboardController extends Controller
 
     public function storeLogo(Request $request, $id)
     {
+
         if ($id = Auth::id()) {
             if (Auth::guard('clients')->check()) {
                 $request->validate([
@@ -193,9 +195,11 @@ class DashboardController extends Controller
                 $logoUpload->move($logoPath, $logoName);
                 $client = Client::find($id);
                 if ($client->logo) {
-                    unlink(public_path($admin->logo));
+                    if (file_exists(public_path($client->logo))) {
+                        unlink(public_path($client->logo));
+                    }
                 }
-                $client->logo = $logoName;
+                $client->logo = '/images/'.$logoName;
                 $client->save();
 
                 return redirect('/settings');
@@ -211,9 +215,11 @@ class DashboardController extends Controller
                 $logoUpload->move($logoPath, $logoName);
                 $company = Company::find($id);
                 if ($company->logo) {
-                    unlink(public_path($admin->logo));
+                    if (file_exists(public_path($company->logo))) {
+                        unlink(public_path($company->logo));
+                    }
                 }
-                $company->logo = $logoName;
+                $company->logo = '/images/'.$logoName;
                 $company->save();
 
                 return redirect('/settings');
@@ -229,7 +235,9 @@ class DashboardController extends Controller
                 $logoUpload->move($logoPath, $logoName);
                 $admin = Admin::find($id);
                 if ($admin->logo) {
-                    unlink(public_path($admin->logo));
+                    if (file_exists(public_path($admin->logo))) {
+                        unlink(public_path($admin->logo));
+                    }
                 }
                 $admin->logo = '/images/'.$logoName;
                 $admin->save();

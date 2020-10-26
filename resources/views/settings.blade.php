@@ -11,7 +11,7 @@
                 <a href="/dashboard" class="h3 text-muted float-left pt-2">back</a>
             </div>
         </div>
-        <div class="row w-100">
+        <div class="w-100">
             <div class="col-md-4 float-left card col-xs-12">
                 <div class="card-body user">
                     <div class="text-center p-3 dashboard-item">
@@ -22,6 +22,7 @@
                             @else
                                 <img src="{{asset('/images/blank_profile_picture.png')}}"
                                      class="settings-logo align-items-center ui-w-30 bg-white rounded-circle" alt="">
+                            @endif
                                 <h4 class="pt-3">{{$company->name}}</h4>
                                 <h5 class="pt-3">{{$company->email}}</h5>
                                 <form method="post" enctype="multipart/form-data" action="/settings/{{$company->id}}/logo/store">
@@ -35,7 +36,6 @@
                                         </div>
                                     </div>
                                 </form>
-                            @endif
                         @elseauth('admins')
                             @if(Auth::user()->logo != null)
                                 <img src="{{asset(Auth::user()->logo)}}" class="settings-company-logo cen"
@@ -67,7 +67,7 @@
                             @endif
                             <h4 class="pt-3">{{$client->first_name}} {{$client->last_name}}</h4>
                             <h5 class="pt-3">{{$client->email}}</h5>
-                            <form method="post" enctype="multipart/form-data" action="/setting/{{$client->id}}/logo/store">
+                            <form method="post" enctype="multipart/form-data" action="/settings/{{$client->id}}/logo/store">
                                 @csrf
                                 <div class="form-group">
                                     <input type="file" accept="image/*" class="" name="logo" required>
@@ -164,7 +164,7 @@
                                     <label for="house_number_suffix" class="col-md-12">House Number Suffix(optional)</label>
                                     <div class="col-md-12">
                                         <input type="text" value="{{$company->house_number_suffix}}" class="form-control form-control-line"
-                                               name="house_number_suffix" required>
+                                               name="house_number_suffix" >
                                         @error('house_number_suffix')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -339,7 +339,7 @@
                             <label for="house_number_suffix" class="col-md-12">House Number Suffix(optional)</label>
                             <div class="col-md-12">
                                 <input type="text" value="{{$client->house_number_suffix}}" class="form-control form-control-line"
-                                       name="house_number_suffix" required>
+                                       name="house_number_suffix">
                                 @error('house_number_suffix')
                                 <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -369,8 +369,8 @@
             </div>
         </div>
     </div>
-        <div class="row w-100 p-2">
-            <div class="col-md-4 ml-1 float-left card col-xs-12">
+{{--        <div class="float-left p-2">--}}
+            <div class="col-md-4 ml-1 card col-xs-12">
                 <div class="card-body user">
                     <div class="p-3 dashboard-item">
                         <form
