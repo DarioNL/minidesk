@@ -41,7 +41,7 @@
         @endif
         @if($invoice->client)
         <td class="pl-3">@if($invoice->client->logo != null)
-                <img src="{{asset($estimate->company->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
+                <img src="{{asset($invoice->client->logo)}}" class="user-profile-img rounded-circle" alt="user logo">
             @else
                 <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
             @endif{{$invoice->client->first_name}} {{$invoice->client->last_name}}</td>

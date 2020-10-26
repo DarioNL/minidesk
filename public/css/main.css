@@ -190,10 +190,28 @@
   padding: 4px;
 }
 
+.settings-logo {
+    width: 70%;
+    max-width: 88px;
+    background: #fff;
+    z-index: 1000;
+    position: inherit;
+    border: 1px solid rgba(52, 73, 94, 0.44);
+    padding: 4px;
+}
+
 .sidebar-company-logo {
     width: 70%;
     max-width: 60px;
     margin-left: 15%;
+    z-index: 1000;
+    position: inherit;
+    padding: 4px;
+}
+
+.settings-company-logo {
+    width: 70%;
+    max-width: 88px;
     z-index: 1000;
     position: inherit;
     padding: 4px;

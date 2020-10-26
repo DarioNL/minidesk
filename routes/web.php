@@ -15,6 +15,11 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth:web,clients,admins']], function () {
     Route::get('/dashboard', 'DashboardController@index');
     Route::get('/pdf', 'DashboardController@pdf');
+    Route::get('/settings', 'DashboardController@settings');
+    Route::post('/settings/{id}/store', 'DashboardController@store');
+    Route::post('/settings/{id}/logo/store', 'DashboardController@storeLogo');
+    Route::post('/settings/{id}/change/password', 'DashboardController@changePassword');
+
 
 });
 
