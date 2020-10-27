@@ -8,7 +8,7 @@
                 <h3 class="float-left pt-2">Settings</h3>
             </div>
             <div class="float-right">
-                <a href="/dashboard" class="h3 text-muted float-left pt-2">back</a>
+                <a href="/dashboard" class="h3 text-dark text-decoration-none float-left pt-2">back</a>
             </div>
         </div>
         <div class="w-100">
@@ -24,10 +24,10 @@
                                      class="settings-logo align-items-center ui-w-30 bg-white rounded-circle" alt="">
                             @endif
                                 <h4 class="pt-3">{{$company->name}}</h4>
-                                <h5 class="pt-3">{{$company->email}}</h5>
+                                <h5 class="">{{$company->email}}</h5>
                                 <form method="post" enctype="multipart/form-data" action="/settings/{{$company->id}}/logo/store">
                                     @csrf
-                                    <div class="form-group">
+                                    <div class="form-group pt-3">
                                         <input type="file" accept="image/*" class="" name="logo" required>
                                     </div>
                                     <div class="form-group">
@@ -401,7 +401,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-12">
                                 <button class="btn btn-success">Change Password</button>
                             </div>
                         </form>
