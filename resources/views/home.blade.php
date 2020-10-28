@@ -250,7 +250,7 @@
 {{--                        </div>--}}
 {{--                    </section>--}}
                     <div class="row">
-                        <div class="card col-6">
+                        <div class="card col-md-6 col-sm-12">
                             <div class="card-header">Recent activities</div>
 
                             <div class="card-body dashboard-item">
@@ -278,7 +278,7 @@
                             </div>
                         </div>
 
-                        <div class="card col-6">
+                        <div class="card col-md-6 col-sm-12">
                             <div class="card-header">Stats</div>
 
                             <div class="card-body dashboard-item">
