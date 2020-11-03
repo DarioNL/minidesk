@@ -13,7 +13,7 @@
                     <div class="col-12">
                         <label for="company" class="font-weight-bolder text-muted col-form-label">{{__('Companies')}}</label>
                         @if(count($companies))
-                            <select name="company" class="form-control">
+                            <select name="company" class="form-control  @error('send_date') is-invalid @enderror">
                                 @foreach($companies as $company)
                                     <option value="{{$company->id}}" title="">{{$company->name}}</option>
                                 @endforeach
@@ -24,7 +24,7 @@
 
 
                         @error('send_date')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror

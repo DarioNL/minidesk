@@ -88,7 +88,9 @@ class AdminInvoiceController extends Controller
 
 
 
-        return back();
+        return back()->with([
+            'success_message' => 'Updated Invoice.'
+        ]);
     }
 
 
@@ -176,7 +178,9 @@ class AdminInvoiceController extends Controller
             ]);
         }
 
-        return back();
+        return back()->with([
+            'success_message' => 'Updated Invoice.'
+        ]);
     }
 
     public function send(Request $request, $id)
@@ -242,19 +246,25 @@ class AdminInvoiceController extends Controller
                 $invoice->update([
                     'send_date' => $send_date,
                 ]);
-                return back();
+                return back()->with([
+                    'success_message' => 'Invoice will be send on'.$send_date.'.'
+                ]);
 
             } else {
                 $invoice->number = null;
                 $invoice->save();
-                return back();
+                return back()->with([
+                    'error_message' => 'Could not send Invoice.'
+                ]);
             }
         }
         $invoice->update([
             'send_date' => $send_date,
             'color' => $request->post('color')
         ]);
-        return back();
+        return back()->with([
+            'success_message' => 'Invoice sent.'
+        ]);
     }
 
     public function link(Request $request, $id){
@@ -263,7 +273,9 @@ class AdminInvoiceController extends Controller
         $invoice->client_id = $request->post('client');
         $invoice->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Linked client to invoice.'
+        ]);
     }
 
     public function unlink($id){
@@ -272,7 +284,9 @@ class AdminInvoiceController extends Controller
         $invoice->client_id = null;
         $invoice->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Unlinked client to invoice.'
+        ]);
     }
 
     public function linkCompany(Request $request, $id){
@@ -281,7 +295,9 @@ class AdminInvoiceController extends Controller
         $invoice->company_id = $request->post('company');
         $invoice->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Linked company to invoice.'
+        ]);
     }
 
     public function unlinkCompany($id){
@@ -290,7 +306,9 @@ class AdminInvoiceController extends Controller
         $invoice->company_id = null;
         $invoice->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'unlinked Company to invoice.'
+        ]);
     }
 
     public function destroy($id){
@@ -308,9 +326,9 @@ class AdminInvoiceController extends Controller
         $invoice->number = 'deleted_'.time().'_'.$invoice->number;
         $invoice->pay_id = null;
         $invoice->save();
-        return response()->json([
-            'message' => 'Deleted estimate'
-        ])->setStatusCode(200)->redirectTo('/estimates');
+        return redirect('admin/invoices')->with([
+            'success_message' => 'Deleted invoice'
+        ])->setStatusCode(200);
 
 
     }

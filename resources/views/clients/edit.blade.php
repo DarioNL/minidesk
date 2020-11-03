@@ -9,152 +9,152 @@
             </div>
             <form method="POST" @auth('admins') action="/admin/clients/{{$client->id}}/edit" @else action="/company/clients/{{$client->id}}/edit" @endauth>
             <div class="modal-body">
-                    @csrf
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="first_name" class="font-weight-bolder text-muted col-form-label">{{__('First Name')}}</label>
-                            <input type="text" autocomplete="first_name"
-                                   class="form-control"
-                                   name="first_name" value="{{$client->first_name}}"
-                                   required autofocus>
+                @csrf
+                <div class="row">
+                    <div class="col-6">
+                        <label for="first_name" class="font-weight-bolder text-muted col-form-label">{{__('First Name')}}</label>
+                        <input type="text" autocomplete="first_name"
+                               class="form-control @error('first_name') is-invalid @enderror"
+                               name="first_name" value="{{$client->first_name}}"
+                               required autofocus>
 
 
-                            @error('first_name')
-                                <span class="invalid-feedback" role="alert">
+                        @error('first_name')
+                        <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="last_name" class="font-weight-bolder text-muted col-form-label">{{__('Last Name')}}</label>
-                            <input type="text" autocomplete="last_name"
-                                   class="form-control"
-                                   name="last_name" value="{{$client->last_name}}"
-                                   required autofocus>
+                        @enderror
+                    </div>
+                    <div class="col-6">
+                        <label for="last_name" class="font-weight-bolder text-muted col-form-label">{{__('Last Name')}}</label>
+                        <input type="text" autocomplete="last_name"
+                               class="form-control @error('last_name') is-invalid @enderror"
+                               name="last_name" value="{{$client->last_name}}"
+                               required autofocus>
 
 
-                            @error('last_name')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                        @error('last_name')
+                        <span class="invalid-feedback d-block" role="alert">
+                                        <h3><strong>{{ $message }}</strong></h3>
                                     </span>
-                            @enderror
-                        </div>
+                        @enderror
                     </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="house_number" class="font-weight-bolder text-muted col-form-label">{{__('House Number')}}</label>
-                            <input type="text" autocomplete="house_number"
-                                   class="form-control"
-                                   name="house_number" value="{{$client->house_number}}"
-                                   required autofocus>
-
-
-                            @error('house_number')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                        <div class="col-6">
-                            <label for="house_number_suffix" class="font-weight-bolder text-muted col-form-label">{{__('Suffix (optional)')}}</label>
-                            <input type="text" autocomplete="house_number_suffix"
-                                   class="form-control"
-                                   name="house_number_suffix" value="{{$client->house_number_suffix}}"
-                                    autofocus>
-
-
-                            @error('house_number_suffix')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-6">
-                            <label for="city" class="font-weight-bolder text-muted col-form-label">{{__('City')}}</label>
-                            <input type="text" autocomplete="city"
-                                   class="form-control"
-                                   name="city" value="{{$client->city}}"
-                                   autofocus>
-
-
-                            @error('city')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-
-                        <div class="col-6">
-                            <label for="zipcode" class="font-weight-bolder text-muted col-form-label">{{__('Zipcode')}}</label>
-                            <input type="text" autocomplete="zipcode"
-                                   class="form-control"
-                                   name="zipcode" value="{{$client->zipcode}}"
-                                   autofocus>
-
-
-                            @error('zipcode')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-
-                        <div class="col-6">
-                            <label for="address" class="font-weight-bolder text-muted col-form-label">{{__('Address')}}</label>
-                            <input type="text" autocomplete="last_name"
-                                   class="form-control"
-                                   name="address" value="{{$client->address}}"
-                                   required autofocus>
-
-
-                            @error('address')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-
-                        <div class="col-6">
-                            <label for="phone" class="font-weight-bolder text-muted col-form-label">{{__('Phone')}}</label>
-                            <input type="tel" autocomplete="phone"
-                                   class="form-control"
-                                   name="phone" value="{{$client->phone}}"
-                                   autofocus>
-
-
-                            @error('phone')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
+                </div>
 
                 <div class="row">
-                        <div class="col-6">
-                            <label for="email" class="font-weight-bolder text-muted col-form-label">{{__('Email')}}</label>
-                            <input type="email" autocomplete="email"
-                                   class="form-control"
-                                   name="email" value="{{$client->email}}"
-                                   autofocus>
+                    <div class="col-6">
+                        <label for="house_number" class="font-weight-bolder text-muted col-form-label">{{__('House Number')}}</label>
+                        <input type="text" autocomplete="house_number"
+                               class="form-control @error('house_number') is-invalid @enderror"
+                               name="house_number" value="{{$client->house_number}}"
+                               required autofocus>
 
 
-                            @error('email')
-                            <span class="invalid-feedback" role="alert">
+                        @error('house_number')
+                        <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
-                            @enderror
-                        </div>
+                        @enderror
+                    </div>
+                    <div class="col-6">
+                        <label for="house_number_suffix" class="font-weight-bolder text-muted col-form-label">{{__('Suffix (optional)')}}</label>
+                        <input type="text" autocomplete="house_number_suffix"
+                               class="form-control @error('house_number_suffix') is-invalid @enderror"
+                               name="house_number_suffix" value="{{$client->house_number_suffix}}"
+                               autofocus>
+
+
+                        @error('house_number_suffix')
+                        <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-6">
+                        <label for="city" class="font-weight-bolder text-muted col-form-label">{{__('City')}}</label>
+                        <input type="text" autocomplete="city"
+                               class="form-control @error('city') is-invalid @enderror"
+                               name="city" value="{{$client->city}}"
+                               autofocus required>
+
+
+                        @error('city')
+                        <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+
+                    <div class="col-6">
+                        <label for="zipcode" class="font-weight-bolder text-muted col-form-label">{{__('Zipcode')}}</label>
+                        <input type="text" autocomplete="zipcode"
+                               class="form-control @error('zipcode') is-invalid @enderror"
+                               name="zipcode" value="{{$client->zipcode}}"
+                               autofocus required>
+
+
+                        @error('zipcode')
+                        <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-6">
+                        <label for="address" class="font-weight-bolder text-muted col-form-label">{{__('Address')}}</label>
+                        <input type="text" autocomplete="last_name"
+                               class="form-control @error('address') is-invalid @enderror"
+                               name="address" value="{{$client->address}}"
+                               required autofocus>
+
+
+                        @error('address')
+                        <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="col-6">
+                        <label for="phone" class="font-weight-bolder text-muted col-form-label">{{__('Phone')}}</label>
+                        <input type="tel" autocomplete="phone"
+                               class="form-control @error('phone') is-invalid @enderror"
+                               name="phone" value="{{$client->phone}}"
+                               autofocus required>
+
+
+                        @error('phone')
+                        <span class="invalid-feedback d-block" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <label for="email" class="font-weight-bolder text-muted col-form-label">{{__('Email')}}</label>
+                        <input type="email" autocomplete="email"
+                               class="form-control @error('email') is-invalid @enderror"
+                               name="email" value="{{$client->email}}"
+                               autofocus required>
+
+
+                        @error('email')
+                        <span class="invalid-feedback d-block" role="alert">
+                                 <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
 
                     @auth('admins')
                         <div class="col-6">

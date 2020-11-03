@@ -13,7 +13,7 @@
                     <div class="col-6">
                         <label for="send_date" class="font-weight-bolder text-muted col-form-label">{{__('Send Date')}}</label>
                         <input type="date" autocomplete="send_date"
-                               class="form-control"
+                               class="form-control  @error('send_date') is-invalid @enderror"
                                name="send_date" value="{{old('send_date')}}"
                                required autofocus>
 
@@ -27,7 +27,7 @@
                     <div class="col-6">
                         <label for="color" class="font-weight-bolder text-muted col-form-label">{{__('Color')}}</label>
                         <input type="color" autocomplete="color"
-                               class="form-control"
+                               class="form-control  @error('color') is-invalid @enderror"
                                name="color" value="{{old('color')}}"
                                required autofocus>
 
@@ -43,7 +43,7 @@
                     <div class="col-6">
                         <label for="mollie_key" class="font-weight-bolder text-muted col-form-label">{{__('Mollie Key')}}</label>
                         <input type="text" autocomplete="mollie_key"
-                               class="form-control"
+                               class="form-control  @error('mollie_key') is-invalid @enderror"
                                name="mollie_key" value="{{$invoice->company->mollie_key}}"
                                required autofocus>
 

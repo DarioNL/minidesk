@@ -90,7 +90,9 @@ class InvoiceController extends Controller
         }
 
 
-        return back();
+        return back()->with([
+            'success_message' => 'Created invoice.'
+        ]);
     }
 
 
@@ -181,7 +183,9 @@ class InvoiceController extends Controller
             ]);
         }
 
-        return back();
+        return back()->with([
+            'success_message' => 'Updated invoice.'
+        ]);
     }
 
     public function send(Request $request, $id)
@@ -247,19 +251,25 @@ class InvoiceController extends Controller
                 $invoice->update([
                     'send_date' => $send_date,
                 ]);
-                return back();
+                return back()->with([
+                    'success_message' => 'Invoice sent.'
+                ]);
 
             } else {
                 $invoice->number = null;
                 $invoice->save();
-                return back();
+                return back()->with([
+                    'error_message' => 'Could not send Invoice.'
+                ]);
             }
         }
         $invoice->update([
             'send_date' => $send_date,
             'color' => $request->post('color')
         ]);
-        return back();
+        return back()->with([
+            'success_message' => 'Invoice will be send on'.$send_date.'.'
+        ]);
     }
 
     public function link(Request $request, $id){
@@ -268,7 +278,9 @@ class InvoiceController extends Controller
         $invoice->client_id = $request->post('client');
         $invoice->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Linked invoice.'
+        ]);
     }
 
     public function unlink($id){
@@ -277,7 +289,9 @@ class InvoiceController extends Controller
         $invoice->client_id = null;
         $invoice->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Unlinked invoice.'
+        ]);
     }
 
     public function destroy($id){
@@ -295,9 +309,9 @@ class InvoiceController extends Controller
         $invoice->number = 'deleted_'.time().'_'.$invoice->number;
         $invoice->pay_id = null;
         $invoice->save();
-        return response()->json([
-            'message' => 'Deleted estimate'
-        ])->setStatusCode(200)->redirectTo('/estimates');
+        return redirect()->with([
+            'success_message' => 'Deleted invoice'
+        ])->setStatusCode(200);
 
 
     }

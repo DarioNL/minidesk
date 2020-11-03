@@ -75,7 +75,9 @@ class AdminCompanyController extends Controller
         }
 
 
-        return redirect('/companies');
+        return redirect('/companies')->with([
+            'success_message' => 'Created company.'
+        ]);
     }
 
     public function show($id)
@@ -154,7 +156,9 @@ class AdminCompanyController extends Controller
         }
 
 
-        return redirect('admin/companies');
+        return redirect('admin/companies')->with([
+            'success_message' => 'Updated Company.'
+        ]);
     }
 
     public function destroy($id){
@@ -174,8 +178,8 @@ class AdminCompanyController extends Controller
         }
 
 
-        return response()->json([
-            'message' => 'Deleted company'
+        return redirect()->with([
+            'success_message' => 'Deleted company'
         ])->setStatusCode(200);
 
     }
