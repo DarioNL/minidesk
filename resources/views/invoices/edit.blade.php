@@ -7,12 +7,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/invoices/{{$invoice->id}}/edit">
+            <form method="POST" @auth('admins') action="/admin/invoices/{{$invoice->id}}/edit"> @else action="/company/invoices/{{$invoice->id}}/edit"> @endauth
                 <div class="modal-body">
                     @csrf
                     <div class="row">
                         <div class="col-6">
                             <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Client')}}</label>
+                            @auth('admins') @php($clients = \App\Models\Client::all()) @endauth
                             @if(count($clients))
                                 <select name="client" class="select2 form-control">
                                     @foreach($clients as $client)
@@ -74,7 +75,7 @@
                         @endauth
                     </div>
 
-                    @php($products = \App\Models\Products::all()->where('estimate_id', '=', $invoice->id))
+                    @php($products = \App\Models\Products::all()->where('invoice_id', '=', $invoice->id))
                     <div class="row">
                         <div class="col-12">
                             <a class="new-product" href="#">+ Add new product</a>

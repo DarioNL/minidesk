@@ -50,7 +50,7 @@ class sendInvoice extends Notification
             ->markdown(
                 'vendor.notifications.invoice' , ['invoice' => $this->invoice, 'color' => $this->color]
             )
-            ->attachData($pdf->output(), 'estimate '.$invoice->number.'.pdf');
+            ->attachData($pdf->output(), 'invoice '.$invoice->number.'.pdf');
     }
 
     /**

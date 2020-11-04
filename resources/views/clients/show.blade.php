@@ -15,7 +15,7 @@
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Name</p>
                         {{$client->first_name}} {{$client->last_name}}
-                        <div class="text-muted">{{$client->company_name}}</div>
+                        <div class="text-muted">{{$client->company_name ?? 'No company'}}</div>
                     </div>
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Email</p>
@@ -38,22 +38,26 @@
                 <div class="row mt-4">
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Company</p>
-                        @if($client->company->logo != null and $client->company != null)
-                            <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                        @if($client->company)
+                            @if($client->company->logo != null and $client->company != null)
+                                <img src="{{asset('/images/'.$client->company->id.$client->company->logo.'')}}" class="user-profile-img rounded-circle" alt="{{asset('/images/blank_profile_picture.png')}}">
+                            @else
+                                <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
+                            @endif {{ $client->Company->name ?? ''}}
                         @else
-                            <img src="{{asset('/images/blank_profile_picture.png')}}" class="user-profile-img rounded-circle" alt="">
-                        @endif {{ $client->Company->name ?? '-'}}
+                            No company
+                        @endif
                     </div>
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">City</p>
-                        {{$client->city ?? '-'}}
+                        {{$client->city ?? ''}}
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-6">
                         <p class="text-muted font-weight-bolder">Phone</p>
-                        {{$client->phone ?? '-'}}
+                        {{$client->phone ?? ''}}
                     </div>
                     <div class="col-6">
                         <p></p>

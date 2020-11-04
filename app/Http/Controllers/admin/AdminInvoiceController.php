@@ -247,12 +247,13 @@ class AdminInvoiceController extends Controller
                     'send_date' => $send_date,
                 ]);
                 return back()->with([
-                    'success_message' => 'Invoice will be send on'.$send_date.'.'
+                    'success_message' => 'Invoice sent'
                 ]);
 
             } else {
                 $invoice->number = null;
                 $invoice->save();
+
                 return back()->with([
                     'error_message' => 'Could not send Invoice.'
                 ]);
@@ -263,7 +264,7 @@ class AdminInvoiceController extends Controller
             'color' => $request->post('color')
         ]);
         return back()->with([
-            'success_message' => 'Invoice sent.'
+            'success_message' => 'Invoice will be send on '.$send_date.'.'
         ]);
     }
 

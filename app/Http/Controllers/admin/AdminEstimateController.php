@@ -165,7 +165,7 @@ class AdminEstimateController extends Controller
             'discount' => $request->post('discount'),
             'total' => $total,
             'amount' => $amount,
-            'company_id' => Auth::id(),
+            'company_id' => $request->post('company'),
             'client_id' => $request->post('client'),
         ]);
 
@@ -250,7 +250,7 @@ class AdminEstimateController extends Controller
             'color' => $color
         ]);
         return back()->with([
-            'success_message' => 'Estimate will be send on'.$send_date.'.'
+            'success_message' => 'Estimate will be send on '.$send_date.'.'
         ]);
     }
 

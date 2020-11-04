@@ -299,9 +299,9 @@
                                 @auth('admins')
                                 <div class="progress-box progress-2">
                                     <h4 class="por-title">Verified Companies</h4>
-                                    <div class="por-txt">1/1 Users (100%)</div>
+                                    <div class="por-txt">{{count($verifiedCompanies)}}/{{count($companies)}} Users ({{$companiesPercent}}%)</div>
                                     <div class="progress mb-2" style="height: 5px;">
-                                        <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-flat-color-3" role="progressbar" style="width: {{$companiesPercent}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                                 @endauth

@@ -83,11 +83,7 @@ class InvoiceController extends Controller
                 'total' => $productTotal[$i],
             ]);
         }
-        $discription = $estimate->nummber;
 
-        if ($estimate->title != null) {
-            $discription->title;
-        }
 
 
         return back()->with([
@@ -268,7 +264,7 @@ class InvoiceController extends Controller
             'color' => $request->post('color')
         ]);
         return back()->with([
-            'success_message' => 'Invoice will be send on'.$send_date.'.'
+            'success_message' => 'Invoice will be send on '.$send_date.'.'
         ]);
     }
 
@@ -309,7 +305,7 @@ class InvoiceController extends Controller
         $invoice->number = 'deleted_'.time().'_'.$invoice->number;
         $invoice->pay_id = null;
         $invoice->save();
-        return redirect()->with([
+        return redirect('company/invoices')->with([
             'success_message' => 'Deleted invoice'
         ])->setStatusCode(200);
 

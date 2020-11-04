@@ -66,20 +66,20 @@
             </div>
             <div class="w-100 float-right">
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-bag"></i>  {{$invoice->Company->name}}
+                    <i class="uil uil-bag"></i>  {{$invoice->Company->name ?? 'No company'}}
                 </h4>
                 @php($dueDate = explode(' ', $invoice->due_date))
                 <h5 class="pt-3 float-right pb-3">
                     <i class="uil uil-calendar-alt"></i>  {{$dueDate[0]}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-user"></i>  {{$invoice->Client->first_name}} {{$invoice->Client->last_name}}
+                    <i class="uil uil-user"></i>  {{$invoice->Client->first_name?? 'No client'}} {{$invoice->Client->last_name?? 'No client'}}
                 </h4>
                 <h5 class="pt-3 text-muted">
-                    <i class="uil uil-location-point"></i>  {{$invoice->Company->address}} {{$invoice->Company->house_number}}
+                    <i class="uil uil-location-point"></i>  {{$invoice->Company->address ?? 'No company'}} {{$invoice->Company->house_number ?? '-'}}
                 </h5>
                 <h5 class="text-muted border-bottom pb-3">
-                    {{$invoice->Company->zipcode}} {{$invoice->Company->city}}
+                    {{$invoice->Company->zipcode ?? 'No company'}} {{$invoice->Company->city ?? '-'}}
                 </h5>
             </div>
             <div class="card-text">

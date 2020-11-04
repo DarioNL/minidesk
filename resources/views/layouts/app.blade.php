@@ -155,6 +155,7 @@
 
         <main class="py-4 main">
             @yield('content')
+            @include('_partials.messages')
         </main>
     </div>
 </body>

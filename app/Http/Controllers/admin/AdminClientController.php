@@ -67,7 +67,7 @@ class AdminClientController extends Controller
         }
 
 
-        return redirect('admins/clients')->with([
+        return redirect('admin/clients')->with([
             'success_message' => 'Created user.'
         ]);
     }
@@ -181,7 +181,7 @@ class AdminClientController extends Controller
         }
 
 
-        return redirect()->with([
+        return redirect('/admin/clients')->with([
             'success_message' => 'Deleted client'
         ])->setStatusCode(200);
 

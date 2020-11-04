@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="POST" action="/company/estimates/{{$estimate->id}}/edit">
+            <form method="POST" @auth('admins') action="/admin/estimates/{{$estimate->id}}/edit" @else action="/company/estimates/{{$estimate->id}}/edit" @endif>
                 <div class="modal-body">
                     @csrf
                     <div class="row">

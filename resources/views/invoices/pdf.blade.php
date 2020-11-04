@@ -119,8 +119,6 @@
         <div class="col-xs-8 invbody-terms">
             Thank you for your business. <br>
             <br>
-            <h4>Payment Terms</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eius quia, aut doloremque, voluptatibus quam ipsa sit sed enim nam dicta. Soluta eaque rem necessitatibus commodi, autem facilis iusto impedit!</p>
         </div>
     </div>
 

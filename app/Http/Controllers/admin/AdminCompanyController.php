@@ -75,7 +75,7 @@ class AdminCompanyController extends Controller
         }
 
 
-        return redirect('/companies')->with([
+        return redirect('admin/companies')->with([
             'success_message' => 'Created company.'
         ]);
     }
@@ -178,7 +178,7 @@ class AdminCompanyController extends Controller
         }
 
 
-        return redirect()->with([
+        return redirect('admin/companies')->with([
             'success_message' => 'Deleted company'
         ])->setStatusCode(200);
 

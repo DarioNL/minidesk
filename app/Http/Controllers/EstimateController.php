@@ -243,7 +243,7 @@ class EstimateController extends Controller
                 'color' => $color
             ]);
             return back()->with([
-                'success_message' => 'Estimate will be send on'.$send_date.'.'
+                'success_message' => 'Estimate sent.'
             ]);
         }
 
@@ -252,8 +252,8 @@ class EstimateController extends Controller
             'color' => $color
         ]);
         return back()->with([
-        'success_message' => 'Estimate sent.'
-    ]);
+            'success_message' => 'Estimate will be send on '.$send_date.'.'
+        ]);
     }
 
     public function link(Request $request, $id){
@@ -291,7 +291,7 @@ class EstimateController extends Controller
         $estimate->number = 'deleted_'.time().'_'.$estimate->number;
         $estimate->sign_id = null;
         $estimate->save();
-        return redirect('company/estimate')->with([
+        return redirect('company/estimates')->with([
             'success_message' => 'Deleted estimate.'
         ])->setStatusCode(200);
 
