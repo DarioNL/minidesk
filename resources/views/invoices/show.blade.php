@@ -76,10 +76,10 @@
                     <i class="uil uil-user"></i>  {{$invoice->Client->first_name?? 'No client'}} {{$invoice->Client->last_name?? 'No client'}}
                 </h4>
                 <h5 class="pt-3 text-muted">
-                    <i class="uil uil-location-point"></i>  {{$invoice->Company->address ?? 'No company'}} {{$invoice->Company->house_number ?? '-'}}
+                    <i class="uil uil-location-point"></i>  {{$invoice->Company->address ?? 'No company'}} {{$invoice->Company->house_number ?? ''}}
                 </h5>
                 <h5 class="text-muted border-bottom pb-3">
-                    {{$invoice->Company->zipcode ?? 'No company'}} {{$invoice->Company->city ?? '-'}}
+                    {{$invoice->Company->zipcode ?? 'No company'}} {{$invoice->Company->city ?? ''}}
                 </h5>
             </div>
             <div class="card-text">
