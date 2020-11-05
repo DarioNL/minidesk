@@ -49,7 +49,7 @@ class DashboardController extends Controller
         }
         if (Auth::guard('admins')->check()) {
             $clients = Client::all();
-            $companies = Company::all()->where('deleted_at', '=', null);
+            $companies = Company::all();
             $estimates = Estimate::all();
             $acceptedEstimates = $estimates->where('sign_date', '!=', null);
             $invoices = Invoice::all();
