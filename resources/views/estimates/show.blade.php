@@ -74,20 +74,20 @@
                     <i class="uil uil-envelope"></i>  {{$date[0] ? $date[0] : 'Not Send'}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-bag"></i>  {{$estimate->Company->name}}
+                    <i class="uil uil-bag"></i>  {{$estimate->Company->name ?? 'No company'}}
                 </h4>
                 @php($dueDate = explode(' ', $estimate->due_date))
                 <h5 class="pt-3 float-right pb-3">
                     <i class="uil uil-calendar-alt"></i>  {{$dueDate[0]}}
                 </h5>
                 <h4 class="pt-3 pb-3">
-                    <i class="uil uil-user"></i>  {{$estimate->Client->first_name}} {{$estimate->Client->last_name}}
+                    <i class="uil uil-user"></i>  {{$estimate->Client->first_name ?? 'No client'}} {{$estimate->Client->last_name ?? 'No client'}}
                 </h4>
                 <h5 class="pt-3 text-muted">
-                    <i class="uil uil-location-point"></i>  {{$estimate->Company->address}} {{$estimate->Company->house_number}}
+                    <i class="uil uil-location-point"></i>  {{$estimate->Company->address ?? 'No company'}} {{$estimate->Company->house_number ?? ''}}
                 </h5>
                 <h5 class="text-muted border-bottom pb-3">
-                    {{$estimate->Company->zipcode}} {{$estimate->Company->city}}
+                    {{$estimate->Company->zipcode ?? 'No Company'}} {{$estimate->Company->city ?? ''}}
                 </h5>
             </div>
             <div class="card-text">

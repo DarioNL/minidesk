@@ -14,7 +14,7 @@
                         <label for="company" class="font-weight-bolder text-muted col-form-label">{{__('company')}}</label>
                         @php($companies = \App\Models\Company::all())
                         @if(count($companies))
-                            <select name="company" class="form-control">
+                            <select name="company" class="form-control  @error('company') is-invalid @enderror">
                                 @foreach($companies as $company)
                                     <option value="{{$company->id}}" title="">{{$company->name}}</option>
                                 @endforeach
@@ -24,8 +24,8 @@
                         @endif
 
 
-                        @error('send_date')
-                        <span class="invalid-feedback" role="alert">
+                        @error('company')
+                        <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror

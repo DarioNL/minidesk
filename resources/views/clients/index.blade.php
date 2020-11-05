@@ -52,5 +52,20 @@
         </div>
     </div>
 
+    @if (count($errors) > 0)
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            $(document).ready(function () {
+                @error('create')
+                $('#createModal').modal('show');
+                @enderror
+                @error('update')
+                $('#editModal').modal('show');
+                @enderror
+            });
+        });
+    </script>
+    @endif
+
 
 @stop

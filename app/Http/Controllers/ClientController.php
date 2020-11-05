@@ -54,7 +54,7 @@ class ClientController extends Controller
             'logo' => $request->post('logo'),
             'company_id' => Auth::id(),
             'password' => bcrypt($password),
-        ]);
+       ]);
 
         if ($request->has('send_login')) {
             $client->save();
@@ -64,8 +64,9 @@ class ClientController extends Controller
             }
         }
 
-
-        return redirect('/clients');
+        return redirect('company/clients')->with([
+            'success_message' => 'Created client.'
+        ]);
     }
 
     public function show($id)
@@ -98,15 +99,10 @@ class ClientController extends Controller
             'phone' => 'required',
             'email' => [
                 Rule::unique('companies','email'),
-                Rule::unique('clients','email')->ignore($client->id)
+                Rule::unique('clients','email')->ignore($client->id),
+                Rule::unique('admins','email')
             ],
         ]);
-
-        if ($client->email != $request->post('email')) {
-            $client->email_verified_at = null;
-            $client->save();
-        }
-
 
         $client->update([
             'first_name' => $request->post('first_name'),
@@ -132,14 +128,18 @@ class ClientController extends Controller
         }
 
 
-        return back();
+        return redirect('company/clients')->with([
+            'success_message' => 'Updated client.'
+        ]);
     }
 
     public function unlink($id){
         $client = Client::find($id);
         $client->company_id = null;
         $client->save();
-        return redirect('company/clients');
+        return redirect('company/clients')->with([
+            'success_message' => 'Unlinked client.'
+        ]);
     }
 
     public function destroy($id){
@@ -159,8 +159,8 @@ class ClientController extends Controller
         }
 
 
-        return response()->json([
-            'message' => 'Deleted client'
+        return redirect('company/clients')->with([
+            'success_message' => 'Deleted client.'
         ])->setStatusCode(200);
 
     }

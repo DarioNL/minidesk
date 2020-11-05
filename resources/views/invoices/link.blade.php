@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label for="client" class="font-weight-bolder text-muted col-form-label">{{__('Clients')}}</label>
-                        @php($clients = $invoice->company->clients)
+                       @auth('admins') @php($clients = \App\Models\Client::all())  @else @php($clients = $invoice->company->clients) @endauth
                         @if(count($clients))
                             <select name="client" class="form-control">
                                 @foreach($clients as $client)

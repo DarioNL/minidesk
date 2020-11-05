@@ -101,7 +101,9 @@ class AdminEstimateController extends Controller
         }
 
 
-        return back();
+        return back()->with([
+            'success_message' => 'Created Estimate.'
+        ]);
     }
 
     public function show($id)
@@ -163,7 +165,7 @@ class AdminEstimateController extends Controller
             'discount' => $request->post('discount'),
             'total' => $total,
             'amount' => $amount,
-            'company_id' => Auth::id(),
+            'company_id' => $request->post('company'),
             'client_id' => $request->post('client'),
         ]);
 
@@ -182,7 +184,9 @@ class AdminEstimateController extends Controller
             ]);
         }
 
-        return back();
+        return back()->with([
+            'success_message' => 'Updated estimate.'
+        ]);
     }
 
     public function accept($id)
@@ -210,7 +214,9 @@ class AdminEstimateController extends Controller
             return back();
         }
 
-        return back();
+        return back()->with([
+            'error_message' => 'Could not accept Estimate.'
+        ]);
     }
 
     public function send(Request $request, $id)
@@ -234,14 +240,18 @@ class AdminEstimateController extends Controller
                 'send_date' => $send_date,
                 'color' => $color
             ]);
-            return back();
+            return back()->with([
+                'success_message' => 'Estimate sent.'
+            ]);
         }
 
         $estimate->update([
             'send_date' => $send_date,
             'color' => $color
         ]);
-        return back();
+        return back()->with([
+            'success_message' => 'Estimate will be send on '.$send_date.'.'
+        ]);
     }
 
     public function link(Request $request, $id){
@@ -250,7 +260,9 @@ class AdminEstimateController extends Controller
         $estimate->client_id = $request->post('client');
         $estimate->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Linked client to Estimate.'
+        ]);
     }
 
     public function unlink($id){
@@ -259,7 +271,9 @@ class AdminEstimateController extends Controller
         $estimate->client_id = null;
         $estimate->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Unlinked client to Estimate.'
+        ]);
     }
 
     public function linkCompany(Request $request, $id){
@@ -268,7 +282,9 @@ class AdminEstimateController extends Controller
         $estimate->company_id = $request->post('company');
         $estimate->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'linked Company to Estimate.'
+        ]);
     }
 
     public function unlinkCompany($id){
@@ -277,7 +293,9 @@ class AdminEstimateController extends Controller
         $estimate->company_id = null;
         $estimate->save();
 
-        return back();
+        return back()->with([
+            'success_message' => 'Unlinked Company to estimate.'
+        ]);
     }
 
     public function destroy($id){
@@ -293,9 +311,9 @@ class AdminEstimateController extends Controller
         $estimate->number = 'deleted_'.time().'_'.$estimate->number;
         $estimate->sign_id = null;
         $estimate->save();
-        return response()->json([
-            'message' => 'Deleted estimate'
-        ])->setStatusCode(200)->redirectTo('/estimates');
+        return redirect('admin/estimates')->with([
+            'success_message' => 'Deleted estimate'
+        ])->setStatusCode(200);
 
 
     }

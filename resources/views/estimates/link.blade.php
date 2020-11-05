@@ -18,7 +18,7 @@
                             @php($clients = \App\Models\Client::all())
                         @endauth
                         @if(count($clients))
-                            <select name="client" class="form-control">
+                            <select name="client" class="form-control  @error('client') is-invalid @enderror">
                                 @foreach($clients as $client)
                                     <option value="{{$client->id}}" title="">{{$client->first_name}} {{$client->last_name}}</option>
                                 @endforeach
@@ -28,8 +28,8 @@
                         @endif
 
 
-                        @error('send_date')
-                        <span class="invalid-feedback" role="alert">
+                        @error('client')
+                        <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror

@@ -27,13 +27,13 @@
                         <div class="col-6">
                             <label for="DueDate" class="font-weight-bolder text-muted col-form-label">{{__('Due Date')}}</label>
                             <input type="date" autocomplete="due_date"
-                                   class="form-control"
+                                   class="form-control  @error('first_name') is-invalid @enderror"
                                    name="due_date" value="{{old('due_date')}}"
                                    required autofocus>
 
 
-                            @error('DueDate')
-                            <span class="invalid-feedback" role="alert">
+                            @error('due_date')
+                            <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
@@ -44,13 +44,13 @@
                         <div class="col-6">
                             <label for="title" class="font-weight-bolder text-muted col-form-label">{{__('Title (optional)')}}</label>
                             <input type="text" autocomplete="title"
-                                   class="form-control"
+                                   class="form-control  @error('title') is-invalid @enderror"
                                    name="title" value="{{old('title')}}"
                                    autofocus>
 
 
                             @error('title')
-                            <span class="invalid-feedback" role="alert">
+                            <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror

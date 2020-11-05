@@ -13,13 +13,13 @@
                     <div class="col-6">
                         <label for="send_date" class="font-weight-bolder text-muted col-form-label">{{__('Send Date')}}</label>
                         <input type="date" autocomplete="send_date"
-                               class="form-control"
+                               class="form-control  @error('send_date') is-invalid @enderror"
                                name="send_date" value="{{old('send_date')}}"
                                required autofocus>
 
 
                         @error('send_date')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror
@@ -27,13 +27,13 @@
                     <div class="col-6">
                         <label for="color" class="font-weight-bolder text-muted col-form-label">{{__('Color')}}</label>
                         <input type="color" autocomplete="color"
-                               class="form-control"
+                               class="form-control  @error('color') is-invalid @enderror"
                                name="color" value="#0000A0"
                                required autofocus>
 
 
                         @error('color')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                         @enderror

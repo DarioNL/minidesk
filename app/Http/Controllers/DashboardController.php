@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use PhpParser\Node\Stmt\DeclareDeclare;
+use function GuzzleHttp\Promise\all;
 
 class DashboardController extends Controller
 {
@@ -33,8 +34,16 @@ class DashboardController extends Controller
             $invoices = $company->invoices;
             $acceptedInvoices = $invoices->where('pay_date', '!=', null);
 
-            $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
-            $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+            if (count($estimates) != 0) {
+                $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
+            } else {
+                $estimatesPercent = 0;
+            }
+            if (count($invoices) != 0) {
+                $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+            } else {
+                $invoicesPercent = 0;
+            }
 
             return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'estimatesPercent', 'invoicesPercent'));
         }
@@ -45,6 +54,7 @@ class DashboardController extends Controller
             $acceptedEstimates = $estimates->where('sign_date', '!=', null);
             $invoices = Invoice::all();
             $acceptedInvoices = $invoices->where('pay_date', '!=', null);
+            $verifiedCompanies = $companies->where('email_verified_at', '!=', null);
 
             if (count($estimates) != 0) {
                 $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
@@ -57,7 +67,13 @@ class DashboardController extends Controller
                 $invoicesPercent = 0;
             }
 
-            return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'companies', 'estimatesPercent', 'invoicesPercent'));
+            if (count($companies) != 0) {
+                $companiesPercent = count($verifiedCompanies) / count($companies) * 100;
+            } else {
+                $companiesPercent = 0;
+            }
+
+            return view('home', compact('clients', 'estimates', 'invoices', 'acceptedEstimates', 'acceptedInvoices', 'companies', 'estimatesPercent', 'invoicesPercent' ,'companiesPercent' ,'verifiedCompanies'));
         }
 
         $user = Auth::id();
@@ -68,8 +84,16 @@ class DashboardController extends Controller
         $invoices = $client->Invoices;
         $acceptedInvoices = $invoices->where('pay_date', '!=', null);
 
-        $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
-        $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+        if (count($estimates) != 0) {
+            $estimatesPercent = count($acceptedEstimates) / count($estimates) * 100;
+        } else {
+            $estimatesPercent = 0;
+        }
+        if (count($invoices) != 0) {
+            $invoicesPercent = count($acceptedInvoices) / count($invoices) * 100;
+        } else {
+            $invoicesPercent = 0;
+        }
         return view('home', compact('client', 'estimates', 'invoices', 'acceptedInvoices', 'acceptedEstimates', 'estimatesPercent', 'invoicesPercent'));
     }
 
@@ -115,7 +139,9 @@ class DashboardController extends Controller
                         'email' => $request->post('email'),
                     ]);
 
-                    return redirect('/settings');
+                    return redirect('/settings')->with([
+                        'success_message' => 'Updated account'
+                    ]);
                 }
 
                 if (Auth::guard('web')->check()) {
@@ -145,7 +171,9 @@ class DashboardController extends Controller
                         'email' => $request->post('email'),
                         'vat_number' => $request->post('vat_number'),
                     ]);
-                    return redirect('/settings');
+                    return redirect('/settings')->with([
+                        'success_message' => 'Updated account'
+                    ]);
                 }
 
                 if (Auth::guard('clients')->check()) {
@@ -175,7 +203,9 @@ class DashboardController extends Controller
                         'phone' => $request->post('phone'),
                         'email' => $request->post('email'),
                     ]);
-                    return redirect('/settings');
+                    return redirect('/settings')->with([
+                        'success_message' => 'Updated account'
+                    ]);
                 }
                 return back()->withErrors();
             }
@@ -202,7 +232,9 @@ class DashboardController extends Controller
                 $client->logo = '/images/'.$logoName;
                 $client->save();
 
-                return redirect('/settings');
+                return redirect('/settings')->with([
+                    'success_message' => 'Changed logo'
+                ]);
             }
 
             if (Auth::guard('web')->check()) {
@@ -222,7 +254,9 @@ class DashboardController extends Controller
                 $company->logo = '/images/'.$logoName;
                 $company->save();
 
-                return redirect('/settings');
+                return redirect('/settings')->with([
+                    'success_message' => 'Changed logo'
+                ]);
             }
 
             if (Auth::guard('admins')->check()) {
@@ -243,7 +277,9 @@ class DashboardController extends Controller
                 $admin->save();
 
 
-                return redirect('/settings');
+                return redirect('/settings')->with([
+                    'success_message' => 'Changed logo'
+                ]);
             }
         }
         return back()->withErrors();
@@ -261,7 +297,9 @@ class DashboardController extends Controller
                 $client->password = bcrypt($request->post('password'));
                 $client->save();
 
-                return redirect('/settings');
+                return redirect('/settings')->with([
+                    'success_message' => 'Changed password'
+                ]);
             }
 
             if (Auth::guard('web')->check()) {
@@ -273,7 +311,9 @@ class DashboardController extends Controller
                 $company->password = bcrypt($request->post('password'));
                 $company->save();
 
-                return redirect('/settings');
+                return redirect('/settings')->with([
+                    'success_message' => 'Changed password '
+                ]);
             }
 
             if (Auth::guard('admins')->check()) {
@@ -285,7 +325,9 @@ class DashboardController extends Controller
                 $admin->password = bcrypt($request->post('password'));
                 $admin->save();
 
-                return redirect('/settings');
+                return redirect('/settings')->with([
+                    'success_message' => 'Changed password'
+                ]);
             }
         }
         return back()->withErrors();

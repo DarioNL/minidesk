@@ -67,7 +67,9 @@ class AdminClientController extends Controller
         }
 
 
-        return redirect('admins/clients');
+        return redirect('admin/clients')->with([
+            'success_message' => 'Created user.'
+        ]);
     }
 
     public function show($id)
@@ -136,14 +138,18 @@ class AdminClientController extends Controller
         }
 
 
-        return back();
+        return back()->with([
+            'success_message' => 'Updated client.'
+        ]);
     }
 
     public function unlink($id){
         $client = Client::find($id);
         $client->company_id = null;
         $client->save();
-        return redirect('admin/clients');
+        return redirect('admin/clients')->with([
+            'success_message' => 'Unlinked client.'
+        ]);
     }
 
     public function link(Request $request, $id){
@@ -153,7 +159,9 @@ class AdminClientController extends Controller
         $client = Client::find($id);
         $client->company_id = $request->post('company');
         $client->save();
-        return redirect('admin/clients');
+        return redirect('admin/clients')->with([
+            'success_message' => 'Linked client.'
+        ]);
     }
 
     public function destroy($id){
@@ -173,8 +181,8 @@ class AdminClientController extends Controller
         }
 
 
-        return response()->json([
-            'message' => 'Deleted client'
+        return redirect('/admin/clients')->with([
+            'success_message' => 'Deleted client'
         ])->setStatusCode(200);
 
     }
