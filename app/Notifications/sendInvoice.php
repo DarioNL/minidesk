@@ -47,6 +47,7 @@ class sendInvoice extends Notification
         $pdf = Facade::loadView('invoices.pdf', compact('invoice'));
 
         return (new MailMessage)
+            ->subject('You have a new invoice')
             ->markdown(
                 'vendor.notifications.invoice' , ['invoice' => $this->invoice, 'color' => $this->color]
             )

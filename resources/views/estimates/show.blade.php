@@ -47,7 +47,9 @@
                         <button onclick="$('#acceptModal').modal('show')" class="col-sm-12 col-md-auto btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
                     @endif
                     <button onclick="" class="btn btn-info text-white"><i class="col-sm-12 col-md-auto uil uil-print"></i> Print</button>
-                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    @if(!$estimate->sign_date)
+                        <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    @endif
                     <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
                 @elseauth('admins')
                     <a href="/company/clients/{{$estimate->client_id}}" class="col-sm-12 col-md-auto btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
@@ -56,7 +58,9 @@
                         <button onclick="$('#acceptModal').modal('show')" class="col-sm-12 col-md-auto btn btn-success text-white"><i class="uil uil-check-square"></i> Mark As Accepted</button>
                     @endif
                     <button onclick="" class="btn btn-info text-white"><i class="uil uil-print"></i> Print</button>
-                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    @if(!$estimate->sign_date)
+                        <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($estimate->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    @endif
                     <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
                 @else
                     @if(!$estimate->sign_date)

@@ -103,5 +103,6 @@ Route::group(['middleware' => ['auth:clients'], 'prefix' => 'client'], function 
     Route::get('/invoices/{id}', 'client\ClientInvoiceController@show');
     Route::post('/invoices/search', 'client\ClientInvoiceController@postSearch');
     Route::get('/invoices{id}/success', 'client\ClientInvoiceController@succes');
+    Route::get('/invoices/{id}/paid/', 'client\ClientInvoiceController@paid');
     Route::name('webhooks.payment')->post('webhooks/payment', 'client\ClientController@webhook');
 });
