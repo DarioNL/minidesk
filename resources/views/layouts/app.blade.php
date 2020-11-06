@@ -89,8 +89,8 @@
                                         @csrf
                                     </form>
 
-                                    <a class="dropdown-item" href="/profile" role="button">
-                                        Profile <span class="caret"></span>
+                                    <a class="dropdown-item" href="/settings" role="button">
+                                        Settings <span class="caret"></span>
                                     </a>
                                 </div>
 

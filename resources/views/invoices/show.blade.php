@@ -12,8 +12,6 @@
         @include('invoices.send', ['invoice' => $invoice])
     @endauth
 
-
-
     <div class="card table-container align-items-center w-100">
         <div class="w-100 border-bottom p-2">
             <div class="float-left">
@@ -32,6 +30,12 @@
                             {{$invoice->pay_date ? 'Accepted' : 'Unaccepted'}}
                         </h5>
                     @endif
+
+                        @if($invoice->status)
+                            <h5 class="float-left @if($invoice->status == 'payed') text-success @else text-danger @endif mr-2 mt-1 desktoptd">
+                                {{$invoice->status}}
+                            </h5>
+                        @endif
                 </h5>
             </div>
             <div>
@@ -45,13 +49,13 @@
                     <a href="/company/clients/{{$invoice->client_id}}" class="col-sm-12 col-md-auto btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
                     <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 col-md-auto btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
                     <a class="btn btn-info text-white col-md-auto col-sm-12"><i class=" uil uil-print"></i> Print</a>
-                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    @if(!$invoice->pay_date)<button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>@endif
                     <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
                 @elseauth('admins')
                     <a href="/company/clients/{{$invoice->client_id}}" class="col-sm-12 col-md-auto btn btn-secondary"><i class="uil uil-eye"></i> View Client</a>
                     <button onclick="$('#deleteModal').modal('show')" class="col-sm-12 col-md-auto btn btn-danger"> <i class="uil uil-trash-alt"></i> Delete</button>
                     <a class="btn btn-info text-white col-md-auto col-sm-12"><i class="uil uil-print"></i> Print</a>
-                    <button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>
+                    @if(!$invoice->pay_date)<button onclick="$('#sendModal').modal('show')" class="col-sm-12 col-md-auto btn btn-primary text-white"><i class="uil uil-envelope-upload"></i> @if($invoice->send_date != null)Send Reminder Mail @else Send Mail @endif</button>@endif
                     <button onclick="$('#editModal').modal('show')" class="col-sm-12 col-md-auto btn btn-warning text-white"><i class="uil uil-edit"></i> Edit</button>
                 @else
                     @if(!$invoice->pay_date)

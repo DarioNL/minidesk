@@ -101,7 +101,9 @@ class InvoiceController extends Controller
 
             return view('invoices.show', compact('invoice', 'products', 'clients'));
         }
-        return back();
+        return back()->withErrors([
+            'No permission' => 'You are not allowed to view that invoice'
+        ]);
     }
 
     public function search(Request $request)
@@ -238,15 +240,14 @@ class InvoiceController extends Controller
             if ($payment) {
                 $invoice->payment_id = $payment->id;
                 $invoice->pay_id = $payment->_links->checkout->href;
+                $invoice->send_date = $request->post('send_date');
                 $invoice->save();
                 $send_date = $request->post('send_date');
                 $color = $request->post('color');
 
 
                 $invoice->client->notify(new sendInvoice($invoice, $color));
-                $invoice->update([
-                    'send_date' => $send_date,
-                ]);
+
                 return back()->with([
                     'success_message' => 'Invoice sent.'
                 ]);

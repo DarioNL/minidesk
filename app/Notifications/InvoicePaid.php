@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class sendEstimate extends Notification
+class InvoicePaid extends Notification
 {
     use Queueable;
 
@@ -18,9 +18,9 @@ class sendEstimate extends Notification
      *
      * @param $client
      */
-    public function __construct($estimate, $color)
+    public function __construct($invoice, $color)
     {
-        $this->estimate = $estimate;
+        $this->invoice = $invoice;
         $this->color = $color;
     }
 
@@ -43,18 +43,15 @@ class sendEstimate extends Notification
      */
     public function toMail($notifiable)
     {
-        $estimate = $this->estimate;
-        $pdf = Facade::loadView('estimates.pdf', compact('estimate'));
-
-
-
+        $invoice = $this->invoice;
+        $pdf = Facade::loadView('invoices.client.pdf', compact('invoice'));
 
         return (new MailMessage)
-            ->subject('You have a new estimate')
+            ->subject('Thanks for your payment!')
             ->markdown(
-                'vendor.notifications.estimate' , ['estimate' => $this->estimate, 'color' => $this->color]
+                'vendor.notifications.paid' , ['invoice' => $this->invoice, 'color' => $this->color]
             )
-            ->attachData($pdf->output(), 'estimate '.$estimate->number.'.pdf');
+            ->attachData($pdf->output(), 'receipt '.$invoice->number.'.pdf');
     }
 
     /**
