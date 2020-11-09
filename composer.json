@@ -21,6 +21,7 @@
         "mollie/laravel-mollie": "^2.10",
         "niklasravnsborg/laravel-pdf": "^4.0",
         "ramsey/uuid": "^4.0",
+        "spatie/laravel-activitylog": "^3.16",
         "webpatser/laravel-uuid": "^3.0"
     },
     "require-dev": {
